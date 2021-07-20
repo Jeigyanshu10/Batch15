@@ -16,6 +16,4 @@ public class Accounts {
 		
 		return balance;
 	}
-	
-
 }

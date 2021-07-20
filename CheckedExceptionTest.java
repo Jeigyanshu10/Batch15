@@ -8,5 +8,4 @@ public class CheckedExceptionTest {
 		PrintWriter pw =new PrintWriter("Anshu.txt");
 		
 	}
-
 }
