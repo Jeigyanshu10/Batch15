@@ -1,5 +1,5 @@
 Challenges:
-1. Create a method called getDurationString with two oarameters, first parameter minutes and 2nd parameters seconds.
+1. Create a method called getDurationString with two parameters, first parameter minutes and 2nd parameters seconds.
  - You should validate the first parameter minutes is >=0
  - you should also validate that the 2nd parameter seconds is >=0 and <=59.
  - The methods should return "invalid value" in the method if wither of the above are not true.
@@ -25,5 +25,114 @@ Challenge 3:
 
  Challenge 4:
  The cats spend most of the day playing. In particular, they play if the temperature is between 25 and 35 (inclusive). Unless it is summer, then the upper limit is 45 (inclusive) instead of 35.
- Write a method  isCatPlaying that has  2 parameters. Method needs to  return true if the cat is playing, otherwise return false
+ Write a method  isCatPlaying that has  2 parameters. Method nells to  return true if the cat is playing, otherwise return false
   1st parameter should be of type  boolean and be named  summer it represents if it is summer. 2nd parameter represents the  temperature and is of  type int with the  name temperature.
+
+
+
+Challenge5:
+Write a method called printNumberInWord.The method has one parameter number which is the whole number. The method needs to print "ZERO", "ONE", "TWO", ... "NINE", "OTHER" if the int parameter number is 0, 1, 2, .... 9 or otherfor any other number including negative numbers. You can use if-else statement or switch statement whatever is easier for you.
+
+Note: 
+1.Method printNumberInWord needs to be public static.
+2. Do not add main method to the solution code.
+
+
+Challenge 6:
+Create a for statement using a range of numbers from 1 to 1000 inclusive
+Sum all the numbers that can be divided with both 3 and 5.
+for those numbers that met the above conditions, print out the number
+break out of the loop once you find 5 numbers that met the above condition
+After breaking out of the loop peint the sum of the numbers that met the above conditions.
+
+Note: All code in main method.
+
+
+
+Challenge 7:
+Write a method called isOdd with an int parameter and call it number. The method needs to return a boolean.Check that number is &gt; 0, if it is not return false.
+If number is odd return true, otherwise return false.
+Write a second method called sumOdd that has 2 int parameters start and end, which represent a range of numbers.The method should use a for loop to sum all odd numbers in that range including the end and return the sum.It should call the method isOdd to check if each number is odd.
+The parameter end needs to be greater than or equal to start and both start and end parameters have to be greater than 0.If those conditions are not satisfied return -1 from the method to indicate invalid input.
+
+
+Challenge 8:
+Write a method named  sumFirstAndLastDigit with one parameter of type  int called  number.   The method needs to find the first and the last digit of the parameter  number passed to the method, using a loop and return the sum of the first and the last digit of that number.  If the  number is negative then the method needs to  return -1 to indicate an invalid value. 
+
+Challenge 9:
+ Write a method named  getEvenDigitSum  with one parameter of type  int  called  number . <br><br>The method should  return the sum of the even digits  within the number. <br><br>If the number  is negative , the method should  return -1 to indicate an invalid value . 
+
+
+Challenge 10:
+ Write a method named  hasSharedDigit  with two parameters of type  int .  
+ Each number should be within the range of  10 (inclusive) - 99 (inclusive) . If one of the numbers is  not within the range , the method should   return false. 
+ The method should   return true if there is a digit that appears in both numbers, such as  2  in   12 and 23; otherwise, the method should  return false.  
+
+
+Challenge 11:
+ Write a method named  hasSameLastDigit  with three parameters of type  int .  
+ Each number should be within the range of  10 (inclusive) - 1000 (inclusive) . If one of the numbers is  not within the range ,   the method should   return false. 
+ The method should   return true if at least two of the numbers share the same rightmost digit;  otherwise , it should   return false. 
+
+Challenge 12:
+ Write a method named  printFactors  with one parameter of type  int  named   number.  
+  If number is &lt; 1 , the method should  print "Invalid Value" . 
+ The method should   print all factors of the number. A factor of a number is an integer which divides that number wholly (i.e. without leaving a remainder). 
+ For example, 3 is a factor of 6 because 3 fully divides 6 without leaving a remainder. In other words 6 / 3 = 2. 
+
+Challenge 13:
+ Write a method called  numberToWords  with one  int  parameter named  number.<br><br> The method should print out the passed number using words for the digits. <br><br> If the number is negative, print  "Invalid Value" .
+
+Challenge 14:
+ Write a method named  canPack  with three parameters of type  int  named  bigCount, smallCount, and goal .  
+ The parameter  bigCount  represents the count of big flour bags (5 kilos each). 
+ The parameter  smallCount  represents the count of small flour bags (1 kilo each). 
+ The parameter  goal  represents the goal amount of kilos of flour needed to assemble a package. 
+ Therefore, the sum of the kilos of  bigCount  and   smallCount must be at least equal to the value of  goal . The method should  return true  if it is possible to make a package with  goal  kilos of flour. 
+ If the sum is greater than  goal , ensure that   only full bags are used towards the goal amount. For example, if  goal  = 9,  bigCount  = 2, and  smallCount  = 0, the method should  return false  since each big bag is 5 kilos and cannot be divided. However, if  goal  = 9,  bigCount  = 1, and  smallCount  = 5, the method should  return true  because of  1 full   bigCount  bag and  4 full   smallCount  bags equal  goal, and   it's okay if there are additional bags left over. 
+ If any of the parameters are negative,  return false . 
+
+Challenge 15:
+ Bob is a wall painter and he needs your help. You have to write a program that helps Bob calculate how many buckets of paint he needs to buy before going to work. Bob might also have some extra buckets at home. He also knows the area that he can cover with one bucket of paint. 
+  1.  Write a method named  getBucketCount  with 4 parameters. The f irst  parameter should be named  width  of type  double.  This parameter represents the  width  of the wall. 
+ The  second  parameter should be named  height  of type  double.  This parameter represents the  height  of the wall. 
+ The  third  parameter should be named  areaPerBucket.  This parameter represents the area that can be covered with one bucket of paint. 
+ The  fourth  parameter should be named  extraBuckets.  This parameter represents the bucket count that Bob has at home. 
+ The method needs to return a value of type  int  that represents the number of buckets that Bob needs to buy before going to work. To calculate the bucket count, refer to the notes below. 
+ If one of the parameters  width, height or areaPerBucket   is less or equal to 0   or if extraBuckets  is  less than 0,  the method needs to  return -1  to indicate an invalid value. 
+ If all parameters are valid, the method needs to calculate the number of buckets and  return  it. 
+
+Challenge 16:
+ Write a class with the name  SimpleCalculator.  The class needs  two fields (instance variables)  with names  firstNumber  and  secondNumber  both of type  double . 
+ Write the following methods (instance methods): 
+     Method named  getFirstNumber   without   any parameters , it needs to  return  the value of  firstNumber  field. 
+      Method named  getSecondNumber   without   any parameters , it needs to  return  the value of  secondNumber  field.  
+      Method named  setFirstNumber   with one parameter of type double , it needs to  set the value  of the  firstNumber  field.  
+      Method named  setSecondNumber with one parameter of type double , it needs to  set the value  of the  secondNumber field.  
+      Method named  getAdditionResult without any parameters,  it needs to  return  the result of  adding  the field values of  firstNumber  and  secondNumber .  
+      Method named  getSubtractionResult without any parameters , it needs to  return  the result of  subtracting  the field values of  secondNumber  from the  firstNumber .  
+      Method named  getMultiplicationResult without any parameters , it needs to  return  the result of  multiplying  the field values of  firstNumber  and  secondNumber.   
+      Method named  getDivisionResult   without any parameters  it needs to  return  the result of  dividing  the field values of  firstNumber  by the  secondNumber.  In case the value of  secondNumber  is  0 then return 0 .  
+
+Challenge 17:
+ Write a class with the name  Wall.  The class needs  two fields (instance variables)  with name  width  and  height  of type  double . 
+ The class needs to have two constructors. The first constructor does not have any parameters (no-arg constructor). The second constructor has parameters  width  and  height  of type double and it needs to initialize the fields. In case the width is  less than 0  it needs to set the  width  field value to  0 , in case the  height  parameter is  less than 0  it needs to set the  height  field value to  0 . 
+ Write the following  methods  (instance methods): 
+      Method named  getWidth   without   any parameters , it needs to  return  the value of  width  field.  
+      Method named  getHeight   without   any parameters , it needs to  return  the value of  height  field.  
+      Method named  setWidth   with one parameter of type double , it needs to  set the value  of the  width  field. If the parameter is  less than 0  it needs to set the  width  field value to 0.  
+      Method named  setHeight   with one parameter of type double , it needs to  set the value  of the  height  field. If the parameter is  less than 0  it needs to set the  height  field value to 0.  
+      Method named  getArea without any parameters , it needs to return the area of the wall.  
+
+Challenge 18:
+ A complex number is a number that can be expressed in the form a + bi, where a and b are real numbers, and i is a solution of the equation x2 = −1. Because no real number satisfies this equation, i is called an imaginary number. For the complex number a + bi, a is called the real part, and b is called the imaginary part.  To add or subtract two complex numbers, just add or subtract the corresponding real and imaginary parts. For instance, the sum of 5 + 3i  and 4 + 2i  is 9 + 5i.  For another, the sum of 3 + i  and –1 + 2i  is 2 + 3i.   
+
+ Write a class with the name  ComplexNumber.  The class needs  two fields (instance variables)  with name  real  and  imaginary  of type  double . It represents the Complex Number. 
+ The class needs to have one constructor. The constructor has parameters  real  and  imaginary  of type double and it needs to initialize the fields. 
+ Write the following  methods  (instance methods): 
+      Method named  getReal   without   any parameters , it needs to  return  the value of  real  field.  
+      Method named  getImaginary   without   any parameters , it needs to  return  the value of  imaginary  field.  
+      Method named  add with two parameters real and imaginary of type double , it needs to  add  parameters to fields. In other words, it needs to do a complex number add operation as described above.  
+      Method named  add  with one parameter of type  ComplexNumber . It needs to add the  ComplexNumber  parameter to the corresponding instance variables.  
+      Method named  subtract with two parameters real and imaginary of type double , it needs to  subtract  parameters from fields, in other words, it needs to do a complex number subtract operation as described above.  
+      Method named  subtract with one parameter other of type ComplexNumber.  It needs to subtract the other parameter from this complex number.         
