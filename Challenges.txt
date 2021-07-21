@@ -9,3 +9,21 @@ Challenges:
 
 - If it is valid then calculate how many minutes are in the seconds value and then call the other overloaded method passing the correct minutes and seconds calculated so that it can calculate correctly.
 - call both methods to print values to the console.
+
+Challenge2:
+Write a method named area with one double parameter named radius. 
+The method needs to return a double value that represents the area of a circle.If the parameter radius is negative then return -1.0 to represent an invalid value.Write another overloaded method with 2 parameters x and y (both doubles), where x and y represent the sides of a rectangle.
+The method needs to return an area of a rectangle.If either or both parameters is/are a negative return -1.0 to indicate an invalid value.
+
+Challenge 3:
+ Write a method printEqual with 3 parameters of type int. The method should not return anything ( void). 
+ If one of the parameters is less than 0, print text "Invalid Value". 
+ If all numbers are equal print text "All numbers are equal" 
+ If all numbers are equal print text "All numbers are equal" 
+ If all numbers are different print text "All numbers are different". 
+ Otherwise, print "Neither all are equal or different". 
+
+ Challenge 4:
+ The cats spend most of the day playing. In particular, they play if the temperature is between 25 and 35 (inclusive). Unless it is summer, then the upper limit is 45 (inclusive) instead of 35.
+ Write a method  isCatPlaying that has  2 parameters. Method needs to  return true if the cat is playing, otherwise return false
+  1st parameter should be of type  boolean and be named  summer it represents if it is summer. 2nd parameter represents the  temperature and is of  type int with the  name temperature.
