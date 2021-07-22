@@ -1,0 +1,172 @@
+Object Oriented Programming System:
+What do we mean by Object: Look around the room or the area you are sitting at right now, If we do that you will find many real world object. For eg: I can see this that.
+Real world object have two major char: state & Behaviour
+
+Computer: 
+State: Ram, OS, hard drive size, Monitor size
+Behaviour: Booting up, shuting down, playing something
+Ant
+State: Age, number of legs
+Behaviour: Eating, fighting, drinking etc
+
+Software Object:
+State: stores their states in fields
+Behaviour: expose their behaviour with methods
+
+Where does class fit in:
+Think of a class as a template or blue print for creating an object.
+Eg: Sample Apartment
+
+public class main: creates a new class in java.
+What is the benefits of class:
+We have used different datatypes like int, boolean, char & String in the past.
+You can think the class as sort of an user defined type, this might not be correct in the true meaning but it sort of gives you an idea of what a class is.
+
+Eg: using int we can only store integer type of data but nothing else. Similary we can assign a certain type of data to the user defined class(State) and make it to do something(Behaviour)
+
+public class Car{
+
+	private int doors;
+	private int wheels;
+	private String model;
+	private String engine;
+	private String color;
+} 
+
+- While working on a real time project we always tend to create private variables and let them set the values using a seter and fetch the value using a getter.
+- This make sure that we can put in some sort of validation while setting the values to the variables.
+
+Now if you look objectively you might just have created a class where you would have set up all the rules, what is valid what is not invalid and this rules are inherited while creating the object.
+- This also is called the encapsulation where we don't allow people to access the field directly and by forcing them to assign the value according to the will of the developer.
+
+
+Constructors:
+- It is quite a bit of work to assign initial values to the objects especially when we have setters and getter methods.
+- It might also lead to a position where in we might tend to forget to assign values to a few variables. In such cased we might lead to a major error.
+- Hence there is a way of solving both of the above issues by using constructors.
+-By default a default constructor is provided by java by virtue of which we are able to make all our intialization. But the default constructor is not mandating any of the values, which is why it allows us to set the values as per our requirments.
+
+- the part after new actaully calls the special class called constructor.
+- constructors can be overloaded
+- we can call one constructor from another constructor. In this scenario we have to use this() inside the constructor from where we are     - calling the other constructors. This is mainly used to provide some default values to the object fields.
+- this() has to be the very first line in the constructor.
+
+
+Inheritance:
+- Lets go back to the physical objects.
+eg: imac computer, Andriod nexus 9 tablet and dell computer all share the same characterstics of computer, they got ram, rom, current state the device is on or off. These all device share the same characterstics however, each of these devices add additional feature that collectively make different from each other.
+Eg: an iMac runs on  os x,intel cpu,SSD drive and have thunderbolt ports.... so where as the nexus 9 runs an android OS, on a snapdragon processor which has some storage space of a kind and takes touch as an input further a Dell Pc runs on a amd processor runs windows and has a normal hard drive to store things.
+
+So oops allows us to create classes and allows to inherit the state and behaviour of that class as an object so that users can create as many as object and provide.
+
+- while calling a method from the parent class we should use the super keyword which make sure that the parent class method is called. However it can also be accessed by just using the parent class method name. But if inside the child class if we are over-riding this method we want to call then the JVM will provide priority to the over-ridden method rather than the parent class method.
+
+
+Coupling in OOPS:
+
+The degree of dependency between the components is called coupling.
+
+If dependency is more between two components, then it is considered as tightly coupling and if dependency is less then it is considered as loosely coupling.
+
+
+Tightly coupled Eg:
+class A{
+	static int i= B.j;
+}
+
+class B{
+	static int j=C.k;
+}
+
+class C{
+	static int k= D.m1();
+}
+
+class D{
+	public static int m1(){
+		return 10;
+	}
+}
+
+1. Enhancement is dificult. If I make a single change to class D then all the classes will be affected.
+2. Reusabilty of the code is suppresed. If I have to use class A then I have to take class B, C & D
+3. Maintainence is very difficult.
+
+------------------Data Hiding---------------------
+1. Outside person can't access our internal data directly, or our internal data should not go out directly. This Oops feature is nothing but data hiding.
+
+The process where is restrict direct access of our data from the outside world is called as Data hiding.
+After validation or authentication outside person can access our internal data. 
+
+For eg: after providing proper username and password we can able to access our emails in Gmail.
+Even tough we are valid customer of the bank, we can able to access our account information and we can't access others account information.
+
+
+
+------------------Abstraction----------------------
+
+Hiding internal implementation and just highlight, the set of services what we are offering is the concept of abstraction.
+
+
+
+------------------Encapsulation---------------------
+The process of grouping data member and correspoinding methods into a single unit is the concept of Encapsulation. Every Java class is an example of Encapsulation.
+
+Any component follows data hiding and abstraction then that component is said to be encapsulated component
+
+Encapsulation= data hiding + abstraction
+
+
+class Account{
+	
+	private double balance;
+
+
+	public double getBalance(){
+		return this.balance;
+	}
+
+	public void deposite(double amount){
+	this.balance+=amount;
+	}
+}
+
+Hiding the data behind methods is called encapsulation
+Advantage: Security, Maintainibilty.
+
+Eg: of non encapsulation:
+
+public class Player {
+
+	public String name;
+	public int health;
+	public String weapon;
+	
+	public void looseHealth(int damage) {
+		this.health-=damage;
+		if(this.health>=0)
+		System.out.println("Remaining health: "+this.health);
+		if(this.health<=0) {
+			System.out.println("Player knocked out");
+		}
+		
+	}
+
+	public int getHealth() {
+		return health;
+	}	
+
+}
+
+1. we access players health and make changes to it.
+2. If any changes is made inside the player class then we need to make the necessary amendments in the main class.
+3. We might forget to initialize a variable.
+
+
+
+---------------Is- A Relationsip--------------------------
+
+
+
+---------------Polymorphism-------------------------------
+It is the mechanism in object oriented programing that allow actions to act differently based on the actual object.

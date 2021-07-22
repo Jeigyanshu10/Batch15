@@ -1,0 +1,896 @@
+Why Java was created?
+Project started at sun microsystem around 1990 and was released to the world by 1995
+Team was lead by James Gosling(Father of Java language)
+assisted by Patrick Naughton
+Chris Warth
+Ed Frank
+Mike Sheridan
+
+Goal: Platform independent(Write once run anywhere)
+
+
+source--->compiler--->Excutable--->machine(different machine expects different MLL)
+.Java(source file/code)--->compiler--->.class--->RunTime(Byte code)--->Machine
+.java--> .class --> JVM--->Runtime
+
+JDK: Only used to write the java code and is required by the developer. It comes with runtime
+JRE: Run java program, used by the user
+JVM: Responsible for running any program which is converted into byte code. Converts the byte code to machine specific code in the last min
+Is Java slow?
+JIT:it is responsible to convert byte code to MLL so that the machine can run faster
+AOT: Java 9 onwards introduced to convert the entire code to native code/MLC so
+
+
+Advantages of byte code:
+Write once run anywhere
+better security since JVM acts as a sandbox
+
+
+
+
+
+
+Language Fundamentals
+
+1.Identifiers
+2.Reservered words
+3.Data Type
+4.Literals
+5.Arrays
+6.Types of Variables
+7.Var-arg methods
+8.Main Method
+9.Command line arguments
+10. Java coding standards
+
+
+
+
+1.Identifiers: 
+
+Any name used in Java programs can be called as IDENTIFIERS, It can be a class name,method name variable name etc.
+
+class Test{
+	public static void main(String[] args){
+		int x=10;
+	}
+}
+
+
+Total number of identifiers: 5(Test,main,String,args,x)
+
+Rules we need to follow while defining Identifiers:
+1.Characters Allowed:
+a to z
+A to Z
+0 to 9
+$(dollar)
+_(underscore)
+
+2.Identifiers cannot start with digits
+3.Java identifiers are case sensitive language
+4.No character length limits for Java Identifiers
+5.We cant use reserve words/keywords as identifiers
+6.Predefined class & interface names can be used as identifiers
+
+
+
+Reserved Words:
+1. There are certain words reserved in Java to respresent some meaning or functionality such words are called as Reservered words.
+2. Total 53 reserve words are there in Java
+3. Out of 53, 50 are Keywords(words that represent some functionality) & the rest 3 are the Reserved Literals(Represent some value)
+4. Reserved Literals: true,false,null
+5.Keywords are further divided into Used Keywords(48) and unused keywords(2(goto & const))
+
+
+Keywords for Data types:(8)
+byte
+short
+int 
+long
+float
+double
+boolean
+char
+
+Keywords for flow control(11)
+if
+else
+switch
+case
+default
+while
+do
+for
+break
+continue
+return
+
+Keywords for modifiers(11)
+public
+private
+protected
+static
+final
+abstract
+synchronized
+native
+strictfp(1.2)
+transient
+volatile
+
+Keywords for exception handling(6)
+try
+catch
+finally
+throw
+throws
+assert(1.4)
+
+Keywords for class(6)
+class
+interface
+extends
+impelements
+package
+import
+
+object related keywords(4)
+new
+intanceof
+super
+this
+
+return type(1)
+void
+
+Unused Keywords(2)
+goto
+const
+
+Reserved Literals(3)
+true
+false
+null
+
+enum(1)(1.5v)
+
+Conclusions: 
+1. All 53 reserved words contains lowercase alphabets only
+2. In java we have only 'new' keyword and there is no delete keyword because destruction of usless object is the responsibitily of garbage collector
+
+Which are the following list contains only java reserved words
+
+
+-----------------------------------------------------------------------------------
+Data Types: Strongly typed programming language
+
+1. In java every variable and every expression has some type
+2. Each and every data type is clearly defined
+3. Every assignment should be checked by compiler for type compatibilty
+4. Because of above reasons we can conclude java language is STRONGLY TYPED Programming language.
+byte: 8 bits(-128 to 127)
+
+
+Is Java a purely Object Oriented programming language?
+When compared to old programming language it has more oops feature however when compared alone it is not completly an object oriented programing language(we use primitive data type)
+
+Primitive DataTypes:(8)
+1. Numeric data types(signed data type(because we can have positive or negetive values))
+	a. Integral datatype:(4)
+		byte: (size:1 byte or 8 bits)(range:-128 to 127)(suitable use while writing files to files(io inputs))(Default value:0)
+		short: (size:2 byte or 16 bits)(range:-32768 to 32767)(suitable for 16bits processor)(Default value:0)
+		int: (size:4 byte or 32 bits)(range:-2147483648 to 2147483647)(Default value:0)
+		long: (size:8 byte or 64 bits)(Default value:0)
+	b. Floating-Point data type:(2)
+		float: (size:4 byte or 32 bits)(Default value:0.0)
+		double: (size:8 byte or 64 bits)(Default value:0.0)
+			
+2. Non-numeric data types(2)
+	char: (size:2 byte or 16 bits)(Java is unicode based language)(Default value:0(represent space))
+	boolean: Size not applicable(Virtual machine depandable)(range not applicable, allowed values are true & false)(Default value:false)	boolean b=True(cannot find symbol)
+
+-------------------------------------------------------------------------------------------
+Literals:
+1. A constant value which can be assigned to a variable is called literal.
+eg: int x= 10; 10 is the literal here.
+
+byte-->short-->int
+
+char-->int
+
+int-->long-->float-->double
+8 byte long value we can assign to 4 byte float variable because both are following different memory representation internally
+float f=10L;
+sop(f);//output:10.0
+
+
+------------------------------------------------------------------------------
+
+Arrays:
+Introduction
+Array declaration
+Array creation
+Array initialization
+Array declaration, creation & initialization in a single line
+length vs length();
+Anonymous array
+Array element assignments
+Array variable assignments
+
+
+Introduction:
+1. If we want to represent more than 1 value in a single variable we should go for array.
+2. Arrays are fixed in size
+3. Arrays can hold homogeneous data type elements only
+4. All the elements of the array can be accessed using their respective indexes
+5. Array is an indexed collection of fixed number of homogeneous data elements
+
+
+int x = new int[10];
+
+1 demsional Array declaration
+int[] x;
+int []x;
+int x[];
+1. We can't specify the size while declaration of the array.
+
+2 Array Creation:
+int[] a = new int[3];
+1. Every array in java is an object only, hence we can create arrays by using new operator
+2. We need to provide the size of the array during the creation of the array else we will get compile time error
+3. It is legal to have an array with size 0 in Java
+4. We can't have negetive size.
+5. While providing the size of the array the allowed data types are int,byte,short & char.
+6. Max allowed size of array is 2147483647
+
+3. Array Initialization
+
+1. Once we create an array every element by default initialized with default values(as per the data type)
+2. Whenever trying to print any reference variable, internally toString() method will be called which is implemented by default to return the string in the form of classname@hashcode in hexadecimal form.
+note: If we are trying to perform any operation on null then we will get run time exception saying null pointer exception
+3. By default the every array will be initialized with default value & if we are not satisfied with the value then we can over ride with our own values
+
+
+4. Array Decalration, creation & initialization in a single line:
+
+We can declare, create & initialize an array in a single line(shortcut representation)
+
+long version:
+int[] x;
+x= new int[3];
+x[0]=10;
+x[1]=20;
+x[2]=30;
+
+single line representation: 
+int[] x={10,20,30};
+char[] ch={'a','e','i','o','u'};
+String[] str={"a","aa","aaa"};
+
+We can extend this shortcut for multi dimensional arrays also
+int[] x={{10,20},{30,40,50}}
+
+int[][][] x={{{10,20,30},{40,50,60},{{70,80},{90,100,110}}}
+sopln[x[0][1][2]];
+
+If we want to use the above shortcut we have to perform all activities in a single line else we will get CE.
+
+
+length Vs length()
+1. length
+
+1. length is a final variable applicable for arrays
+2. length variable represents the size of the array
+
+int[] x =new int[6];
+System.out.println(x.length()); CE: Cannont find symbol, symbol: method length(),location: class int[]
+System.out.println(x.length);//6
+
+2. length()
+
+1. length() is a final method applicable for String objects
+2. length() returns number of characters present in the strings
+
+String s= "Anshu";
+System.out.println(x.length);//CE: Cannont find symbol, symbol: method length,location: class j.l.s
+System.out.println(x.length());//5
+
+Note: length variable applicable for arrays but not for String objects whereas length() applicable for String objects but not for arrays.
+
+String[] s={"a","aa","aaa"}
+System.out.println(s.length);//3
+System.out.println(s.length());//CE
+System.out.println(s[0].length);//CE
+System.out.println(s[0].length());//1
+
+In multidimensional array length variable represents only base size but not total size.
+int[][] x= new int[6][3]
+System.out.println(x.length);//6
+System.out.println(x[0].length);//3
+There is no direct way of finding the total length of a multi dimensional array but we can sum up the length of every element in the base array and find out the total length.
+
+
+Anonymous array:
+Sometimes we can declare an array without name. Sucn type of nameless arrays are called anonymous arrays.
+The main purpose of the anonymous arrays is just for an instant use(One time usage)
+class test{
+Public static void main(String[] args){
+	sum(new int[]{10,20,30})
+}
+public static void sum(int[] x){
+	int total =0;
+	for(int x1:x){
+	total=total+x1;
+	}
+	System.out.println("The sum is "+total);
+	}
+}
+
+We can creat anonymous arrays as follow:
+new int[]{10,20,30,40}
+
+While creating anonymous arrays we can't specify the size, otherwise we will get compile time error.
+new int[3] {10,20,30}//Invalid
+new int[]{10,20,30}//valid
+
+We can create multi dimensional anonymous array also.
+new int[][]{{10,20},{30,40,50}}
+
+Based on our requirement we can give the name for anonymous array, then it is no longer anonymous
+int[] x = new int[][]{{10,20},{30,40,50}};
+
+
+Array Element Assignments:
+
+Case 1: 
+In the case of primitive type arrays as array elements we can provide any type which can be implicitly promoted to declared type.
+int[] x=new int[5];
+x[0]=10;
+x[1]='a';
+byte b=20;
+x[2]=b;
+short s=30;
+x[3]=s;
+x[4]=10l;//CE
+
+Case2:
+In the case of Object type arrays as array elements we can provide either declared type objects or its child class objects.
+Object[] a = new Object[10];
+a[0]= new Object();
+a[1]= new String("Anshu");
+a[2]= new Interger(10);
+
+Case3:
+For interface type arrays as array elements it's implementation class objects are allowed.
+Runnable[] r = new Runnable[3];
+r[0]= new Thread();
+r[1]= new String("Anshu");//CE
+
+Array Variable assignment:
+
+Case1:
+Element level promotions are not applicable at array level. Eg: char element can be promoted to int type whereas char[] cannot be promoted to int[].
+eg:
+int[] x={10,20,30,40};
+char[] ch={'a','b','c'};
+
+int[] b=x;//Valid
+int[] c=ch;//Invalid
+
+
+*In the case of Object type arrays, child class type array can be promoted to parent class type array.
+String[] s = {"a","b","c"};
+Object[] o = s;//Valid
+
+Case2:
+Whenever we assigning one array to another array,internal elements won't be copied. Just reference variables will be reassigned.
+int[] a ={10,20,30,40,50,60}
+int[] b = {60,70}
+
+a=b;//Valid
+b=a;//Valid
+
+Case3:
+Whenever we are assigning one array to another array, the dimension must be matched.
+Eg: In the place of int[] we should provide one dimensional array only. If we are trying to provide any anyother dimension then we will get compile time error.
+
+int[][] x= new int[3][];
+x[0]=new int[][];
+x[1]=10;
+x[2]=new int[2];
+
+Note: Whenever we are assigning 1 array to another array, both dimension and type must be matched but sizes are not required to match
+
+
+Eg1:
+
+class test{
+
+	public static void main(String[] args){
+
+		for(int i=0;i<=args.length;i++){
+			System.out.println(args[i]);
+		}
+		
+	}
+}
+
+Execution: Java Test A B C
+output: A
+		B
+		C
+		RE: AIOOBE
+
+
+Eg2:
+
+class test{
+	public static void main(String[] args){
+		String[] argh={"x","y","z"};
+		args=argh;
+		for(String s:args){
+			System.out.println(s)
+		}
+		
+	}
+}
+Execution: Java Test A B C
+output: x
+		y
+		z
+Eg3:
+
+int[][] a= new int[4][3];
+a[0]=new int[4];
+a[1]=new int[2];
+a= new int[3][2];
+Total number of objects created 11
+Total number objects elegible for garbage collection 7
+
+Types of Variable:
+
+Division 1:
+Based on type of value represented by a variable, all variables are divided into 2 type.
+1.Primitive Variable: Can be used to represent primitive values.
+	eg: int x=10;
+
+2.Reference Variables: Can be used to refer objects.
+	eg: Student s= new Student();
+
+Division 2:
+Based on position of declaration & behaviour all variables are divided into 3 type.
+1. Instance Variable
+2. Static Variables
+3. Local Variables
+
+
+1. Instance Variable:
+	a.If the value of a variable is varied from object to object such type of variables are called instance variables
+	b.For every object a seprate copy of instance variables will be created.
+	c.Instance variable should be declared within the class directly but outside of any method,block or constructor.
+	d.Instance variable will be created at the time of object creation and will be destroyed at the time of object destruction. Hence the scope of instance variable is exactly same as the scope of object.
+	e.Instance variable will be stored in the heape memory as a part of object.
+
+Eg1. class Student{
+		String name;
+		int rollno;
+		}
+	}
+
+f. We can't access instance variable directly from static area but we can access by using object reference.
+g. We can access instance variable directly from instance area.
+
+Eg2. class Test{
+
+	int x=10;
+	
+	public static void main(String[] args){
+		Test t= new Test();	
+		System.out.println(t.x);
+		t.m1();
+	}
+
+	public void m1(){
+	System.out.println(t.x);
+	}
+}
+
+h. For instance variables JVM will always provide default value and we are not required to perform initialization explicitly.
+
+Eg3.
+class Test{
+	int x;
+	double d;
+	boolean b;
+	String s;
+	public static void main(String[] args){
+		Test t1= new Test();
+		System.out.println(t1.x);
+		System.out.println(t1.d);
+		System.out.println(t1.b);
+		System.out.println(t1.s);
+	}
+}
+
+i. Instance variables are also called as Object level variable or sometime called as attributes.
+
+Static Variables:
+	a. If the value of a variable is not varied from object to object then it is not recommended to declare variable as instance variable.
+	b. We have to declare such type of variable in class level by using static modifier.
+	c. In the case of instance variables for every object a seprate copy will be created, however in case of static variable only one copy will be created at class level and shared by every object of the class.
+	d. Static variable should be declared within the class directly but outside of any method, block or constructor.
+	e. Static variables will be created at the time of class loading and will destroyed at the time of class unloading. Hence scope of static variable is exactly same as scope of .class file.
+
+Eg1
+	class Student{
+		String name;
+		int roll_no;
+		Static String collageName;
+	}
+
+	f. Static variables will stored in method area.
+	g. We can access static variables either by object reference or by class name. But recommended to use class name. Within the same calss it is not required to use class name and we can access directly.
+
+Eg2:
+	class Test{
+		static int x=10;
+		public static void main(String[] args){
+			Test t= new Test();
+			System.out.println(t.x);//Valid
+			System.out.println(Test.x);//Valid(Recomended)
+			System.out.println(x);//When within the class
+		}
+	}
+
+	h. We can access static variables directly from both instance and static areas.
+Eg2:
+	class Test{
+		static int x=10;
+		public static void main(String[] args){
+			System.out.println(x);
+		}
+		public void m1(){
+			System.out.println(x);
+		}
+	}		
+
+	i. For static variables jvm will provide default values and we are not required to perform initialization explicity.
+Eg3:
+	class test{
+	static int x;
+	static double d;
+	static String s;
+	public static void main(String[] args){
+			System.out.println(x); //0
+			System.out.println(d); //0.0
+			System.out.println(s); //null
+		}
+	}	
+
+	j. Static variables also known as class level variables or fields.
+
+Local Variables:
+	a. Sometimes to meet temporary requirements of the programmer we can declare variables inside a method or block or constructor, such type of variables are called Local variables/temporary variable/stack variables/automatic variables.
+	b. Local variable will be stored inside stack memory.
+	c. Local variables will be created while executing the block in which we declared it. Once block execution completes automatically local variable will be destroyed, hence the scope of local variable is the block in which we declared it.
+
+
+	class Test{
+	public static void main(){
+		int i=0;
+		for(int j=0;j<3;j++){
+			i=i+j;
+		}
+		System.out.println(i+"...."+j);//ce:since j is local to for loop
+	}
+}
+
+
+
+	class Test{
+	
+		public static void main(String[] args){
+	
+		try{
+			int j= Integer.parseInt("ten")
+		}catch(numberFormatException e){
+			j=10;
+		}
+		System.out.println(j);
+	}
+}
+
+
+	d. For local variables JVM wont provide default values. Compulsory we should perform initialization explicitly before using that variable. i.e. if we are not using then it is not mandatory to perform initialization.
+
+					class Test{
+					public static void main(){
+						int x;
+						System.out.println("Hello");
+					}
+					}
+
+					Output: If we are not using local variable then its okay not to initialize the local variable.
+
+
+	e. It is higly recommended for local variables at the time of declaration atleast with default values.
+
+
+		class Test{
+			public static void main(String[] args){
+				int x;
+				if(args.length>2){
+					x=10;
+				}
+				System.out.println(x);
+			}
+		}
+
+Output: CE since there is no value initalized for x to print in case the if condition fails.
+
+		class Test{
+			public static void main(String[] args){
+				int x;
+				if(args.length>2){
+					x=10;
+				}else{
+					x=20;
+				}
+				System.out.println(x);
+			}
+		}
+Output: Depends on the value we pass while executing the program.
+
+
+Note: It is not recommended to perform initialization for local variable inside logical blocks, because there is no gurantee for the execution of these blocks always at run time.
+
+
+	f. The only applicable modifier for local variable is final, by mistake if we are trying to apply any other modifiers, then we will get compile time error.
+
+	g.If we are not declaring with any modifier, then by default it is default but this rule is applicable only for instance and static variable but not for local variables.
+
+Uninitialized Arrays:
+
+
+1.Instance Array:
+class Test{
+	int[] x;
+	public static void main(String[] args){
+		Test t= new Test();
+		System.out.println(t.x);//null
+		System.out.println(t.x[0]);//nullpointerexception
+	}
+}
+
+
+
+class Test{
+	int[] x = new int[3];
+	public static void main(String[] args){
+		Test t= new Test();
+		System.out.println(t.x);//[i@454r5
+		System.out.println(t.x[0]);//0
+	}
+}
+
+
+2.Static Array:
+
+class Test{
+	static int[] x;
+	public static void main(String[] args){
+		Test t= new Test();
+		System.out.println(t.x);//null
+		System.out.println(t.x[0]);//nullpointerexception
+	}
+}
+
+
+
+class Test{
+	static int[] x = new int[3];
+	public static void main(String[] args){
+		Test t= new Test();
+		System.out.println(t.x);//[i@454r5
+		System.out.println(t.x[0]);//0
+	}
+}
+
+
+3.Local Array
+
+class Test{
+	static int[] x;
+	public static void main(String[] args){
+		Test t= new Test();
+		System.out.println(t.x);//CE
+		System.out.println(t.x[0]);//CE
+	}
+}
+
+
+
+class Test{
+	static int[] x = new int[3];
+	public static void main(String[] args){
+
+		Test t= new Test();
+		System.out.println(t.x);//[i@454r5
+		System.out.println(t.x[0]);//0
+	}
+}
+
+Note: Once we create an arrayevery array element bydefault initialized with default values irrespetive of weather it is instance or static or local array.
+
+
+
+Var-Arg Methods(Variable Number of argument Methods)(1.5 version)
+
+1. Until 1.4 version we can't declare a method with variable number of arguments, if there is a change in number of arguments compulsory we should go for new method. It increases length of the code and reduced redability. 
+2. To overcome this problem sun people introduced var-arg methods in 1.5 version. According to this we can declare a method which can take variable number of arguments such type of methods are called Var-Arg Methods.
+3. Var-Arg method declaration: m1(int... x).
+4. We can call this method by passing any number of int values including 0 number.
+eg. m1(),m1(10),m1(10,20,30) etc.
+
+class VarArgMethodTest{
+	public static void m1(int... x){
+		System.out.println("Var-arg method");
+	}
+
+	public static void main(String[] args){
+		m1();
+		m1(10);
+		m1(10,20,30,40);
+	}
+}
+Output: 
+Var-arg method
+Var-arg method
+Var-arg method
+
+5. Internally var-arg parameter will be converted into 1-dimensional array, hence withing the var-arg method we can differentiate values using index.
+
+Eg:
+class VarArgMethodTest{
+	public static void m1(int... x){
+		System.out.println("Var-arg method");
+		System.out.println("The number of argument passed: "+x.length);
+	}
+
+	public static void main(String[] args){
+		m1();
+		m1(10);
+		m1(10,20,30,40);
+	}
+}
+
+
+Best suitable example of Var-arg method:
+
+class SumByVarArgMethodTest{
+	public static void main(String[] args){
+		sum();
+		sum(10);
+		sum(10,20);
+		sum(10,20,30);
+	}
+
+	public static void sum(int... x){
+		int total=0;
+		for(int x1:x){
+			total+=x;
+		}
+		System.out.println("The sum is : "+total);
+	}
+}
+
+Main Method:
+
+Weather class contains main method or not and weather main method is declared according to requirement or not, these things won't be checked by compiler. At run time JVM is responsible to check these things. If JVM unable to find main method then we will get run time exception sayind nosuchmethoderror:main
+
+class Test{
+	
+}
+
+Javac Test.java//
+java Test//NoSuchMethodError:main
+
+
+At run time JVM always searches for the main method with the following prototype:
+
+public static void main(String[] args)
+
+public: Because our jvm is in c drive but our program can be stored anywhere so to call the method from anywhere is why it is public.
+static: So the even in the absence of any object it can create the main method because static method are created during the class loading.
+void: JVM do not expect any return value from the main method is why it is void.
+main: This is the name which is being configured inside the JVM code.
+String[] args: this is the command line argument. 
+
+The above syntax is very strict and if we perform any change then we will get run time exception saying NoSuchMethodError:main
+
+Even tough above syntax is verys strict, the following changes are acceptable:
+1. Instead of "public static" we can take "static public". i.e the order of modifiers is not important.
+2. We can declare String array in any acceptable form.
+3. Instead of args we can take any valid java identifier.
+4. We can replace String[] with Var-arg parameter(String... args)
+
+
+Note: Overloading of the main method is possible but JVM will always call String[] arg main method only. The other overloaded method we have to call explicitly like any other method call.
+
+class Test{
+	
+	public static void main(String[] args){
+		System.out.println("String[]");
+	}
+
+		public static void main(int[] args){
+		System.out.println("int[]");
+	}
+}
+
+Output: String[]
+
+2. Inheritance concept applicable for main method, hence whild executing child class if child doesn't contain main method then parent class main method will be exectued.
+
+
+class Parent{
+	public static void main(){
+		System.out.println("Parent main");
+	}
+}
+
+class Child extends Parent{
+	
+}
+
+Javac Parent.java
+It creates 2 .class files Parent.class  & Child.class
+
+Java Parent// Parent main
+Java Child// Parent main
+
+
+3. Method hiding: It seems over riding concept applicable for main method but it is not over riding and it is method hiding.
+
+class Parent{
+	public static void main(String[] args){
+		System.out.println("Parent main");
+	}
+}
+
+class Child extends Parent{
+	public static void main(String[] args){
+		System.out.println("Child main");
+	}	
+}
+
+Java Parent// Parent main
+Java Child// Child main
+
+
+Note: For main method, inheritance and overloading concepts are applicable but over-riding concept is not applicable, instead of over riding method hiding is applicable.
+
+
+Command Line Arguments
+
+The Arguments which are passing from command prompt are called command line arguments. With these command line arguments JVM will create an array and by passing that array as argument jvm will call main method
+
+Eg: Java Test A B C
+args[0]=A
+args[1]=B
+args[2]=C
+args.length=3
+
+
+Usage: The main objective of command line argument is we can customize behaviour of the main method.
+class Test{
+	
+	public static void main(String[] args){
+		int number=Integer.parseInt(args[0]);
+		System.out.println("The square of "+number+ "is : "+number*number);
+	}
+}
+
+
+

@@ -1,0 +1,362 @@
+Exception Handling:
+1. When write code in Java sometimes, things go well and sometime it doesn't. When such kind of situation arises where things doesn't go well, in such case we need to provide an alternate course to our programing and the process/method/ mechanism in which handle such scenarios is nothing but Exception handling.
+
+2. We can't sit around at the time of code execution and manipulate/alter our code. So we need to plan things ahead, which is why we have this option of Exception Handling.
+
+What could go wrong, here is an example.
+
+	int i=0;
+	int j=10/i;
+
+public int intDivide(int i,int j){
+	return i/j;
+}
+
+Exception is not for compile time error. The compile time error is being given to us by the compiler and the program simply would not run if the relevant error is not fixed. On the other hand there are situation where in the compiler can't catch an error because syntactically everything is as per the compiler expectations, however, logically its not correct. These are the scenarios where we need to have some mechanism to handle the situation and give a different direction to our program.
+
+How does Java handles Exception:
+When the is an exception or when something goes wrong during the execution, the java creates an object of a particular class, the class is called Exception.
+Not only it creates it, rather it throws it(Baically what it says is, the runtime says like something happened and shouts and says here is the object and someone has to handle it, this thing broke and someone need to handle it)
+
+There are a bunch of thing you need to do when you are doing exception handling.
+1. You need to protect the code which can throw an exception. You need to identify what peice of code can go wrong. When you are writing something which is pretty safe like writing a code to add two number, well there is nothing which can go wrong hence we don't need to protect the code.
+
+2. The 2nd steps: You need to specify what needs to happen during the time of exception. So when you are providing some sort of protection to a piece of code, you essentially have to also specify what needs to happen if that situation arrive as you had forseen. 
+
+3. The 3rd step: You also need to specify what needs to happen no matter what.There is a bunch of code which is risky and you saying if something goes wrong this needs to happen.But then you need to have this other piece of code which you can have optionally no matter weather it execute sucessfuly or it fails, make sure you run this piece of code.This usually happens to be the cleanup code. Lets say for example you are opening a bunch of files, connecting to the database and if something goes wrong you can't just quit the program. No matter if it completes sucessfully or not you gotta close the database connection, you gota close the file so that it can free up the resources.
+
+4. finally: You need to detect when something goes wrong and you need to throw that exception. This step is optional.
+
+Try-Catch block:
+
+try{
+	//Risky code
+}catch(Exception e){
+	//Handle Exception
+}finally {
+	//Wrap up/clean up
+}
+
+
+
+Eg:
+
+public int intDivide(int i,int j){
+	try{
+		return i/j;
+	}catch(Exception e){
+		return 0;
+	}
+}
+
+Multiple Catch Block:
+
+try{
+	//Risky code
+}catch(ExceptionClass1 e1){
+	//Handle Exception
+}catch(ExceptionClass2 e2){
+	//Handle Exception
+}catch(ExceptionClass3 e3){
+	//Handle Exception
+}catch(ExceptionClass4 e4){
+	//Handle Exception
+}finally{
+	//Wrap up / clean up
+}
+
+
+
+Exception-->
+
+public int intDivide(int i , int j){
+	try{
+		return i/j;
+	}catch(ArithmeticException e){
+		return 0;
+	}catch(Exception e){
+		System.out.println("Something unexpected happened here");
+		return Error_Code;
+	}
+}
+
+The exception we are throwing should of the create exception object type of its superclass type. Whichever comes first in the execution, the JVM uses that to block and executes the code inside it. before moving to the finally block.
+
+
+Nested Try-Catch block:
+
+try{
+	//Risky code
+	try{
+		//Some other risky code
+	}Catch(Exception e){
+		//Handle the expection in the inner try.
+	}
+}catch(Exception e){
+	//Handles the exception in the outer try block
+}
+finally{
+	//Wrap up / Clean up
+}
+
+
+
+throw:
+throw new ArithmeticException("You passed zero for the denominator");
+
+
+Exception in call-stack:
+try{
+	------> calls a method()
+}catch(Exception e){
+	
+}
+
+In the above scenario where is the piece of code which is written inside the try is calling a method has an exception in such case the jvm comes out of the method to the place which is calling this method and start to find if there is a try block surrounding the block of code and if it does find it then it executes the relevant piece of code.
+
+If the peice of code inside the block is calling a method (say m1()) and the called method is again calling another method(say m2()) and the exception is found in the last imidiate method(m2()), in such case the JVM keeps traversing to the root code which is calling the method and try to find the try block if not then it keeps going up in the stack to find the try block around it.
+
+
+Uncaught Exceptions: This may leads to end of the program.
+
+
+public class App{
+	public static void main(String[] args){
+		int i = 4/0;
+	}
+}
+
+If we don't provide any exception handler and the jvm excounters an exception it first will try to find the try-catch block in the piece of code which is raising an exception and keeps traversing up in the call stack to look for the try-catch and if it doesn't find any in that case the JVM gives the error to the default handler which then in the JVM typically prints a message in the console and just end the program.
+
+
+Exception:
+An unwanted and unexpected event that distrubs the normal flow of program is called as exception
+
+purpose: Graceful termination of the program(DB example)
+
+1. Open a DB connection
+2. Read the data from the DB //SQLException -----> It will terminate the program without closing the connection
+3. Close the DB connection 
+
+In the above case lets assume the DB server provides a max of only 10 connection at a time, if the above SQLException happens 10 times then the 11th person is not able to open a DB connection, this is fail the entire application.
+
+Meaning: Defining alternate ways to sucessful execution of program is called exception handling.
+
+Runtime Stack Mechanism:
+
+
+Default Exception Handling:
+
+class Test{
+	public static void main(String[] args){
+		doStuff();
+	}
+
+	public static void doStuff(){
+		doMoreStuff();
+	}
+
+	public static void doMoreStuff(){
+		System.out.println("Hello");
+	}
+}
+
+
+
+
+Exception Hierarchy:
+
+
+---------------------------
+Customized Exception handling using Try-Catch:
+
+
+without try-catch:
+class Test{
+	public static void main(String[] args){
+		System.out.println("Statement-1");
+		System.out.println(10/0);
+		System.out.println("Statement-3");
+	}
+}
+
+Output: Statement-1
+RE: AE:/by zero
+
+With Try-Catch:
+
+class Test{
+	public static void main(String[] args){
+		System.out.println("Statement-1");
+		try{
+			System.out.println(10/0);
+		}catch(ArithmeticException e){
+			System.out.println(10/2);
+		}
+		System.out.println("Statement-3");
+	}
+}
+
+Output: Statement-1
+		5
+		Statement-3
+
+
+Note: Make sure you should have ONLY risky code inside the try block else the rest of the non-risky code will never be executed inside the try block 		
+
+
+Note: 3 methods present in the Throwable class to print the message to the console. So any excecption can access these methods.
+
+try{
+	System.out.println(10/0)
+}catch(Exception e){
+	System.out.println(e);
+}catch(ArithmeticException e){
+	System.out.println(e);
+}
+
+Output: CE:
+
+While in a case of multiple catch blocks with a single try make sure to have the order of the exception from child class exception to parent class exception
+
+
+Finally:
+-The block of code which will execute no matter if the try or catch block is executed or not is the finally block. Hence anything that we put inside this block it will execute no matter the situation. 
+
+- Finally is given the highest priority even before the return statement.
+- The only case where the finally is suppressed is when we use System.exit(0) and if the JVM gets chance to reach this statement before getting a chance to reach the finally block then the finally block will not be executed.
+- By understanding above facts about the finally block it is always recommended to use clean up codes inside the finally block(eg. closing a db connection, closing a file which we might have started at the begning of the program etc.)
+
+
+throw Keyword:
+- Sometimes it is required to create an exception object explicitly and throw it to the JVM manually for this we use throw keyword.
+- To hand over customized exception object to JVM manually we use the throw keyword.
+
+Eg:1
+
+withdraw(double amount){
+	if(amount>balance){
+		throw new InsufficientFundException();
+	}
+}
+
+Eg2:
+
+without throw keyword:
+public class WithoutThrowTest {
+	
+	public static void main(String[] args) {
+		System.out.println(10/0);
+	}
+}
+Output: Exception
+Explanation: In the above piece of code the main method is responsible for creating the exception object and also responsible for giving it to the JVM. However, if I want to create a customized exception object of my own and give it to JVM is when I need to create the object and throw is to the JVM.
+
+With throw keyword:
+class Test{
+	public static void(String[] args){
+
+		throw new ArithmeticException("/ by zero by Anshu");
+	}
+}
+
+
+
+throws keyword:
+To delegate the responsibility of exception handling to the caller we use the throws keyword.
+Eg1:
+import java.io.*;
+
+public class CheckedExceptionTest {
+
+	public static void main(String[] args) {
+		PrintWriter pw = new PrintWriter("abc.txt");
+		pw.println("Hello");
+
+	}
+}
+
+Eg2:
+
+class Test{
+public static void main(String[] args) {
+		Thread.sleep(1000);
+		System.out.println("I slept happily")
+
+	}
+}
+
+The above program will raise checked exception during the compilation time. Hence we need to handle the exception explicitly else we will get compile time error.
+
+There are 2 ways of handling the checked exception:
+1. By using try-catch block
+
+class Test{
+public static void main(String[] args) {
+		try{
+		Thread.sleep(1000);
+		}catch(IterruptedException e){
+
+		}
+		System.out.println("I slept happily");
+	}
+}
+
+2. By using throws keyword
+
+class Test{
+public static void main(String[] args) throws InterruptedException {
+		Thread.sleep(1000);
+	}
+}
+
+
+Customized or User Defined Exception:
+Sometimes to meet our programming requirement we have to define our own exceptions and we have to raise those exceptions as per our requirement.
+Exceptions defined explicitly by the programmer is called customized exception.
+
+Eg 1:
+withdraw(double amount){
+	if(amount>balance){
+		throw new InsufficientFundsException();// User defined exceptions
+	}
+}
+
+How to define user defined or customized exception:
+
+class TooYoungException extends RuntimeException{
+	
+	public TooYoungException(String msg){
+		super(msg);
+	}
+}
+
+class TooOldException extends RuntimeException{
+	public TooOldException(String msg){
+		super(msg)
+	}
+}
+
+usage of user defined exception:
+
+class Test{
+	public static void main(String[] args){
+		int age = Integer.parseInt(args[0]);
+		if(age>60){
+			throw new TooYoungException("Please wait some more time, definitely you will get best match"); 
+		}else if(age<18){
+			throw new TooOldException("Your age already crossed marriage age, no chance of getting married"); 
+		}else{
+			System.out.println("Thank you for registration.");
+		}
+	}
+}
+
+Note 1: The JVM know when to raise arithmetic exception, nullpointer exception etc. because these are java defined exceptions and the jvm know whrn the relevant exception to be raised however, JVM doesn't know when to raise the user defined exception hence it is the responsibilty of the programmer to hand over the user defined exception to the JVM explicitly.
+
+Note 2: Customized exceptions are never handled because this is a situation where the programmer would not like to proceed with the rest of the execution because of the input provided by the user, hence he/she will throw this exception to the JVM who further will delicate it to the default exception handler to print the customized message to the console.
+
+Note 3: It is highly recommended that while defining our customized/user defined exception we need to extend it from the Runtime Exception, because if that is the case then the compiler will never expect us to handle the exception during the compilation and will allow the program to run.
+
+
+Throwable hirarchy: https://www.benchresources.net/exception-hierarchy-in-java/

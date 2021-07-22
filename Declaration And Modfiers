@@ -1,0 +1,369 @@
+Declaration And Modfiers
+1. Java source file Structure
+2. class Level modifiers
+3. Member level modifiers
+4. Iterfaces
+
+
+
+Java source file Structure:
+1. A java program can contain any number of classes but at most 1 class can be declared as public. If there is a public class then name of the program and the name of the public class must be matched otherwise we will get a compile time error
+
+eg:
+class A{
+	//code
+}
+class B{
+	//code
+}
+class C{
+	//code
+}
+
+Case 1: If there is no public class, then we can use any name and there are no restrictions.
+	eg: A.java,B.java,c.java,Anshu.java
+
+Case 2: If class B is public then name of the program should be B.java, otherwise we will get compile time error.
+
+Case 3: If class B and C are declared as public and the name of the program is B.java, then we will get compile time error.	
+
+
+class A{
+	public static void main(String[] args){
+		System.out.println("A class main");
+	}
+}
+class B{
+	public static void main(String[] args){
+		System.out.println("B class main");
+	}
+}
+class C{
+	public static void main(String[] args){
+		System.out.println("C class main");
+	}
+}
+class D{
+	
+}
+
+Conclusions: 
+1. Whenever we are compiling a java program for every class present in that program a seprate .class file will be generated.
+2. We can compile a java program(Java Source File), but we can run a java.class file
+3. While executing a java class, the corresponding class main method will be executed. If the class contain main method then we will get run time exception.
+
+
+
+Import Statement:
+1. We can solve the below problem by using fully qualified name. java.util.ArrayList l = new java.util.ArrayList();
+2. In the above piece of code java.util.ArrayList is called as fully qualified name.
+3. The problem with usage of fully qualified name always is it increases and reduces redabilty.
+4. We can solve this problem by using import statement.
+5. Whenever we are writing import statement it is not required to use fully qualified name evertime inside the program.
+
+Issue Eg:
+class Test{
+	public static void main(String[] args){
+		ArrayList l = new ArrayList();
+	}	
+}
+Output: CE
+
+Solution Eg:
+import java.util.ArrayList;
+class Test{
+	public static void main(String[] args){
+		ArrayList l = new ArrayList();
+	}	
+}
+
+Note: By default two package which are available to all java programs are java.lang & CWD(Current working directory)
+
+Class Level Modifiers:
+
+1. While writing our own classes, we need to provide some information about our class to the JVM. Eg: 1. weather this class can be accessible from anywhere or not(public), 2. Child class creation is possible or not, 3. Weather object creation is possible or not etc.
+
+2. We can specify this information by using appropriate modifiers.
+3. Out of 12 modifers in java the only applicable modifiers to top level classes: 5. These are public,<default>,final,abstract,strictfp.
+
+	private class Test{
+		public static void main(String[] args){
+			System.out.println("Hello");
+		}
+	}
+Output: CE
+
+4. For innerclasses we can use 8 modifiers which includes the above 5 modifiers. These are private,protected & static.
+
+Access Specifiers Vs Access Modifiers:
+1. public private protected <default> are considered as access specifiers except these remaining are considered as access modifiers. 
+2. This rule is applicable only for old language like c++ but not in Java.
+3. In java all 12 are considered are modifiers only, there is no word like access specifiers
+
+
+public classes:
+1. If a class declared as public then we can access that class from anywhere.
+
+Default classes:
+1. If there is no access modifiers mentioned in the class, then it is considered as to be the default modifiers and it can be accessed within the same package only.
+2. Hence default access is also known as package level access.
+
+Final Modifier:
+1. final is a modifier applicable for classes,methods & variables.
+
+final method:
+1. All the methods in the parent class is available to the child class by default through inheritance
+2. If the child class is not satisfied with the parent class implimentation of a particular method then the child class has the liberty to override the method.
+3. However, if the parent declare a method to be final then the respective method cannot be overridden in the child class.
+
+
+Final class:
+1. If a class declared as final, we can't extend functionality of that class. i.e we can't create child class for that class(inheritance is not possible).
+2. Every method present inside final class is by default a final method however, every variable present inside final class need not to be final.
+3. The main advantage of final keyword is we can achive security and we can provide unique implimentation. However, at the same time the main disadvantage of final keyword is we are missing out on the key benifits of OOPS:
+	Inheritance(Because of final class)
+	Polymerphism(Because of final method)
+Hence if there is no specific usage we should avoid final in class & method level.
+
+Abstract Modifier:
+1. Abstact modifiers are applicable for class & methods only but not for variables.
+
+Abstract Method:
+1. Even tough we don't know about implementation still we can declare a method with abstract modifier. i.e. for abstarct methods only declaration is available but not implimentation, hence abstact method declaration should end with ;
+
+2. If inside a class we have atleast one abstract method then we have to mention the class as abstract class.
+
+3. It is mandatory for a child class to provide implementation to all the abstract class.
+	This acts as an advantage because if we are not sure of the implementation or if the implementation is going to vary from class to class then we can just declare the method and make it mandatory for the child class to provide implementation.
+
+
+
+
+Eg:
+abstract class Vehicle{
+		abstract public int getNoOfWheels(); 
+}
+
+class Bus extends Vehicle{
+	public int getNoOfWheels(){
+	return 7;
+	}
+}
+
+Abstract class:
+
+1. With abstart as a modifier to a class we are not allowed to create an object of that class because of partial implementation. 
+2. An abstract class may or may not contain any abstract method.
+
+Abstract class Vs Abstract Method:
+1. If a class contains contains atleast one abstract method, then it is mandatory to declare the respective class as abstract. Otherwise we will get complie time error.
+2. Reason for point 1: If a class contains atleast one abstract method means its implementation is not complete which means if we create an object of this class then we will not be able to fetch any value or make any operation for the abstract method. Hence to avoid creating an object of such class we have to make this class as abstract which will restrict creating object of the respective class.
+
+final vs abstract:
+1. abstract method is mandatory to be overridden in child classes to provide implementation whereas we can't override final methods in child class. Hence final abstract is an illegal combinations for methods.
+
+2. For final classes we can't create child class whereas for abstract classes we should create child class to provide implementation. Hence, final abstract combination is illegal even in class level.
+
+3. Abstact class can contain final method but the reverse is not possible(i.e. final class can't contain abstract method).
+
+Note: It is highly recommended to use abstract since it encourage/promotes OOPS features like inheritance & polymerphisim. 
+
+
+Static Modifiers:
+1. Static is a modifier applicable for methods and variables but for classes. We can't declare top level class with static modifier but we can declare inner classes as static(such type of inner classes are called static nested classes).
+2. In the case of instance variables, for every object a seprate copy will be created, however in case of static variables a single copy will be created at class level which will further be shared by every object of that class.
+
+Interface
+1.Introduction
+2. Declaration & implementation
+3. Extends Vs Implements
+4. Interface methods
+5. Interface Variables
+6. Interface Naming conflicts
+	a. Method naming conflicts
+	b. variable naming conflicts
+7. marker Interface(imp)
+8. Adapter classes
+9. Interface vs abstarct class vs concrete class
+10. Difference between interfaces & abstarct class(imp)
+11. Conclusions
+
+1. Introduction:
+
+1. Any service requirement specification(SRS) is considerd as an Interface.
+Eg1: 
+a. JDBC API acts as requirement specificationto develop database driver. 
+b. Database vendor is responsible to implement this JDBC API
+
+Eg2:
+a. Servlet API acts as requirement specifications to develop Webserver.
+b. Webserver vendor is responsible to implement servlet API
+
+
+2. From client point of view an interface defines the set of services what he is expecting 
+From service provider point of view an interface defines the set of services what he is offering.
+Hence any contract between client and service provider is considered as as interface.
+
+3. Inside interface every method is always abstarct weather we are declaring or not. Hence, interface is considered as 100% pure abstract class.
+
+Final Def: 
+Any service requirement specification or any contract between client and service provider or 100% pure abstract class is nothing but interface.
+
+
+Interface Declaration and implementation
+1. Whenever we are implementing an interface for each and every method of that interface we have to provide implementation, Otherwise we have to declare class as abstract. Then next level child class is responsible to provide implementation.
+2. Every interface method is always public and abstract weather we are declaring or not. Hence whenever we are implementing an interface method compulsary we should declare as public, otherwise we will get compile time error.	
+
+
+Eg: 
+interface interf{
+	void m1();
+	void m2();
+}
+
+abstract class ServiceProvider implements interf{
+	public void m1(){}
+}
+
+class SubServiceProvider extends ServiceProvider{
+	public void m2(){}
+	public void m1(){}	
+}
+
+
+Extends Vs Implements:
+
+1. A class can extend only 1 class at a time.
+2. An interface can extend any number of interfaces simultaneously.
+
+interface A{
+	
+}
+
+interface B{
+	
+}
+
+interface C extends A,B{
+	
+}
+
+3. A class can implement any number of interfaces simultaneously.
+4. A class can extend another class and can implement any number of imterfaces simlutaneously.
+	eg: class A extends B implements C,D,E
+
+Invalid	
+1. A class can extend any number of classes at a time.
+2. A class can implement only one interface at a time.
+3. Interface can extend only one interface at a time.
+4. An Interface can implement any number of interfaces simlutaneously.
+5. A class can extend another class or can implement an interface but not both simultaneously.
+
+x extends y
+1. Both X and Y should be classes
+2. Both X and Y should be interfaces.
+3. Both X and Y can be either class or interface (Ans)
+4. No restrictions
+
+Every method present inside interface is always public & abstract irrespective of decalration:
+Why public: The implementation class can be present in any directory hence we need to have a public modifier to the methods inside the implementation class.
+Why abstratc: To make the implementation class mandatory to provide implementation to the methods.
+
+Interface Variables:
+1. An interface can contain variables, the main purpose of interface variables is to define requirement level constants.
+2. Interface variable are always public static final.
+	public: To make this variable available to every implementation class.
+	static: It is not possible to create an object of an interface, hence to make these variables accessible to every implementation class without having to create an object is why the variables are static. 
+	final: If one implementation class changes value then remaining implementation classes will be affected. To avoid this scenario every interface variable is always final.
+3. For interface variable compulsory we should perform initialization at the time of declaration, otherwise we will get compile time error(for final static compiler will not provide default value.)	
+
+4. Inside implementation class we can access interface variables. But we can't modify values
+
+interface interf{
+	int x=10;
+}
+
+class Test implements interf{
+	public static voind main(String[] args){
+		x=777;
+		System.out.println(x);
+	}
+}
+
+Output: CE
+
+class Test implements interf{
+	public static voind main(String[] args){
+		int x=777;
+		System.out.println(x);
+	}
+}
+Output: 777
+
+Marker Interfaces:
+If any interface doesn't contain any methods and by implementing that interface if our objects get any ability,such type of interfaces are called marker interfaces.
+
+Eg:
+1. Serializable, clonable, RandomAccess, SingleThreadModel: These interfaces are marked for some ability.
+
+Eg1: By implementing Serializable interface our objects can be saved to a file nd can travel across a network.
+Eg2: By implementing Cloneable interface our objects are able to produce exactly duplicate cloned objects.
+
+Without having any methods how the objects will get ability in marker interfaces?
+Ans: Internally JVM is responsible to provide required ability.
+Why JVM is providing required ability in marker interfaces?
+Ans:  To reduce complexity of programing and to make Java Language as simple as possible.
+Is it possible to create our own marker interface?
+Ans: Yes however we will need to customize the JVM or create our own JVM curated to provide support to our marker interface.
+
+Adapter Class:
+1. Adapter class is a simple Java class that implements an interface with only empty implementation.
+
+Eg:
+interface X{
+	m1();
+	m2();
+	m3();
+	.
+	.
+	.
+	.
+	m1000();
+}
+
+
+
+
+abstract class AdapterX implements X{
+	m1(){}
+	m2(){}
+	m3(){}
+	.
+	.
+	.
+	m1000(){}
+}
+
+
+If we implement an interface, for each and every method of that interface compulsoury we should provide implementation weather it is rerequired or not required
+
+The probelem with the above approach is, it increases length of the code and decreases redabilty. We can solve this problem by using adapter classes. Instead of implementing interface if we extend adapter class we have to provide implementation only for required methods and we are not responsible to provide implementation for each and every method of the interface. So that length of the code will be reduced.
+
+
+class Test extends ApdapterX{
+	m3(){
+		//Implementation
+	}
+}
+
+class Sample extends ApdapterX{
+	m5(){
+		//Implementation
+	}
+}
+
+class Demo extends ApdapterX{
+	m999(){
+		//Implementation
+	}
+}

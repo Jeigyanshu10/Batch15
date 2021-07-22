@@ -1,0 +1,183 @@
+Collection Framework(Durga soft)
+
+int x = 10;
+int y = 20;
+int z = 30;.....
+------------------
+Array
+Student[] s = new Student[10000];
+s[0]= new Student[];
+s[1] = new Student[];....
+
+-------However there are a few but very vital limitations with array.
+
+1. Array is fixed in size: in the real time we are not allowed to alter the size of the array. We have to mention the size of the array at the begining, and hence we need to know the size of the array all in advance.
+
+2. Array can contain only homogeneous data elements. We cannot store a student type of object into a customer type of array. However, we do have a work around of defining an array of Object type which can contain every time of data inside it.
+
+3. The most important issue espcially from the developers point of view is that the Array is not built on top of any standard Data structure.: How is that important? Well since it is not built on top of any standard data structure, as a developer for every operation we have to do with the array it demands to be coded by the developer. For eg: we need to insert a bunch of data into our array with some sorting order, well for this you as a developer have to write the logic of the sorting and also the insertion process.
+
+After looking at all the limitations of the array exactly when the developers started eyes got waterry and the first drop was about to run down their cheeks is when this person with all attire and equipment knocked at developers doorstep and introduced itself as 
+										                  Collections
+1. Growable in nature
+2. Can hold both homogeneous and hetrogeneous elements.
+3. Every collection class is implemented based on some standard datastructure. Hence there is support for almost all of my day to day operation and I as a developer don't have write a tonne of code to get the basic requirement up and running.
+
+
+Listening to this the developer was very happy. He wiped his eyes and nose and just about to throw that smile on his face, the Collections said, Kuch pane ke liye kuch khona padata hai. Hence if you want to take advantange of these features of these collections framework then you have compromise on the performance of your application.
+
+
+Diffrences Between Arrays and collections
+
+Arrays 														|										Collections			
+1. Fixed in size											|	1. Growable in size
+2. with respect to memory, it is not recommended to use 	|   2. With respect to memory, Collections are recommneded to use
+3. WRT performance Arrays are recommended to use			|	3. WRT performance Arrays are not recommended to use
+4. Can hold only homogeneous elements						|	4. Can hold only homogeneous and hetrogeneous elements
+5. No standard datastructure hence no readymade methods 	|	5. Every class has some standard datastructure hence supported with ready 																	   made methods for different day to day operations. 
+6. We can hold primitive and object elements				|	6. Can only hold objects elements
+
+
+Collection:
+To represent group of individual objects as a single entity we should go for collection.
+
+Collection Framework:
+It defines several classes and interface which can be used to represent collection.
+
+9 Key Interfaces in collection framework:
+1. Collection(I): it contains all the basic/common methods which we need in our day to day operations
+-In general Collection is considered as to be the root interface of the Collection Framework.
+Note: There is no concrete class which implements collection interface directly.
+
+Collections:
+1. Collections is an utility class which defines several utility methods for collection objects(like sorting,searching etc.)
+Eg: ArrayList, never talks about sorting, so it gets it from the Collections class.
+	Collections.sort(al);
+
+
+2. List(I):
+- Child interface of Collection
+If you want to represent a group of objects where:
+	a. duplicates are allowed
+	b. instertion order must be preserved
+
+
+															Collection(I)(1.2v)
+																/					
+															   /
+															  /
+															List(I)(1.2v)------
+															/\                |
+														   /  \               | 
+														  /    \              | 
+												  Arraylist	 LinkedList    Vector(1.0v)
+												  	(1.2v)		(1.2v)		  |
+												  							  |
+												  							Stack(1.0v)	  		
+
+
+3. Set(I):
+If you want to represent a group of objects where:
+	a. duplicates are not allowed
+	b. instertion order is not preserved
+
+
+
+
+															Collection(I)(1.2v)
+																 \					
+															      \
+															  	   \
+																  Set(I)(1.2v)
+																		/
+																	   / 
+																	  /  
+															     HashSet
+															  	(1.2v)	
+															  		|	
+															  		|	
+															  		|
+															  	LinkedHasSet
+															  	(1.4v)	
+
+
+4. SortedSet(I)
+If you want to represent a group of objects where:
+	a. duplicates are not allowed
+	b. All the objects inserted should follow some sorting order
+
+
+															Collection(I)(1.2v)
+																 \					
+															      \
+															  	   \
+																  Set(I)(1.2v)
+																		/\
+																	   /  \
+																	  /    \
+															     HashSet  SortedSet(I)
+															  	(1.2v)	
+															  		|	
+															  		|	
+															  		|
+															  	LinkedHasSet
+															  	(1.4v)	
+
+
+5. NavigableSet(I)
+If you want to represent a group of objects where:
+	a. duplicates are not allowed
+	b. All the objects inserted should follow some sorting order
+
+
+
+
+															Collection(I)(1.2v)
+																 \					
+															      \
+															  	   \
+																  Set(I)(1.2v)
+																		/\
+																	   /  \
+																	  /    \
+															     HashSet  SortedSet(I)
+															  	(1.2v)	         |
+															  		|	         |
+															  		|		NavigableSet(I)(1.6V)	
+															  		|			 |
+															  	LinkedHasSet     |
+															  	(1.4v)        TreeSet(1.2V)
+
+
+
+
+
+
+
+
+
+6. Queue(I):
+If you want to represent a group of objects where:
+	a. I want to represent prior to processing.
+	b. It follow the first in first out protocol
+
+Eg: Sending an email to a group of people we need to provide all their email addresses prior sending the email.	
+
+
+														Collection(I)(1.2v)
+																 \					
+															      \
+															  	   \
+																  Queue(I)(1.5v)
+																		/\
+																	   /  \
+																	  /    \
+														   PriorityQueue  BlockingQueue
+																		    |
+																	  		|-- LinkedBlockingQueue	
+																	  		|	
+																	  		|-- PriorityBlockingQueue
+																	  		
+Note: 
+- All the above interfaces(Collection, List, Set,SortedSet,NavigableSet & Queue) are meant for representing a group of individual objects.
+- If at all we want to represent a group of objects as key value pairs then we should go for Map interface.

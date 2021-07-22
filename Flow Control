@@ -1,0 +1,478 @@
+Flow Control:
+Flow: At run time which sequence of statments will executed is called as flow control.
+
+
+1. Selection Statements:(Among several only 1 statement will be selected and executed)
+	if-else
+	Switch()
+
+2. Iterative Statements:(A group of statement will be executed iteratively)
+	while()
+	do-while()
+	for
+	for-each loop(1.5 version)
+
+3.Transfer Statements:(To transfer the control from one place to another)
+	break
+	continue
+	return
+	try-catch-finally
+	Assert
+
+1. Selection Statements:(Among several only 1 statement will be selected and executed)
+
+if-else
+
+	Syntax:
+
+		if(a){
+			Action if a is true
+		}
+		else
+		{
+			Action if a is false
+		}
+
+Note: Argument a should be always boolean type, anything apart from boolean we will get CE.
+
+Eg:1
+int x=0;
+
+if(x){
+	System.out.println("Hi");
+}
+else
+{
+	System.out.println("Hello");
+}
+
+Output:CE
+
+
+Eg:2
+int x=10;
+
+if(x=20){
+	System.out.println("Hi");
+}
+else
+{
+	System.out.println("Hello");
+}
+
+Output:CE
+
+
+Eg:3
+int x=10;
+
+if(x==20){
+	System.out.println("Hi");
+}
+else
+{
+	System.out.println("Hello");
+}
+Output: Hello
+
+Eg:4
+int x=true;
+
+if(x=false){
+	System.out.println("Hi");
+}
+else
+{
+	System.out.println("Hello");
+}
+Output: Hello
+
+Eg:5
+int x=true;
+
+if(x==false){
+	System.out.println("Hi");
+}
+else
+{
+	System.out.println("Hello");
+}
+Output: Hello
+
+Eg6:
+if(true)
+int x=10;
+CE
+
+
+Eg7:
+if(true){
+	int x=10;	
+}
+No compilation error.
+
+
+if(true)
+	if(true) System.out.println("Hello")
+else
+System.out.println("Hi")	
+
+Output: Hi(else always belongs to the nearest if statement.)
+
+
+
+Switch Statement:
+1. If several options are available then it is not recommended to use nested if-else, because it reduces redability, to handle this requirement we should go for switcg=h statement.
+
+Syntax:
+case 1:
+	Action - 1;
+	break;
+case 2:
+	Action - 2;
+	break;
+case n:
+	Action - n;
+	break;
+default:
+	default action;
+
+2. Argument to the switch: int , byte, short, char(1.4 version) | wrapper class allowed from (1.5 version): Byte,Short,Charcter,Integer+ Enum| String(1.7 version)
+
+3. Cruly braces are mandatory in Switch statement. Except switch everywhere curly braces are optional.
+
+4. Every case lable should be compile time constant(i.e contant expression).
+
+Eg:
+class Test{
+		int x=10;
+		int y=20;
+
+		switch(x){
+
+			case 1:
+				System.out.println(x);
+				break;
+			case y:
+				System.out.println(y);
+				break;	
+		}
+}
+
+Output: CE. Constant expression required.
+
+Fix for the above:
+
+class Test{
+		int x=10;
+		final int y=20;
+
+		switch(x){
+
+			case 1:
+				System.out.println(x);
+				break;
+			case y:
+				System.out.println(y);
+				break;	
+		}
+}
+
+
+
+class SwitchTest{
+		
+public static void main(String[] args){
+		int x=10;
+		final int y=20;
+	
+	switch (x){
+		case 10:
+			System.out.println(10);
+			break;					
+		case y:
+			System.out.println(10);
+			break;
+		}
+	}
+}
+
+Iterative Statements:
+
+1. while(): If we don't know the number of iterations in advance, it is highly recommended to go for while loop.
+
+Eg:
+
+while(rs.next){
+		
+}
+
+while(e.hasMoreElsements()){
+	
+}
+
+while(itr.hasNext()){
+	
+}
+
+Syntax:
+
+while(b){
+	//Code
+}
+The argument should always be of boolean type, else we will get CE.
+
+
+UnReachable Statement Confusion
+
+class ReachabilityTest{
+		public static void main(String[] args){
+			while(true){
+				System.out.println("Hello");
+			}
+			System.out.println("Hi");
+		}
+}
+
+CE: Unreachable Statement
+
+class ReachabilityTest{
+		public static void main(String[] args){
+			while(false){
+				System.out.println("Hello");
+			}
+			System.out.println("Hi");
+		}
+}
+
+CE: Unreachable Statement
+
+class ReachabilityTest{
+	public static void main(String[] args){
+			int x=10;
+			int y=20;
+			while(x>y){
+				System.out.println("Hello");
+			}
+			System.out.println("Hi");
+		}
+}
+
+Output: Hi
+
+class ReachabilityTest{
+	public static void main(String[] args){
+			int x=10;
+			int y=20;
+			while(x<y){
+				System.out.println("Hello");
+			}
+			System.out.println("Hi");
+		}
+}
+
+Output: Hello * infinite times
+
+class ReachabilityTest{
+	public static void main(String[] args){
+			final int x=10;
+			final int y=20;
+			while(x<y){
+				System.out.println("Hello");
+			}
+			System.out.println("Hi");
+		}
+}
+CE: Unreachable Statement
+
+class ReachabilityTest{
+	public static void main(String[] args){
+			final int x=10;
+			final int y=20;
+			while(x>y){
+				System.out.println("Hello");
+			}
+			System.out.println("Hi");
+		}
+}
+CE: Unreachable Statement
+
+do-while():
+There might be chance when the while loop might get excecute 0 number of times, however if we want to execute the while loop atleast once then we should go for do-while
+
+Syntax:
+
+do{
+	//code
+}while(b);
+
+1. in the above the argument in while must be of boolean type.
+2. the semicolon after the while statement is mandatory. 
+3. The above piece of code make sure that the code inside the do block runs atleast once even when the condition inside while fails and the loops continues as long as the while statement is true.
+
+Contradictory program:
+
+do while(true)
+System.out.println("Hello");
+while(false);
+
+class DoWhileRechabilityTest{
+	public static void main(String[] args){
+		do
+			while(true)
+				System.out.println("Hello");
+		while(false);
+   }	
+}
+
+Output: Hello * infinite
+
+
+for-loop:
+1. For-loop is the most commonly used loop in Java.
+2. If we know the number of iteration in advance then for-loop is the best choice
+
+Syntax:
+
+for(initialization-section;conditional-check;increment/decriment-section){
+	loop body;
+}
+
+1. in the initialization statement we can take any valid Java statement including sopln
+
+eg:
+
+
+for(int i=0;i<10;i++){
+	System.out.println("Hello");	
+}
+
+int i=0;
+
+for(System.out.println("Hello");i<3;i++){
+	System.out.println("Hi");
+}
+
+2. We can take any valid java expression however, it should be of type boolean. 
+3. It is not mandatory for us to provide conditional check inside the for-loop and if we do so the compiler will replace the blank space with true
+
+For- Each Loop(Enhanced For loop)(1.5 Version)
+1. Special designed loop to retive/access elements of arrays and collections
+
+Eg1:
+int[] x= {10,20,30,40};
+
+for(int x1:x){
+		System.out.println(x1);
+}
+
+Eg2:
+int[][] x= {{10,20,30},{40,50}};
+for(int[] x1:x){
+	for(int x2:x1){
+		System.out.println(x2);
+	}
+}
+
+Eg3: 3- dimensional array
+for(int[][] x1:x){
+	for(int[] x2:x1){
+		for(int x3:x2){
+		System.out.println(x3);
+	}	
+}
+
+Note: for-each loop can't be used for normal scenario.
+
+Reverse for-loop
+
+int[] x={10,20,30,40,50};
+for(int i=x.length-1;i>0;i++){
+	System.out.println(x[i]);
+} 
+
+Output: 50,40,30,20,10
+Note: We can't write access/retrive elements using reverse order.
+
+
+Important: Iterable Interface:
+
+for(eachitem x:target){
+	
+}
+
+1.Target:Array/collection
+
+2. When is an object is said to be iterable?
+	: An object is said to be iterable only when the corresponding class implements java.lang.iterable interface(1.5 version).
+4. Iterable interface contain only 1 method which is iterator().
+		public Iterator iterator()
+5. All arry related classes and collection implemented classes already implements iterable interface. Being a programmer we are not required to do anything regarding this.
+
+Differences between Iterator and Iterable
+
+Iterator(I):
+1. It is related to collection
+2. We can use to retrive/access the elements of a collection one by one.
+3. Present in java.util
+4. Methods present:3 //1. hasNext(),2.next(),3.remove()
+
+Iterable(I):
+1. It is related to for-each loop
+2. The target element in the for-each loop should be iterable.
+3. Present in java.lang
+4. Methods present:1 //1. iterator()
+
+
+Transfer Statement:
+
+1. break:
+	a. We can use it inside switch.
+		int x=0;
+		switch(x){
+		case 0:
+			System.out.println(0);
+			break;
+		case 1:
+			System.out.println(1);
+			break;
+		case 2:
+			System.out.println(2);
+			break;		
+		default
+			System.out.println("def");	
+		}
+	b. We can use it inside any loop
+		for(int=0;i<10;i++){
+			if(i==5)
+			break;//used as an secondary condition.
+			System.out.println(i);
+		}	
+	c. We can used inside labled block.
+	
+		class Test{
+			public static void main(String[] args){
+				int x=10;
+				l1:
+				{
+					System.out.println("Begin");
+						if(x==10);
+						break l1;
+					System.out.println("end");	
+				}
+				System.out.println("Hello");
+			}
+		}
+
+2. Continue
+If we want to skip current iteration of a loop for a particular condition in such case we can use the continue keyword.
+
+Eg:
+	for(int i=0;i<10,i++){
+		if(i%2==0)
+		continue;
+		System.out.println(i);
+	}
+
+Note: Continue can be used only inside a loop.
+

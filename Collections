@@ -1,0 +1,33 @@
+Java Collections
+1. Language API to manage "group" of things
+
+Agenda:
+1. Understanding The overall Collections API
+2. Individual type of collections
+3. When to use what? What's the difference?
+Concepts
+1. Coding to interface
+2. iterator pattern
+3. Efficiency Discussion
+4. Equality and hash code
+5. Natual ordering and comparisons
+
+Collections:
+1. Set
+	HashSet
+	TreeSet
+2. List
+	ArrayList
+	LinkedList
+3. Maps
+
+Code Examples
+	Using collection type
+
+Roadmap:
+1. Pre- collection Java
+2. Different Collection needs
+3. Introducing ArrayList
+4. Zoom up to Collections interface
+5. Tackel individual collection types
+6. Learn the collection type, usage and code examples

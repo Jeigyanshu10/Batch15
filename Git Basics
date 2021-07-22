@@ -1,0 +1,77 @@
+Working knowledge of GIT and Github:
+Agenda:
+1. Version control Systems
+2. Working Model of Git
+3. Terminologies
+4. Working locally, moving forward and backward.
+5. Branching, merging, rebasing
+6. Github, team workflow, clone, fork, pull, push
+
+
+Prerequisites:
+1. Familiarity with command line
+2. Coding Experience
+
+
+What is Version Control System:
+Think of a brick and mortor structure, eg a skyscraper: How is it built? Is it that one fine day a mansion got the project and completes it on the same day? no, it takes a lots of efforts to first build the base foundation after a couple of months he creates the first wall, then roof etc. Once the first floor is done then he moves to the second floor and one after another and a skyscraper is built.
+
+However, lets say he got a contract for a 5 story building, while he is in the process of building the 3rd floor is when he sopts a very critical error which was made in the foundation by him or one of his co-workers. In order for the project to be completed he has to fix this mistake. How to do that? The only way of doing it is demolishing the entire 3 stories and fix the issue in the foundation and then start building it again. While on the 4th floor is when he spots another issue on the 2nd floor which is very critical? Tell me wont he give anything to have an option where he can rollback to a given point where he probably don't need to make any effort or have to make a very few effort to fix an issue and  comeback to the place where he is right now. Well unfortunate for him he can't do it atleast as of today.
+
+However, fortunate for us we are able to do it being on a digital line of work. This process where is we can track our major changes to a project even while we are working on it is noting but version control system.
+
+Here is an example.
+
+Multiple users:
+
+Source control server:
+- Git treats its repository as distributed thing but very often it has one centralized repository which is considered as the main          - repository, because you are working on a large team, each person has a copy of the repository.
+- Now there has to be some common area(Main repository). multiple people are working on the same project where they need to push code to and pull the codes from.
+- This common shared space is otherwise called as the Git's source control server.
+
+
+
+
+Git Workflow:(Local)
+1. Initialize repository.
+2. Add and commit changes
+3. Branching and merge / rebase
+4. Push change
+
+Git WorkFlow(Remote working/Working in a team)
+1. Clone repository
+2. Add and commit changes
+3. Branching and merge / rebase
+4. Pull and merge / rebase
+5. Resolve merge conflicts
+6. Push changes
+
+
+Github:
+1. Fork repository
+2. Make a pull request
+3. Discussion, issues
+4. Actions, codespace
+
+
+Download git from : https://git-scm.com/download/win
+Download tortoisegit from : https://tortoisegit.org/
+
+
+-------------------------------------------------------
+
+1. Create a Repository in github.com
+2. create a folder in the local hard drive and open it
+3. right click on it and click on git bash here
+4. it will open a CMD for the git
+
+Git commands:
+1. git init: it will initialize the git in that folder and will create a .git folder which would be of hidden type
+2. git status: it will check the status of the 
+3. git add <file_name.ext>: Add the file to git.
+4. git config --global user.email "you@example.com"
+5. git config --global user.name "Your Name"
+6. git commit -m "git commit demo": This is where we commit our work
+7. git remote add origin "get the https link from the global repo and paste it here"
+8. git push -u origin master: This will push the code to the master branch. Before it does it will ask to authenticate the github account
+g
