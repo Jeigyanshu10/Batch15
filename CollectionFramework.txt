@@ -1,0 +1,221 @@
+Collection Framework and its charaterstics:
+
+
+
+Below are some import classes/interfaces and its charterstics:
+
+1. Collection: 
+	1.When we want to represent a group of individual obejects as a single entity, then we should use collection.
+	2. Collection interface defines most common methods which are applicable for any collection objects.
+	3. We use Collection interface to hold and transfer objects from one place to another. Hence the Collection interface implements Serializable and clonable interface.
+
+2. List:(interface) 
+	1. Introduced in 1.2 Version of Java 
+	2. Allows duplicate
+	3. User have control over the insertion order. i.e. intertion order is maintained.
+	4. It allows null as an object.
+
+3. ArrayList:(class implements List)
+	1. ArrayList allows duplicates.
+	2. ArrayList maintains intersertion order.
+	3. Provides implementation to the List interface.
+	4. Provides methods to add, get or manipulate the elements in the ArrayList.
+	5. ArrayList is non-synchronized.
+	6. There are 3 constructors:
+		a. ArrayList()
+		b. ArrayList(int initial capacity)
+		c. ArrayList(Collection c) 
+	7. Underlying data structure is resizable-array(dynamic array) of Object class, hence it works at the index basis.
+	8. The formula in which the ArrayList grow: 
+		new capacity = (currentCapacity*3/2)+1
+	9. Apart from the Serilizable and clonable interface, the ArrayList also implements RandomAccess interface which allow the serach operation really fast.
+	10. Best choice is when we have to perform retrival operations. Worst Choice: Ifn we have to insert or remove/delete in middle of the ArrayList.		
+	11. How to get synchronized version of ArrayList:
+		ArrayList al = new ArrayList();
+		List l = Collections.syncronizedList(al);	
+
+3. LinkedList: (Class implements List & Deque):
+	1. Allows to contain duplicate elements.
+	2. LinkedList maintains intertion order.
+	3. Provides implementation to the List interface.
+	4. Provides methods to add, delete, get & manipulate the contents of the LinkedList.
+	5. LinkedList is non-synchronized.
+	6. LinkedList has 2 constructors, they are:
+		a. LinkedList()
+		b. LinkedList(Collection c)
+	7. The underlying data structure is doubly linked-list. Because of the this the manipulation is fast because there is no shifting needs to occurs.
+	8. The elements are not going to be stored in consecutive memory location.
+	9. Every element we add to the LinkedList will create a seprate node which will have 3 blocks inside it. Below are the arrangement of the object and references:
+		a.The object itself will be stored in the middle.
+		b.The first block of the mode will contain the address of the previous node.
+		c.The last block will contain the address of the next node.
+	10. Because of the above arrangement, the insertion and the deletion becomes very easy and fast as well.
+	11. Worst choice: Retrival of the objects from the LinkedList.
+	12. There are 6 unique methods of LinkedList to provide support for Stack and Queue:
+		a. void addFirst(Object o)
+		b. void addLast(Object o)
+		c. Object getFirst()
+		d. Object getLast()
+		e. Object removeFirst();
+		f. Object removeLast();	  
+
+Difference Between ArrayList and LinkedList:
+
+		ArrayList                               |                         LinkedList
+	1. Best choice: When frequent operation is  |1. Best choice: When frequent operation is insertion
+	    retrival.									in middle.
+	2. Worst choice: When frequent operation is |2. Worst Choice: When frequent operation is     
+		insertion in middle							retrival.
+	3. Underlying DS: Resizable/growable array  |3. Underlying DS: Doubly Linked-List	
+	4. Implements RandomAccess interface 		|4. Doesn't Implements RandomAccess interface
+
+
+4. Vector:
+	1. Allows to contain duplicate elements.
+	2. Vector maintains intertion order.
+	3. Provides implementation to the List interface.
+	4. Provides methods to add, delete, get & manipulate the contents of the vector.
+	5. LinkedList is synchronized.
+	6. Vector has 4 constructors:
+		a. Vector()
+		b. Vector(int initialCapacity)
+		c. Vector(int initialCapacity, int capacityIncrement)
+	7. Underlying data structure is resizable-array(dynamic array) of Object class, hence it works at the index basis.
+	8. Apart from the Serilizable and clonable interface, the Vector also implements RandomAccess interface which allow the serach operation really fast.
+	9. Default initial capacity 10. But the growth mechanism is calculated by the formula
+		new capacity = currentCapacity*2
+
+
+Difference Between ArrayList & Vector:
+
+		ArrayList                               |                         Vector
+	1. Not-Synchronized							|1. Syncronized									
+	2. Not Thread-safe							|2. Thread safe     
+	3. High performance							|3. Low Performance
+	4. new capacity is calculated by the formula|4. new capacity is calculated by the formula 
+		nc=(cc*3/2)+1   							nc = cc*2
+
+
+5. Stack:
+	1. The stack is based on liner data structure.
+	2. It is based on Last-in-first-out(LIFO).
+	3. It defines a lot of methods which helps us to carry out different operations like push,pop,search, etc..
+	4. Only contain default constructor. i.e:
+		public Stack();	
+
+
+Cursors:
+	1. If we want to retrive/get/fetch objects from the Collection one after another, then we need to go for cursor.
+	2. There are 3 types of cursors in Java:
+		a. Enumeration
+		b. Iterator
+		c. ListIteretor
+
+
+a. Enumeration:
+	1. To make use of the enumeration,first we need to get the enumeration object.
+	2. We can get enumeration object by calling the elements method in the vector class
+	3. Syntax: Enumeration e = v.elements();//Where v is any vector object.
+	4. There are 2 methods in Enumeration interface.
+		1. hasMoreElement();//type boolean and provide output true or false if there are more objects in the Collection.
+		2. nextElement();//Returns the next elements.
+	5. disadvantage: 
+		1. Only applicable for legecy classes.
+		2. We can only perform read operation. If an object is no longer required we can't perform remove operation.	
+
+b. Iterator:
+	1. This universal cursor, which mean it is applicable for any Collection interface class.
+	2. We can perform read and remove operation using Iterator.
+	3. Present in the Collection interface which gives us Iterator object.
+	4. Signature of Iterator: public Iterator iterator()
+		eg: Iterator itr = c.iterator();//Here c is any collection object.
+	5. Methods:
+		1. public boolean hasNext();
+		2. public Object next();
+		3. public void remove();	
+	6. Limitations: 
+		1. It only moves in forward direction. 
+		2. It can read, remove but replace or addition of new object functionality is unavailable.
+c. ListIterator:
+	1. ListIterator is bi-direction cursor.
+	2. Using ListIterator we can perform replacement & addition of new object with addition to read & remove objects from the Collection.
+	3. Signature: public ListIterator listIterator()// Present in the List interface.
+		eg: 	ListIterator ltr= l.listIterator()// Here l is any List object.
+	4. Methods:	
+		1. public boolean hasNext();
+		2. public Object next()
+		3. public int nextIndex()
+		4. public boolean hasPrevious()
+		5. public Object previous()
+		6. public int previousIndex()
+		7. public void remove()
+		8. public void set(Object new)
+		9. public void add(Object new)
+	5. Limitation: Only applicable for List objects.	
+
+6. Set:
+	1. Introduced in 1.2 version of java
+	2. It cannot contain duplicates
+	3. Its an unorded collection because it doesn't maintain any insertion order. However there are expection to this(LinkedHashSet).
+	4. It implements the mathematical set. Hence if we need any sort of matematical oprations, set is our friend.
+
+7. HashSet:
+	1. It implements the Set interface.
+	2. It stores the elements by a mechanism called hashing.
+	3. It can only contain unique elements, which means there cannot be any duplicates.
+	4. HashSet doesn't maintain intertion order. The elements are stored on the the basis of their hashcode.
+	5. HashSet is non-synchronized.
+	6. The best use case for HashSet is where we need some sort of search operation.
+	7. Initial capacity of the HashSet is 16.
+	8. Constructors of HashSet:
+		a. HashSet()
+		b. HashSet(int initialCapacity)
+		c. HashSet(int initialCapacity, float loadFactor)
+		d. HashSet(Collection c)
+
+8. LinkedHashSet:
+	1. Provides implementation to Set interface.
+	2. Just like the HashSet it can only contain unqiue elements.
+	3. LinkedHashSet is non-Synchronized.
+	4. LinkedHashSet unlike other Set classes/interfaces, maintains insertion order.
+	5. Constructors of LinkedHashSet:
+		a. LinkedHashSet()
+		b. LinkedHashSet(Collection c)
+		c. LinkedHashSet(int capacity)
+		d. LinkedHashSet(int capacity,float fillRatio)
+
+9. SortedSet:
+	1. It is an interface.
+	2. Duplicates are not allowed in SortedSet.
+	3. It also provides a particular ordering on its elements. The elements are ordered either by using natural ordering(Ascending order) or by using a Comparator.
+
+10. NavigableSet:
+	1. Extends/Inherit from SortedSet.
+	2. In addition to the sorting that happens in the SortedSet, the navigableSet provides methods to navigte through the elements in the NavigableSet.
+
+11. TreeSet:
+	1. This is a class which implements NavigableSet. It also inherits AbstractSet.
+	2. Stores the elements in ascending order even when explicit comparator is not provided.
+	3. Doesn't allow null elements.
+	4. TreeSet is non-synchronized.
+	5. Constructors of TreeSet:
+		1. TreeSet()
+		2. TreeSet(Collection c)
+		3. TreeSet(Comparator e comparator)
+		4. TreeSet(SortedSet<E> s)
+
+12. Queue:
+	1. Queue is an interface that extends the Collection interface.
+	2. The main usage of the Queue is, it orders the elements in First-in-First-out manner(FIFO).
+	3. If we want to represent a group of individual objects prior to processing, then we should go for Queue.
+
+13. Priority Queue:
+	1. The priority queue does not follow the fifo structure, rather it is designed to process the objects based on its priority.
+	2. In order for the priority to work on a given attribute of an object, this object has to implement the Comparator interface.
+
+14. Deque:
+	1. 	This is an interface which extends Queue interface.
+	2. This is related to double-ended queue that supports FIFO and LIFO.
+15. ArrayDeque:
+	1. This is a subclass of Deque.
+	2. This is a special kind of array that grows and allows users to add or remove elements from both side of the queue.
