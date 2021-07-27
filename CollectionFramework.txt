@@ -118,7 +118,7 @@ a. Enumeration:
 	3. Syntax: Enumeration e = v.elements();//Where v is any vector object.
 	4. There are 2 methods in Enumeration interface.
 		1. hasMoreElement();//type boolean and provide output true or false if there are more objects in the Collection.
-		2. nextElement();//Returns the next elements.
+		2. nextElement();//Returns the next elements(object).
 	5. disadvantage: 
 		1. Only applicable for legecy classes.
 		2. We can only perform read operation. If an object is no longer required we can't perform remove operation.	
@@ -219,3 +219,299 @@ c. ListIterator:
 15. ArrayDeque:
 	1. This is a subclass of Deque.
 	2. This is a special kind of array that grows and allows users to add or remove elements from both side of the queue.
+----------------------------------------------------------------------------------------------
+	
+Map:
+1. Map is not a child interface of Collection.
+2. We should always go for Map if we want represent a group of value as key value pair.
+3. Each of the key and value pair is known as an individual entry.
+4. Both keys and values are objects only.
+5. A map can have duplicate values but cannot have duplicate keys.
+6. In case we try to provide with a duplicate key in that case it simply replace the value to the new value 
+7. Map interface has its own methods. Unlike Collection methods it accepts 2 arguments for carrying out basic operation.
+	eg: put(Object key, Object value)
+
+8. Some important methods:
+   1. Object  put(Object key, Object value)
+	To add 1 key value pair to the map, if the key is already present then old value will be replaced with new value and the put() will return the old value. If the key is not present then it will return null.
+
+	m.put(101,"Anshu");//null
+	m.put(102,"jiggy");//null
+ 	m.put(101,"Jeigyanshu");// Anshu
+    
+    2. m.putAll(map m)//merge a smaller map to a larger map.
+
+    3. m.get(key);//Fetch the value of a known key.
+
+    4. m.remove(key);//Removes the entry associated with this key.
+
+    5.m.containsKey(key);//checks if a particular key is available in the map.
+
+    6.m.containsValue(key);//checks if a particular value is available in the map.
+
+    7. m.isEmpty();//Check if the map is empty or not.
+    8. m.size();//Returns the size of the map.
+    9.  Set keySet()//returns a set of keys
+    10. Collection values();returns a collection of values.
+    11. Set entrySet();//Returns a set of entry objects.
+Note. methods 9,10 & 11 are called as Collection views of Map.
+
+Entry interface:
+1. Entry is inner interface of Map interface.
+
+2. Entry interface methods: 
+interface Map{
+	
+	interface Entry{
+		Object getKey();
+		Object getValue();
+		Object entrySet(Object newObject);
+	}
+}	
+
+HashMap:
+1. Underlying dataStrcture: Hashtable
+2. insertion order is not preserved.
+3. It is based on Hashcode of Keys.
+4. Duplicate keys are not allowed, but duplicate values are allowed.
+5. Hetrogeneous keys and values are allowed.
+6. Null is allowed for key but only once.But we can store null for values any number of times.
+7. It implements Serilizable and cloneable marker interface
+8. Best Choice: Where search is the frequent operation.
+9. Constructors:
+  a.HashMap m = new HashMap();
+ 		Default initial Capacity:16,
+ 		Default fill ratio: 0.75
+  b. HashMap m = new HashMap(int initialCapacity); //Default fill ratio: 0.75
+  c.HashMap m = new HashMap(int initialCapacity,float fillRatio);
+  d.HashMap m = new HashMap(Map m);	
+
+Differences Between HashMap and Hashtable:
+
+HashMap               |             Hashtable
+1.Non-synchronzied	  |	1. Synchronized
+2.Not Thread-safe     | 2. Thread-safe
+3.Performance is high | 3. Low performance
+4.Null is allowed for | 4. Null not allowed for
+  key and value	 			either key or value
+5.Non legecy(1.2 v)   | 5. Legecy class.
+
+Synchronized Version of HashMap objects:
+HashMap m = new HashMap();
+Map m1 = Collections.synchronizedMap(m); 
+
+LinkedHashMap:
+1.Child class of HashMap
+2.Underlying DS: combination of LinkedList & Hashtable
+3.Insertion order is preserved.
+4.Introduced in 1.4 version
+Note:
+1. Except these points, LinkedHashMap is exactly same as HashMap(including constructors and methods).
+2. LinkedHashSet and LinkedHashMap are commonly used for developing cache based applications.
+
+IdentityHashMap
+Difference Between == & .equals()
+1. In general == operator is meant for comparing the refernce(address). However, .equals() meant for content comparision
+
+Integer I1 = new Integer(10);
+Integer I2 = new Integer(10);
+System.out.println(I1==I2);//false
+System.out.println(I1.equals(I2));true
+
+IdentityHashMap m = new IdentityHashMap();
+Integer I1 = new Integer(10);
+Integer I2 = new Integer(10);
+m.put(I1,"Jeigyanshu");
+m.put(I2,"Sarangi");
+System.out.println(m);
+//Here I1 and I2 are not identical keys. In case of IdentityHashMap JVM will use "==" operator to identify the keys, but incase of HashMap JVM will consider ".equals()" to identify the keys. In the above example since the I1 and I2 hashcode are different hence it will have 2 different entries.
+
+Other than this difference, IdentityHashMap is exactly the same as HashMap(including constructor and methods).
+
+
+WeakHashMap:
+In case of a HashMap object, if there are no reference pointing to a key object which is associated(is one of the keys) with the HashMap, in that case the garbace collector has no capability to destroy the object. However, in case of the WeakHashMap if there are no reference pointing to a key object which is associated with the WeakHashMap then the garbage collector is capable of destroying the object which in return will remove the entry from the WeakHashMap.
+
+- Other than this difference the WeakHashMap is exactly the same as of the HashMap(Including constructor and methods).
+
+
+SortedMap:
+1. Child interface of Map.
+2. If we want to represent a group of key value pairs, where all the entries will be saved to the Map based on some sorting order of the Keys then we should go for SortedMap.
+3. It is important to notice, sorting is based on the key but not the value.
+
+
+4. methods:
+
+Lets consider this SortedMap Object:
+	101 -----> A
+	103 -----> B
+	104 -----> C
+	107 -----> D
+	125 -----> E
+	136 -----> F
+Based on the above SortedMap:	
+	firstKey();//101
+	lastKey();//136
+	headMap(107);//{101=A,103=B,104=C}
+	tailMap(107);//{107=D,125=E,136=F}
+	subMap(103,125);//{103=B,104=C,107=D}
+	comparator();//Null,since the SortedMap is already sorted.
+
+TreeMap:
+1. It provides implementation to the SortedMap.
+2. Underlying DS RED-BLACK tree.
+3. Insertion order is not preserved.
+4. Elements will be inserted in the sorting order of keys.
+5. Duplicate keys are not allowed, but duplicate values are allowed.
+6. If we are depending on default natural sorting order,Keys should be homogeneous and comparable. However, If we are defining our own sorting by comparator, then the keys need not be homogeneous and comaparable.		
+7. There are no restriction on the values whatsoever. 
+8. Null not applicable for TreeMap. If at all we try to put null as a key then we will get NullPointerException.
+9. Constructors:
+	1. TreeMap tm = new TreeMap();
+	inserts the elements based on default natural sorting order of keys.
+
+	2. TreeMap tm = new TreeMap(Comparator c);
+	inserts the elements based on customized sorting order of keys.	
+
+	3. TreeMap tm = new TreeMap(Map m);
+		Interconversion between Map objects.
+
+	4. TreeMap tm = new TreeMap(SortedMap sm);		
+
+
+Hashtable:
+1. Underlying DS: Hashtable
+2. Insertion ordered is not preserved.
+3. Insertion of the elements are based on the hashcode of the keys.
+4. Duplicate keys are not allowed, but values can be duplicated.
+5. Hetrogeneous objects are allowed for both key and value.
+6. null is not applicable for key or value.
+7. Hashtable implements Serializable and Clonable but not RandomAccess.
+8. Every method is synchronized hence Hashtable objects are ThreadSafe.
+9. Best choice is our frequent operation is search.
+10. Constructors:
+	1. Hashtable ht = Hashtable()//Default initial capacity:11, Fill ratio: 0.75
+	
+	2. Hashtable ht = Hashtable(int initialCapacity)
+	
+	3. Hashtable ht = Hashtable(int initialCapacity,float fillRatio)
+	
+	4. Hashtable ht = Hashtable(Map m)
+
+
+
+Properties:
+1. In our program if any thing which changes frequently(like username,password,emailids,mob etc) are not recommended to hardcode in java program because if there is any change to reflect that change we will need to go through different steps like: recompilation,rebuild,redepoly application are required, even some time server restart also required which creates a big impact bussiness impact to the client.
+2. To overcome this problem by using properties file. Such type of variables we have to configure in the properties file
+3. From the properties file we have to read into java program and we can use those properties.
+4. Main advantage of this approach is if there is a change in properties file to reflect that change we just need to redeployment is enough.
+5. We can use java properties object to hold properties which are coming from properties file.
+6. In normal map(like HashMap ) key and value can be anytype, but in the case of properties key and value should be of String type.
+7. Constructor:
+	Properties p = new Properties();
+8. Methods:
+	1. String getProperty(String propertyName)
+	
+	2. String setProperty(String pName,String pvalue)//returns old value
+
+	3. Enumenration PropertyNames()
+
+	4. void load(InputStream is)//loads the property from Property file into Java properties object.
+
+	5. void store(OutputStream os, String comment)// to store properties from java properties object into properties file.
+
+Comparable(I):
+1. Present in java.lang
+2. Has only one method: 
+	public int compareTo(Object obj);
+
+Eg: obj1.compareTo(obj2)
+	1.Returns -ve if obj1 has to come before obj2.
+
+	2. Returns +ve if obj1 has to come after obj2.
+
+	3. Returns 0 if obj1 and obj2 are equal.	
+3. It will give NullPointerException if we try to compare object with null.
+
+TreeSet t = new TreeSet();
+t.add("K");//Empty, there will be no comparision
+t.add("Z");Z.compareTo("K")//+ve
+t.add("A");A.CompareTo("K")//-ve
+t.add("A");//A.compareTo("K"),//-ve A.compareTo("A")//0
+System.out.println(t)//[A,K,Z]
+Note: If we are not satisfied with default natural sorting order, we have to go for comparator.
+
+Comparator:
+. Comparator is an interface.
+1. Present in java.util
+2. Defines 2 methods:
+	1.compare()
+	2.equals()
+- public int compare(Object obj1,Object obj2)
+	1.Returns -ve if obj1 has to come before obj2.
+
+	2. Returns +ve if obj1 has to come after obj2.
+
+	3. Returns 0 if obj1 and obj2 are equal. 
+
+- public boolean equals(Object obj)
+
+3. To implement Comparator:
+class myComparator implements Comparator{
+	compare(){
+		-
+		-
+
+	}
+}
+ we are should only provide implementation only for Compare(). We are not required to provide implementation for equals(), because the class providing implementation to the Comparator() already extends Object class where the euqals() is defined and it is available for the implementing class hence it is not mandatory to provide implementation to the equals().
+Eg: WAP to insert integer objects into the TreeSet where the sorting order is descending order.
+
+TreeSet t = new TreeSet();
+t.add(10);
+t.add(0);
+t.add(15);
+t.add(5);
+t.add(20);
+System.out.println(t);//[0,5,10,15,20]
+
+
+class MyComparator implements Comparator{
+	public int compare(Object obj1,Object obj1){
+
+	Integer I1= (Interger)Obj1;
+	Integer I1= (Interger)Obj1
+	if(I1<I2){
+		return 1;
+	}else If(I1>I2){
+		return -1;
+	}else{
+		return 0;
+	} 
+	}
+}
+
+
+TreeSet t = new TreeSet(new MyComparator());
+t.add(10);
+t.add(0);--->compare(0,10)//+ve
+t.add(15);--->compare(15,10)//-ve
+t.add(5);--->compare(5,0)//+ve,compare(5,10)//-ve
+t.add(20);-->compare(20,10)//-ve,compare(20,15)//-ve,compare(20,20)//0
+System.out.println(t); // 20,15,10,5,0
+
+Note: If we are not passing the comparator object while creating the object for TreeSet then the JVM will call compareTo() of Comparable interface to give us default natural sorting order.
+
+
+possible implementation of compare method:
+public int compare(Object obj1,Object obj2){
+	Integer I1 = (Integer)Obj1;
+	Integer I1 = (Integer)Obj1;
+	1.return I1.compareTo(I2);(ascending order)
+	2. return -I1.compareTo(I2);(decending order)
+	3. return I2.compareTo(I1);(decending order)
+}
+
+
+
