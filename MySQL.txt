@@ -1,0 +1,908 @@
+SQL:
+1. Otherwise it is known as structured query language.
+2. This is a standard Database language which is use to
+	create 
+	maintain
+	retrive 
+the relational database.
+3. SQL is case insensitive.
+4. Recommended pratice is to using the keywords in uppercase. Eg: SELECT, UPDATE, CREATE ect. And the user defined stuff in lowercase eg: tablename, columnname etc.
+5. We can write comments in SQL using "-"(hyphen).
+6. SQL is a programming langauge used to interact with relationla databases like MySql,Oracle,Sybase,SQL Server,Postgre etc. along with no-relational(also called as NoSQL) databases like MongoDB,DynamoDb.
+
+Relational Database:
+1. The kind of database where the data is stored and retrived in the form of relation(tables).
+2. The below table shows the relational database with only one relation called Employee which stores Emp Id,Name and salary.
+
+Employee:
+
+| Emp ID   | NAME   | SAL   |
++----------+--------+-------+
+|    101   | ROHAN  | 34444 |
+|    102   | PRAFUL | 34444 |
+|    103   | PRANAV | 34444 |
+|    104   | ASHA   | 34444 |
+
+
+
+Some important terminologies used in terms of relation:
+1. Attributes: Properties that defines a relation. Eg. Emp ID.
+
+2. Tuple: Each row in the relation is know as Tuple.
+	eg: 1     ROHAN 34444
+
+3. Degree: Number of attributes in a relation is known as the degree of the relation. The degree of the above relation Employee is 3.
+
+4. The number of tuples in a given relation is know as the Cardinality of the relation.
+	Eg: The cardinality of the above relation Employee is 4.
+5. Column: The set of values for a particular attribute is represented by column.	
+	Eg:
+	Emp Id:
+	101
+	102
+	103
+	104
+
+6. Data Defination Language(DDL): It is used to define the structure of the database. 
+	Eg: CREATE TABLE,ADD COLUMN,DROP COLUMN,DROP TABLE
+
+7. Data mainpulation Language(DML): The kind of commands used to manipulate the data inside the relation is called as Data manipulation language(DML).
+	Eg: INSERT,DELETE,UPDATE ETC. 
+
+8. Data Query Language(DQL): The kind of commands used to fetch the data from the relation is called the Data Query Language(DQL).
+	Eg: SELECT.
+
+MySQL:
+
+1. It a relational database management system(RDBMS) which is based on the Structured Query Language(SQL).
+2. It is open-source and free.
+3. It is supported by Oracle Company.
+4. It was developed and is marketed by MySQL AB, a Swedish company.
+5. It is built on top of C and C++ programming language.
+
+MySQL Working architecture:
+1. It follow the working of Client-server Architecture
+2. It is designed for the end-users called clients to access the resources from a central computer know as a server using network services.
+
+Steps it follows:
+1. The way it works is the clients make requests through a graphical user interface(GUI).
+2. The server will gives the desired output as soon as instruction is matched(from step 1).
+3. The process SQL environment is same as the client-server model.
+	______________						__________
+	|			 |	1. requests			|		 |
+	|			 |	---------------->   |		 |
+	|			 |						|		 |
+	|			 |						|		 |	
+	|____________|						|________|
+		 /\									
+	   clients                            server	
+
+
+DATA QUERY LANGUAGE(DQL):
+
+Select clause in details
+
+Select clause in details:
+-This clause brings back the data from the database and show us in a format of our choice. Under no circumstance it alters the table at all.
+- It looks for a specific format for us to give the data.
+- First we need to provide the SELECT clause then query what we need from the data base followed by the name of the table:
+	eg: SELECT * FROM CUSTOMER;
+- The astrix return all the data in a table but it is not a good practice at all to use it since the millions of data might slow down the process.	
+- We can carry out arithmatic operations while using the SELECT clause.
+- We can add columns to the output result but this is temporary and will not affect the structure or the data inside the database. When we create this column for the viewing purpose only we can provide any name as we want by using keyword "AS" followed by the name for the column. This name of the column we see is also called as an alias.
+- We can use DISTINCT keyword to fetch the distinct data from the table.
+
+Excersise:
+1. Return all the products, in the output section I need
+	- name
+	- unit price
+	- new price where there is a hike of 10% in the price
+
+
+Where Clause in details:
+- We use this clause to filter the data from the table.
+- For the filter to happen we need to provide the condition using which we can filter the data.
+- When we execute the query the query execution engine is going to iterate over all the rows and only returs the data in the output section for whome the condition is true.
+
+Excercise:
+Get me all the orders which were placed in the year 2018.
+
+- We can combine multiple condition to filter our data in the WHERE clause. The operators we use for these are
+	1. AND: when both the conditions are true.
+	2. NOT: The inverse of the condition.
+	3. OR: Either of the conditions are
+Eg:
+SELECT  *
+FROM customers
+WHERE birth_date>'1990-01-01' AND points > 1000
+
+Excercise:
+From the order_items table, get the items
+	- for order #6
+	- Where total price is greater than 30
+
+
+IN operator:
+We use this clause in the case where we need to fetch the data within a column based on a condition so that we can avoid writing the name of the columns multiple times in the condition
+
+Eg: Select * 
+FROM customer
+WHERE state ='VA' or state = 'GA' or state = 'FL'
+
+In the above query we can avoid writing state(line 129) multiple times using the IN operator, this will give us a better understanding of the query.
+
+The same eg using the IN operator:
+
+Select * 
+FROM customer
+WHERE state IN('GA','VA','FL')
+
+we can get the negeation using the NOT operator just before the IN operator. It will return inverse of the query.
+Eg:
+Select * 
+FROM customer
+WHERE state NOT IN('GA','VA','FL')
+
+Excercise:
+Return me the products with
+	- quantity in stock equal to 49,38,72
+
+The Between Operator:
+When we are trying to fetch the data based on a specific range of value of a particular column is when we use the Between Operator.
+
+Eg:
+Select * 
+FROM customer
+WHERE point >= 1000 and points <=3000	
+
+The above eg using the Between operator:
+
+Select * 
+FROM customer
+WHERE points BETWEEN 1000 AND 3000
+
+Note the values in the BETWEEN keyowrds are inclusive.
+
+Excercise:
+Return me the customer who were born after jan 1 1990 but before jan 1 2000
+
+
+The LIKE Operator:
+If we want to fetch the data based on a specific string pattern we use the LIKE operator.
+
+Select * 
+FROM customer
+WHERE last_name LIKE 'b%'
+This will return me the row where customer's last name starts with b. 
+
+SELECT  *
+FROM customers
+WHERE last_name LIKE '%b%'
+
+Note: The % is for any number of characters 
+if we want to represent a single character we go for the underscore('_')
+
+SELECT  *
+FROM customers
+WHERE last_name LIKE '_b'
+
+
+Excercise:
+Get me the customers whose
+	- Addresses contain trail or avenue
+	- phone number ends with 9
+
+The RegEXP Operator:(short for regular expression)
+Eg:
+SELECT  *
+FROM customers
+WHERE last_name LIKE '%field%'
+
+SELECT  *
+FROM customers
+WHERE last_name REGEXP 'field'
+
+Note: We have several additional character which we don't have in LIKE operator
+
+^ - This character which gives me the output which starts with the specified string
+Eg
+SELECT  *
+FROM customers
+WHERE last_name REGEXP '^field'
+
+$- Represents the end of a string
+Eg
+SELECT  *
+FROM customers
+WHERE last_name REGEXP 'field$'
+
+|- to search for mutiple words in the table
+Eg:
+
+Eg
+SELECT  *
+FROM customers
+WHERE last_name REGEXP 'field|mac'
+
+[] - If we want to fetch the data with a particular character which comes before or after the string
+Eg:
+SELECT  *
+FROM customers
+WHERE last_name REGEXP '[gim]e'
+
+returns the value where the lastname has 'ge' or 'ie' or 'me'
+Note: If we want to provide a range of character then we use '-' inside the square bracket [a-h].
+Eg:
+Eg:
+SELECT  *
+FROM customers
+WHERE last_name REGEXP '[a-h]e'
+
+Excercise:
+Get me the customers whose
+	- firstname are ELKA or AMBUR
+	- lastname ends with EY or ON
+	- Lastname starts with MY or contains SE
+	- lastname contain B followed by R or U
+
+
+The NULL operator:
+ If we want to get the records for which there is no value for a particular column we go for the NULL operator:
+
+Eg: 
+SELECT  *
+FROM customers
+WHERE phone IS NULL
+
+Excercise:
+Get me the orders that are not shipped
+
+
+The ORDER BY CLAUSE:
+If we want to sort the data based on a specific order/column we can use the ORDER BY clause.
+
+Eg:
+SELECT  *
+FROM customers
+ORDER BY First_name 
+
+Note:
+1.The above eg will give us the data in the accesnding order but if we want to reverse it then we just use the DESC after the first_name.
+
+Eg:
+SELECT  *
+FROM customers
+ORDER BY First_name DESC
+
+2. We can sort the data by multiple columns:
+SELECT  *
+FROM customers
+ORDER BY state DESC,First_name
+
+3. In MySQL we can get the sorted data where the sorted data is based on a different column.
+
+Eg:
+SELECT  first_name,last_name
+FROM customers
+ORDER BY birth_date
+
+4. We can also sort data by an alias
+
+SELECT  first_name,last_name, 10 AS points
+FROM customers
+ORDER BY points,first_name
+
+5. We can also sort data by column position:
+
+Eg: 
+SELECT  first_name,last_name
+FROM customers
+ORDER BY 1,2
+
+Note: While this approach works but we have to be careful because in future if we add a column to the SELECT clause then we might not get the desired output
+
+Exercise:
+Order_id | productiD | quantity | unit price
+2 			1         2            9.10
+2 			4         4            1.66
+2 			6         4            2.94
+
+
+I need all the items with order_ID 2 and want to get the descending total price
+
+
+
+
+The Limit Clause:
+If we want to display a certain number of rows in a query then we go for the Limit clause.
+
+Eg:
+SELECT * FROM customer
+LIMIT 3
+
+
+Offset in Limit clause: If we want to skip a certain number of records while limiting the number of records then we can simply provide the number just before the Limit value.
+
+
+Eg:
+SELECT * FROM customers
+LIMIT 6,3
+In the above example, it will skip the first 6 records and show only 7th ,8th and 9th row
+
+Note: The Limit clause should always comes last. The order is very important
+
+
+Exercise:
+Get me the top 3 loyal customers:
+
+
+Inner Joins:
+So far we have interacted with a single table where in we have retrived data from a single table only. However in the real world or real projects that won't be the case.
+
+We will have to interact with multiple tables to fetch information.
+
+For Eg:
+-In the sql_store database where we have the Order table we have a column called customer_id. 
+-Certainly this table is designed to hold all the order related information placed by the customer. 
+-So if we were not to create independent tables responsible for hold a specific type of data then we might end up in a situation where in we have to make multiple changes. 
+- Just like in the the Order table if we are providing the customer details and if the customer have placed multiple orders and a single change in the customer information might need changes in several places.
+-Hence it is important to design a mechanism where we are creating tables in a fashion such that they can hold a specific type of data and having to relate them to various table after all the RDBMS is all about it.
+
+Now that we have established the fact its a good practice to store specific type of data in their repective table, there has to be a way for us to query data in a way where we can fetch all the required column we need from different table and put  them togeather which would make more sense. This mechanism can be achived using Joins clause.
+
+Eg: If I want to see the customer name instead of the customer ID this is how we can do it:
+
+
+SELECT * 
+FROM orders
+JOIN customers
+	ON order_items.product_id=products.product_id;
+
+The above query will fetch us all the required data from both the tables.
+
+Note:
+1. If we want to query a column which has the same name in both the tables then we need to prefix it by the table name itself followed by period.
+eg: 
+
+SELECT order_id, order_items( or products).product_id
+FROM orders
+JOIN customers
+	ON order_items.product_id=products.product_id;
+
+2. We can porvide an alias to the table however, if we do so then we have to use this alias everywhere we need to use the table name
+
+3. This behaviour is also called as inner join which we do not need to specify explicitly. But if we do there shouldn't be an issue.
+
+Exercise:
+Query the data in such a fashion that it delivers the 
+	- Order_id(in order_items table),product_id, product name(Products table),quantity_in_stock & the unit price
+
+
+
+Joining across Databases:
+
+Along with the tables in real world applications we will have to interact with data from multiple databases, for this we will need joining across databases.
+
+Its pretty much the same as we have see in inner joins with one variation that if we are using a table from a different database then we have to prefix the table with the database name followed by period symbol.
+
+If there are identical column names in the tables from different databases then the format would be something like:
+
+SELECT order_id,oi.unit_price
+FROM order_items oi
+JOIN sql_inventory.products p
+	ON oi.product_id = p.product_id;
+
+
+
+SELF Joins:
+If there ever comes a chance where in we need to gather different information on a specific table however the correspoding data also belongs to the same table in such cases we need to make use of SELF join mechanism.
+
+EG: If we want to query the name of the manager of an employee which information is stored a Human resource database, but the manager himself/herself is also an employee of the same company hence his/her data will also be a part of the same database. In such situation we can make use of the self join.
+
+It is pretty much the same as of the other kinds of joins with an exception that we will be joing both the tables with each other. It goes something like this:
+
+SELECT *
+FROM employee e
+JOIN employee m
+	ON e.report_to = m.employee_id; 
+
+The above query will return me the data of a specific row's report_to value which is equal to the employee_id value in the same table.
+
+
+
+Joining more than 2 tables:
+ 
+ Again it follow the same structure as we have seen in other Join scenarios. If we are in a situation which demands to fetch the data from more than 2 tables then we have to keep joing the tables using the same syntax.
+
+ Eg:
+ SELECT order_id,first_name,os.name status
+FROM orders o
+JOIN customers c
+	on o.customer_id = c.customer_id
+JOIN order_statuses os
+	on o.status = os.order_status_id;	
+
+Note: The most important aspect of this is to understand the reference. So if we can spot the correct reference then the entire process will be pretty easy.
+
+
+Exercise:
+Get me the data(invoice id,client_name,due_ date,payment method) of the different payment made by the clients from the sql_invoicing database.
+
+
+Compound Join conditions:
+So far we have been getting outputs based on comparing 1 column across different table, but where there is a requirement where in we need to compare more than 1 column then it get a little tricky, however the format remains the same.
+
+Eg:
+SELECT * 
+FROM order_items oi
+JOIN order_item_notes oin
+	ON oi.order_id = oin.order_id
+    AND oi.product_id = oin.product_id;
+
+In the above the ON clause is based on 2 condition that is it is trying to comapre two different columns across two different tables.
+
+
+Implicit Join Syntax:
+
+Instead of using the join we can simply use the WHERE clause to achive the join functionality.
+
+Eg: With Join clause:
+
+SELECT * 
+FROM orders o
+JOIN customer c
+	on o.customer_id=c.customer_id;
+
+Without join clause:(Impplicit join syntax)
+
+SELECT *
+FROM orders o,customer c
+WHERE o.customer_id=c.customer_id;
+
+
+The implicit join syntax is not preferable because if accidently forget to write the WHERE clause then it will give us a cross join.
+
+
+
+Outer Joins:
+
+In case of Inner joins the records we see are the records only which satisfis the condition(s) in the ON clause, what if we want to show all the records irrespetive of the condition. In such cases we use the Outer Join.
+
+
+Eg:
+SELECT c.customer_id,order_id,first_name
+FROM customers c
+RIGHT JOIN orders o
+	ON c.customer_id=o.customer_id;	
+
+
+
+Exercise
+
+product_id	name					quantity
+1			Foam Dinner Plate			2
+1			Foam Dinner Plate			4
+1			Foam Dinner Plate			10
+2		Pork - Bacon,back Peameal		3
+2		Pork - Bacon,back Peameal		4
+3		Lettuce - Romaine, Heart		10
+3		Lettuce - Romaine, Heart		7
+3		Lettuce - Romaine, Heart		4
+3		Lettuce - Romaine, Heart		7
+4		Brocolinni - Gaylan, Chinese	4
+4		Brocolinni - Gaylan, Chinese	4
+5		Sauce - Ranch Dressing			1
+5		Sauce - Ranch Dressing			2
+6		Petit Baguette					2
+6		Petit Baguette					5
+7		Sweet Pea Sprouts				NULL
+8		Island Oasis - Raspberry		2
+9		Longan							9
+10		Broom - Push					7
+
+
+
+
+Outer Joins Between Multiple Tables:
+
+SELECT c.customer_id,c.first_name FirstName,o.order_id,sh.name Shipper
+FROM orders o
+RIGHT JOIN customers c
+		ON o.customer_id = c.customer_id
+LEFT JOIN shippers sh
+		ON o.shipper_id = sh.shipper_id
+ORDER BY c.customer_id;
+
+
+Self Outer Join:
+Just like any other outer join we can also use the same concept with the self join as well.
+
+SELECT 
+	e.employee_id,
+    e.first_name EmployeeName,
+    m.first_name Manager
+FROM employees e
+LEFT JOIN employees m
+		ON e.reports_to = m.employee_id
+
+
+This will provide us the entire data irrespective of the condition being met or not
+
+
+
+The USING Clause:
+
+MySQL provides the USING clause which allows us to shorten the ON clause in the JOIN clasue, only when the column name is identical across all the table of databases we are comparing with.
+
+Eg: Without using the USING clause
+
+SELECT * 
+FROM orders o
+JOIN customers c
+	ON o.customer_id = c.customer_id
+
+Using the USING clause:
+
+SELECT * 
+FROM orders o
+JOIN customers c
+	USING(customer_id);
+
+This make the code easier to read and there by makes it more efficient.
+
+Exercise:
+Refer csv : Using USING clause
+
+
+
+Natural Joins:
+In this type of join the MySQL engine takes the decision on itself and finds the columns which are identical and do the Join operation.
+
+SELECT 
+	o.order_id,
+	c.customer_id
+FROM orders o
+NATURAL JOIN customer c
+
+This is not recommened because it gives us less control over our code
+
+
+Cross join:
+In this join every record from one table will combine with the other table
+
+SELECT *
+FROM customers c
+CROSS JOIN products p
+
+In the above example every record of the customer table will combine with every record on the products table
+
+UNION:
+We have seen Joins where in we can combine columns from different tables. Having said that in SQL we can also combine rows from different tables
+
+
+Eg: If we want to get see the data in a fashion where the orders placed in 2019 are active and the rest as archived, below is how we would do it.
+SELECT 
+	o.order_id,
+    o.order_date,
+    'Active' AS Status
+FROM orders o
+WHERE o.order_date>='2019-01-01'
+UNION
+SELECT 
+	o.order_id,
+    o.order_date,
+    'Archived' AS Status
+FROM orders o
+WHERE o.order_date<'2019-01-01'
+
+Note: 
+1. We need to make sure in both parts of the query in the union we need to make sure the columns we are querying for should be equal in number, they can contain different data types but the number should be the same.
+2. The column name of the result will be the same as the name of the first query.
+
+Exercise:
+Refer to CSV: Union Exercise
+
+
+
+
+Data Manipulation Language:
+
+Inserting a single row:
+
+1. If we are not defining the struture of the table we have to write the default value.
+INSERT INTO customers
+VALUES
+(DEFAULT,
+'John','Smith','1990-01-01',NULL,'address','CA',DEFAULT);
+
+2. If we are defining the structure next to the table name we can leave out the default values, which will be automatically inserted by the SQL
+
+INSERT INTO customers (first_name,last_name,birth_date,address,city,state)
+VALUES('John','Smith','1990-01-01','Banshankri','Banglore',CA');
+
+Note: We can interchange the order of the insertion but that is possible only in the 2nd case above and obviously we will also have to interchange the section where we provide the value to match the order with the structure.
+
+As soon as we provide this query to MySql, it will return a statement stating how many rows were affected.
+
+
+Inserting multiple Rows
+
+INSERT 	INTO shipper (name)
+VALUES (shipper1),(shipper2),(shipper3)
+
+Exercise:
+Insert 3 rows into the products table.
+
+
+Inserting Hierarchical Rows: For inserting data which has a parent-child relationship. 
+
+Eg: In the sql_store database we have order_items which is a child table of orders. Because every order will have 1 or more than 1 order items. So basically we first insert the data into the parent table and get the value of the PK and using the same we can insert data into the order_items table. 
+
+INSERT INTO orders (customer_id,order_date,status)
+VALUES(1,'2019-01-01',1);
+
+INSERT INTO order_items
+VALUES
+	(LAST_INSERT_ID(),1,1,2.95),
+	(LAST_INSERT_ID(),1,1,3.95)
+
+
+Creating a copy of the table:
+
+Eg1:
+CREATE TABLE order_archived AS
+SELECT * FROM orders
+
+In the above code the line number 651 is called as a sub-query.
+
+Eg for sub-Query:
+
+
+
+INSERT INTO order_archived
+SELECT * 
+FROM orders 
+WHERE order_date<'2019-01-01'
+
+Exercise:
+In the sql_invoicing db there is a table by the name 'invoices', create a new table by the name invoices_archived and copy all the data from invoice. However, instead of the client_id column you need to provide the client name while inserting into the archived table. Also make sure to put in the data only for the clients whose payment is done.
+
+Updating a Single row:
+
+UPDATE invoices
+SET payment_total =10, payment_date='2019-03-01'
+WHERE invoice_id=1;
+
+
+UPDATE invoices
+SET payment_total =DEFAULT, payment_date=NULL
+WHERE invoice_id=1;
+
+
+
+UPDATE invoices
+SET 
+	payment_total =invoice_total*0.5, 
+	payment_date=due_date
+WHERE invoice_id=3;
+
+
+Updating Multiple columns:
+
+SET 
+	payment_total =invoice_total*0.5, 
+	payment_date=due_date
+WHERE client_id=3;
+
+However, if we write this query in workbench we will get an error because the workbench runs in safe more which will allow to update only 1 row at a time, to get around this  click on the gear icon at the top right corner of the screen >>SQL Editor>>Under Other towards the bottom of the dialog box uncheck the Safe Update box.
+
+Once we do this we need to restart the connection.
+
+Eg: 3
+SET 
+	payment_total =invoice_total*0.5, 
+	payment_date=due_date
+WHERE client_id IN (3,4);
+
+
+
+Exercise: 
+Write a SQL query to give 50 extra points to any customers who were born before 1990
+
+
+Subqueries for updating the records:
+
+Lets say we don't have the id of the client 
+
+SET 
+	payment_total =invoice_total*0.5, 
+	payment_date=due_date
+WHERE client_id=(
+SELECT client_id
+FROM clients
+WHERE name = 'myworks')
+
+If the subquery returns multiple values, then we have to further narrow it down using the different known clauses:
+
+SET 
+	payment_total =invoice_total*0.5, 
+	payment_date=due_date
+WHERE client_id IN (
+SELECT client_id
+FROM clients
+WHERE state IN('CA','NY'))
+
+
+Exercise:
+ In the sql_store db look at the orders table, there are certain customers who don't have any comments.
+ 	- Write a SQL statement to provide a comment whoh has more than 3000 points
+
+
+Deleting Rows:
+
+DELETE FROM invoices
+WHERE invoice_id=1;
+
+We can also make use of the sub-queries:
+
+
+DELETE FROM invoices
+WHERE invoice_id=(
+				SELECT * 
+				FROM clients 
+				WHERE name='MyWorks'
+				)
+
+
+
+Data Defination Language:
+
+1. Create: The kind of queries we use to create the structure of the database and its components(table,index,function,views,stored procedure and triggers).
+
+
+Syntax:
+CREATE TABLE TABLE_NAME (COLUMN_NAME DATATYPES[,....]);
+
+Eg:
+CREATE TABLE EMPLOYEE(Name VARCHAR(20), Email VARCHAR(100), DOB DATE);  
+
+
+Drop:
+It is used to delete both the structure and records stored in the table.
+
+Syntax:
+DROP TABLE table_name;
+
+
+Alter:
+It is used to make changes to the structure of an existing database. We can use Alter to modify or add new attributes.
+
+To add a new column in the table
+	ALTER TABLE table_name ADD column_name COLUMN-definition;   
+
+		Eg: ALTER TABLE STU_DETAILS ADD(ADDRESS VARCHAR2(20));
+
+To modify existing column in the table:
+	ALTER TABLE table_name MODIFY(column_definitions....); 	
+
+		Eg: ALTER TABLE STU_DETAILS MODIFY (NAME VARCHAR2(20));
+
+Truncate:
+If we want to delete all the rows/records then we should go for Truncate.
+	
+	Syntax:
+	TRUNCATE TABLE table_name;  		
+
+	Eg:
+	TRUNCATE TABLE EMPLOYEE;  
+
+Data Control Language:
+1. The kind of queries that we would write to provide or revoke access permission to a database is called DCL.
+
+
+Database privilege levels:Global --> Database --> Table --> Column --> Stored Routine -->Proxy
+	
+a. Grant:
+	GRANT SELECT, UPDATE 
+	ON MY_TABLE 
+	TO USER1, USER2;  
+
+	Eg:
+	GRANT SELECT
+	ON employees
+	TO me@localhost;
+
+	Eg2:
+	GRANT SELECT (employeeID,lastName, firstName,email), 
+   	UPDATE(lastName) 
+	ON employees 
+	TO me@localhost;
+
+In the 2nd example I am giving access to me@localhost to fetch the data from employeeID,lastName, firstName,email. Also I am giving the access to make changes in the lastname column
+
+b. Revoke:
+
+Similarly if we want to restrict a given user from access a database/table/column etc. we can make use of Revoke.
+
+Syntax
+REVOKE SELECT, UPDATE 
+ON MY_TABLE 
+FROM USER1, USER2;  
+
+
+Transaction Control Language:
+
+The kind of queries that we make use to control the trasaction in SQL is called as TCL. It always works along with DML.
+
+
+Commit: Commands used to save all the transaction to the database 
+
+DELETE FROM CUSTOMERS  
+WHERE AGE = 25;  
+COMMIT;  
+
+RollBack:
+If we want to undo any transaction which is not yet saved to the database then we make use of Rollback.
+
+Eg:
+DELETE FROM CUSTOMERS  
+WHERE AGE = 25;  
+ROLLBACK;  
+
+
+SavePoint:
+ It is used to roll the transaction back to a certain point without rolling back the entire transaction:
+
+Eg:
+SAVEPOINT SAVEPOINT_NAME;  
+SAVEPOINT duh; 
+
+to go to this savepoint:
+ROLLBACK duh;
+
+
+
+KEYS:
+1. Primary Key(PK): A column or columns is called primary key (PK) that uniquely identifies each row in the table.
+
+	- If at all we want to make a particular column or columns as primary key then we need to provide that information during the table creation right after defining the data-type or during altering the table. 
+	- If we have more than 1 column as primary key then it is known as composite primary key
+Few points to remember while creating the PK:
+	1.The column will always have unique data.
+	2. A primary key cannot contain NULL value.
+
+Eg: 1 Primary Key
+
+CREATE TABLE students  
+(  
+S_Id int NOT NULL,  
+LastName varchar (255) NOT NULL,  
+FirstName varchar (255),  
+Address varchar (255),  
+City varchar (255),  
+PRIMARY KEY (S_Id)  
+)  
+
+Eg2: composite key:
+
+CREATE TABLE students  
+(  
+S_Id int NOT NULL,  
+LastName varchar (255) NOT NULL,  
+FirstName varchar (255),  
+Address varchar (255),  
+City varchar (255),  
+CONSTRAINT pk_StudentID PRIMARY KEY (S_Id, LastName)  
+)  
+
+
+Dropping a Primary Key:
+
+ALTER TABLE students  
+DROP PRIMARY KEY  
+
+
+
+Foreign Key:
+This is used to establish a link between two tables. In simple terms we can say that, a foreign key in one table used to point primary key in another table.
+
