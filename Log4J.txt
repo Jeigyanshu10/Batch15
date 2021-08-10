@@ -1,0 +1,73 @@
+Log4J:
+1. In the realtime scenario where we would need to write a 100s of lines of codes to make an application run, there are a few checkpoint we put to test if we are trying to get our desired results. 
+2. We make this happen by using our beloved System.out.println to see if everything is as per our requirement. However there are a few drawbacks of doing the same, and below are the reasons.
+
+1. Say there are 1000 lines of codes we might end of using the Sysout statement around 100 times. Now when the application is ready and is working as per requirement we just hand it over to the client for the deployment. And just before we do we need to remove these sysouts from the application.
+
+Now after a few months when the client comes back for some enhancment we will need to have some additional piece of code to create the enhancements which calls for more Sysout statement and not to forget we also need to rewrite the sysout statements for the first build. This process makes the whole process ridiculously
+	a. Time consuming
+	b. Inefficient
+	c. Open doors to errors. 
+2. The other reason we might not want to use the sysout statement is because if we look closely it is nothing but a method provide to us by Java, but at the end of the day its a method and a synchronized method. Hence it is considered to be an expensive resource.
+
+How does Log4J helps us?
+1. It's an open source logging framework.
+2. It is provided by Apache.
+3. It is used for generating customized logs.
+4. It is fast and flexible(configurable)
+5. It is written in Java language.
+6. It views the logging process in terms of priorities and offers mechanisms to direct the logging information to different destinations such as database, files, console etc.
+
+
+Just like the Java Logger it has 3 components:
+1. Logger: Responsible for capturing logging information.
+2. Appenders: Responsible for publishing logging information to various destinations.
+33. Layouts: Responsible for formatting loggin info in different styles.
+
+The different Levels in log4j are
+1. Trace
+2. Debug
+3. Info
+4. Warn
+5. Error
+6. Fatal
+
+Special Level:
+1. ALL
+2. OFF
+
+Download the log4j jar from : https://mvnrepository.com/artifact/log4j/log4j/1.2.17	
+
+You can find more stuff about the log4j at: https://logging.apache.org/log4j/2.x/
+------------Architecture--------
+
+Broadly there are 2 objects available with Log4J:
+1. Core Objects: These are mandatory objects of the framework. We need them for the framework to work.
+
+2. Support Objects: These are options objects but they provide a great deal of support with important tasks.
+
+1. Core Objects includes the following:
+
+a. Logger Object: 
+	1. It is the top layer of the object which provides the logger object itself.
+	2. The logger object is responsible for capturing the logging information.
+
+b. Layout Object:
+	1. This layer's object is responsible to format the logging information as per the requirement.
+	2. It has a capability to convert the machine understandable information(eg. XML format) to human- redable formats.
+	3. We can define our own style to make the message appear in the console or the files.
+
+c. 	Appender Object:
+	1. This the lower level layer which provides the appender objects. 
+	2. The appender object is responsible for publishing the logging information to the preferred destinations.
+
+
+
+2. Support Objects:
+
+a. Level Object: 
+	1. This object defines the priority of any logging information.
+	2. There are 5 basic levels(DEBUG, INFO, ERROR, WARN, FATAL) and 2 special levels(ALL, OFF).
+
+b. Filter Object:
+	1. The job of this object is to analyze logging information and making further decisions on what kind of information should be logged on or not.

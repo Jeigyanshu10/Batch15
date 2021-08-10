@@ -1,0 +1,63 @@
+Java Logger:
+
+Log: An offical record of the events durring a particular process.
+Logger: A device or computer program for making a systematic recording of events, observations, or measurements.
+
+
+Why is it important in Java: So that we can trace back to errors. 
+
+How does Java support logging: Java has provided us with customizable approach to logging by providing a basic logging API.
+
+Broadly the logger is of 2 types:
+1. ConsoleAppender: Mainly for the developer. It will print the log to the console.
+2. FileAppender: Mainly for the support team, so that they can identify the error and then raise a ticket.
+
+Need of a seprate API for logging in Java:
+While building applications we often face errors which have to be debugged to get to the bottom of the issue and resolve it. When we have log it is easily traceable and we can gater information about whats going on in the application.
+
+It could also be a fair question to ask why can't we simply use the print statements to get this output. Well the answer is, the print statements always prints the data to the console and also doesn't store it anywhere. Hence once the console is closed we loose all the logs.
+
+To avoid this scenario the good people of sun micro system has provided us an API through the java.util.logging package.
+
+ Logging Components:
+ 1. Loggers: Responsible for capturing log records and passing them to the corresponding Handlers.
+
+ 2. Handlers also called as appenders:These are responsible for recording the logs to a destination.
+ 
+ 3. Formatter also called as Layouts: Responsible how the data should look like when it appear in the log entry.
+
+Working Architecture:
+1. It has to be initiated by the application itself.
+2. When the application makes a logging call, the logger component records the event and then forward it to the appropriate handler.
+3. Then making use of the Formatter it formats the logs as per the requirement.
+4. Once the log is formatted then it stores in the specified destination.
+
+
+Lets understand how does it work in JAVA:
+1. Logger are nothing but simple Java objects which triggers log events. It is created and also called by the application itself.
+
+2. Upon called it generate Log Events before passing them to the next component which is Handler.
+
+3. We can use multiple loggers in a single class to respond to various events.
+
+Creating a new Logger in Java:
+1. We can create a logger just by using the getLogger() in the Logger class which takes a string as a parameter
+2. The getLogger() identifies the name of the Logger and making use of the String parameter, it returns if there already a logger exists by that name else creates a new Logger.
+
+Log Levels:
+1. The levels are use to categorize the logs by their severity or impact on the stability of the application.
+
+2. The java.util.logging has provided with different levels of logging.  
+	1. Finest(Lowest Level)
+	2. Finer
+	3. Fine
+	4. Config
+	5. Info
+	6. Warning
+	7. Severe(Highest Leve)
+
+
+3. Apart from these severities, the package also provide two methods: ALL also provide 2 additional levels
+1. All
+2. Off
+for logging all messages and disabling logging respectively.
