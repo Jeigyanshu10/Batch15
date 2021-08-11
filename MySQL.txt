@@ -602,9 +602,83 @@ Note:
 Exercise:
 Refer to CSV: Union Exercise
 
+Functions:
+SQL function are special block of code which is already emmbeded to the SQL engine which upon called do some common operations for us.
+
+Eg: Count things, gives us averages, add things togeather etc.:
+
+1. Find the number of employees in the sql_hr.employees table:
+SELECT COUNT(employee_id)
+FROM employees; 
+
+2. Find the number of employees in the sql_hr.employees table who has supervisor:
+SELECT COUNT(reports_to)
+FROM employees;
+
+3. Find the number of employees born after 1970:
+SELECT COUNT(emp_id)
+FROM employee
+WHERE sex = 'F' AND birth_day > "1971-01-01"
+
+4. Find the average of all employee's salaries:
+SELECT AVG(salary)
+FROM employee
+
+5. Find the sum of all employee's salaries:
+SELECT SUM(salary)
+FROM employee;
+
+Aggeregation:
+6. Find out how many males and females are there in there in the company:
+SELECT COUNT(emp_id),SEX
+FROM employee
+GROUP BY sex;
+
+7. Find the total sales of each salesman:
+SELECT emp_id, SUM(total_sales)
+FROM works_with
+GROUP BY emp_id;
+
+8. Find the investment made by each of the clients:
+SELECT client_id,SUM(total_sales)
+FROM works_with
+GROUP BY client_id;
 
 
 
+Nested queried(sub-queries):
+When we write multiple queries to fetch data and the result set of one inner layer query is being used by the respective outer layer query:
+
+
+Eg: Find the names of all employees whose total sales is above 30000:
+
+SELECT 
+	e.first_name,
+	e.last_name
+FROM employee e
+WHERE e.emp_id IN(
+	SELECT WW.emp_id
+	FROM works_with WW
+	WHERE total_sales>30000
+);
+
+
+Explanation:
+1. In the above example the query inside the parenthesis(line 660 through 662) returns the emp_id's of the employees whose sales is more than 30000. Lets call this as the inner layer
+2. The inner layer will return the value back to the outer SELECT query as the result of the condition
+3. And then the outer query return the data as per the WHERE clause.
+
+Exercise:
+Find all clients who are handled by the branch that Michael Scott manages. Assume we know Michael's ID:
+SELECT 
+	c.client_name
+FROM client c
+WHERE c.branch_id =(
+	SELECT b.branch_id
+	FROM branch b
+	WHERE mgr_id=102
+);
+	
 Data Manipulation Language:
 
 Inserting a single row:
@@ -657,8 +731,6 @@ In the above code the line number 651 is called as a sub-query.
 
 Eg for sub-Query:
 
-
-
 INSERT INTO order_archived
 SELECT * 
 FROM orders 
@@ -687,7 +759,7 @@ SET
 WHERE invoice_id=3;
 
 
-Updating Multiple columns:
+Updating Multiple rows:
 
 SET 
 	payment_total =invoice_total*0.5, 
@@ -699,6 +771,7 @@ However, if we write this query in workbench we will get an error because the wo
 Once we do this we need to restart the connection.
 
 Eg: 3
+UPDATE invoices
 SET 
 	payment_total =invoice_total*0.5, 
 	payment_date=due_date
@@ -714,13 +787,15 @@ Subqueries for updating the records:
 
 Lets say we don't have the id of the client 
 
+
 SET 
 	payment_total =invoice_total*0.5, 
 	payment_date=due_date
 WHERE client_id=(
-SELECT client_id
-FROM clients
-WHERE name = 'myworks')
+	SELECT client_id
+	FROM clients
+	WHERE name = 'myworks'
+)
 
 If the subquery returns multiple values, then we have to further narrow it down using the different known clauses:
 
@@ -730,7 +805,8 @@ SET
 WHERE client_id IN (
 SELECT client_id
 FROM clients
-WHERE state IN('CA','NY'))
+WHERE state IN('CA','NY')
+)
 
 
 Exercise:
@@ -818,17 +894,21 @@ a. Grant:
 	ON employees 
 	TO me@localhost;
 
-In the 2nd example I am giving access to me@localhost to fetch the data from employeeID,lastName, firstName,email. Also I am giving the access to make changes in the lastname column
+In the 2nd example I am giving access to me@localhost to fetch the data from employeeID,lastName, firstName,email. Also I am giving the access to make changes in the lastname column only
 
 b. Revoke:
 
-Similarly if we want to restrict a given user from access a database/table/column etc. we can make use of Revoke.
+Similarly if we want to restrict a given user from accessing a database/table/column etc. we can make use of Revoke.
 
 Syntax
 REVOKE SELECT, UPDATE 
 ON MY_TABLE 
 FROM USER1, USER2;  
 
+
+	REVOKE UPDATE
+	ON employees
+	TO me@localhost;
 
 Transaction Control Language:
 
@@ -905,4 +985,42 @@ DROP PRIMARY KEY
 
 Foreign Key:
 This is used to establish a link between two tables. In simple terms we can say that, a foreign key in one table used to point primary key in another table.
+
+
+
+
+
+Stored Procedure:
+A bunch of code bundled under a name that can be reused for highly-frequent or sensitive tasks is called as a stored procedure.
+
+
+When will the stored procedure will be used?
+1. Highly frequent tasks like authentication to Faceboo etc.
+2. Highly senstive activity around tables that involves risk(money)(Eg. Amazon Checkout)
+
+Why is it important?
+1. It is highly flexible, powerful and secure
+	- It hides the structure of the database(The user don't actaully needs to where what are the steps,location etc to carry out an operation. Since it is already created and stored with a name, all the user needs to do is to call it to carry out an operation)
+	- Restricts access and processes(The user need to have permission to access the stored procedures else they won't be able to call the same)
+	- Data in and out with parameters
+2. Maintainance is simplified:
+	- If the data is moved from one table to another we do not have to make changes to our application rather we can make changes to the stored procedure and it will get the job done, since we don't have to hard code the queries into our program.
+
+Example:
+
+Creating the stored procedure:
+DELIMITER && -- This will temporarily change the delimiter to &&
+CREATE PROCEDURE GetMaleData()
+	BEGIN
+	SELECT * 
+	FROM employee
+	WHERE sex='F';
+	END &&
+DELIMITER ; -- Changing the delimiter back to ;
+
+
+The above piece of code will generate a stored procedure by the name GetMaleData whose whole function is give us the date we are querying.
+
+Executing the Stored Procedure:
+Call GetMaleData();
 
