@@ -1,0 +1,349 @@
+Spring:
+
+1. Spring is a dependency injection framework to make java applications loosely coupled.
+2. It was developed by Rod Johnson in 2003.
+3. Dependecy Injection:
+	1. It's a pattern using which we can build applications. Normally while developing an app using java, we tend to create a lot of classes. 
+	2. Since the Java language is bases on OOPs we tend to use a lot of classes for our convinience and then use them across our application.
+
+
+class Student{
+	int id
+	String name;
+	Address address;
+}	
+
+class Address{
+
+	String street;
+	String city;
+	String state;
+	String country;
+
+}
+	In the above two classes, the class Student is using an instance of Address in order to function. As a developer so far 
+		1. We were responsible for creating those objects
+		2. And also creating in the right place 
+	Result: this has to be a manual process which is why we had to do it before compiling the program. Result: The program becomes tightly coupled and we can't change anything during the runtime. 
+	
+	Hence it won't be a mistake to say, till this point of time we had the control in our hands. But as the application starts getting huge things starts to get a little out of hands which make creating objects and also using it in the right place a little challenging.
+	
+Hence with the control in our hands below are the issue we have noticed:
+	1. Creation of objects has to be manual.
+	2. Since there is a human intervention and in an entrprise applications we will have to deal with a lot of classes, it is quite possible, that we might use an unwanted object.
+	3. my application will become tightly coupled because there is no flexibilty during the run time.
+To overcome such issues we make use of the Spring Framework which is capable of creating the required object in the runtime and inject it to the position where it is required in the runtime. 	
+
+
+Spring Framework:
+
+
+Data-	      JDBC, ORM 						Web: Web,Servlet				
+integration	  JMS, OXM								 Portlet,Websocket		
+
+
+	  AOP , Aspect, Intrumentation , Messaging: Used to decouple our code.
+Core: Core , Bean , Context ,spEl: provides Fundamental functionality like IOC,dependency injection. 
+								Testing
+
+The context extends Bean so it has all its feature and also some unique feature.
+
+
+
+Ioc Container: is a component that comes with Spring framework which is responsible for 
+	1. creation of object, 
+	2. Holding them in the memory and 
+	3. Injecting the objects inside another objects.
+
+Hence the IOC container has a grip on the objects and maintains the entire life cycle of the objects created.
+
+We need to provide two different things:
+	1. Beans Information
+	2. Configuration information (Which bean is dependent on what)
+
+
+Application Context: It represent our IOC container. 
+The Bean factory is something which is responsible for creating all the objects. However the application context extends the Bean Factory and hence has all its properties and also has some addition features.
+
+This is an interface using which we can extract objects from inside the container.
+
+Since this is an interface we can't directly create an object of this interface and there are 3 implementation class which helps us do that.
+	1.ClassPathXMLApplicationContext
+	2.AnnotationConfigApplicationContext
+	3.FileSystemXMLApplicationContext	
+Different types of Dependency injection:
+
+class Student{
+	int id
+	String name;
+	Address address;
+}	
+
+class Address{
+
+	String street;
+	String city;
+	String state;
+	String country;
+
+}
+
+
+IoC will create this object of Address and then initialize the values to the properties.
+Also it will create the Student and initialie the values and then it also injects the Address object into the Student object during the runtime automatically.
+
+Dependency Injection can be done in 2 ways:
+1. Setter Injection: It uses the bean classes setter methods to inject the properties. The properties can be primitive or non primitive
+2. Constructor Injection: It uses the constructor to set the properties of an object.
+
+
+Configuration File: XML file
+In order for the IOC container to create object and do all sort of initialization, we need to provide information regarding the class(Otherwise called as bean) of which we want the container to create object of.
+
+
+Hence in a single line we can say configuration file is a place where we declare our beans and its dependency
+
+Different type Data that can be injected into an object by the IOC container:
+1. Primitive Datatype: byte, short,char,int,float,double,long
+2. Collection type: List, Set,Map,Properties
+3. Reference Type / Non primitive data type
+
+Dive into practical:
+
+Next Steps:
+1. Create a Maven Project(So that we can easily add the spring dependencies)
+2. Adding dependencies -> Spring Core, Spring context
+3. Creating beans -> Java Pojo
+4. Creating configuration file -> config.xml
+5. Setter Injection
+6. Main Class: Using which we will pull the data.
+
+
+Software Required: 
+1. Eclipse (IDE)
+2. Tomcat Server (Web Server to run our project)
+3. MySql Database
+4. Workbench for mysql gui
+
+pom.xml: It stands for project object model and this is the place where we add all the dependencies required by our projet.
+
+1. Lets find out how to set values to the object properties using the Setter injection
+
+Name space for config file:
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">  
+
+</beans>    
+
+Note: There are 3 ways of providing values to the beans. 
+	1. Using the value tag(<value></value>)
+	2. Value as attribute ()
+	3. Using p schema
+
+Note: When we provide property tag spring automatically assumes we want to use the setter injection
+
+So far we have learnt how to inject primitive data type to the object. Lets learn how to inject collection objects to our objects
+
+Syntax:(List & Set)
+
+
+<bean>
+	<property name="List/SetCollectionTest">
+			<list/set>
+				<value>10<value>
+				<value>637<value>
+				<value>11223<value>
+				<value>14532<value>
+				<null/>
+			</list/set>
+	</property>
+</bean>
+-------------------------------------------------------
+Syntax(Map)
+
+<bean>
+	<property name="MapCollectionTest">
+			<map>
+				<entry key="IronMan" value="Tony Strak" />
+				<entry key="Amazing Spider Man" value="Peter Parker" />
+			</map>
+	</property>
+</bean>
+-------------------------------------------------------
+Syntax(Properties)
+
+<bean>
+	<property name="PropertyCollectionTest">
+			<props>
+				<prop key="IronMan">Tony Strak<prop>
+				<prop key=Amazing Spider Man>Peter Parker<prop>
+			</props>
+	</property>
+</bean>
+
+Assignment: In our program try to implement the properties using the above syntax
+
+--------------------------------------------------------------
+
+Injecting Reference type of data into objects:
+
+Reference Type:
+
+Syntax:
+
+<bean class =somepackage.B name="B">
+</bean>
+
+
+<bean class=somepacakage.A name="A">
+	<property name="ReferenceTest">
+		<ref bean="b" // here b is the name of the bean on which the current 				  		  // bean is dependent on
+	</property>
+</bean>
+
+Just like the other primitive data-type we can also use the value as attribute in this case as well. Below is an example:
+Eg:
+<bean class="com.technoelevate.SpringCore.ReferenceTypeInjection.A" name="aref">
+		<property name="x" value="20"/>
+		<property name="obj" ref ="bref"/>
+		//"bref" represent the name of the bean on which "aref" is dependent on.
+	</bean>
+
+
+Constructor Injection:
+Syntax for Constructor injection: <constructor-arg></constructor-arg>
+Syntax for setter injection: <property> </property>
+
+
+Here is an example of a constructor injection:
+
+Eg:
+<bean class="com.technoelevate.SpringCore.ConstructorInjection.Person" name="person">
+    	<constructor-arg value="Jeigyanshu" />
+    	<constructor-arg value="20" />
+    	<constructor-arg ref="certificate"/>
+    	</bean>
+
+// The "certificate" in the 3rd argument which represent a bean on which the "person" bean is dependent on
+
+All the experience/technique we have used for the setter injection is almost the same in constructor injection.
+
+Assignment1: Use C schema to provide the values to the class properties.
+Assignment2: use a list type input in the Person Class to represent a collection and provide the appropriate tag in the xml file. 
+
+Note: While getting the objects created using the constructor injection, the order in which we declare the class properties matters. However, if we provide the type then we can use it in the order as per our wish, but if there is a conflict between the same type then the IOC container is going to give preference in the sequence in which they appear in the constructor.
+
+Ambiguity in the Constructor injection:
+
+By default the values are passed as String into the constuructor and below is the order:
+
+Default order: String -> then the sequence where it find the first matching value.
+However if we want to fixate the type then we have to explicitly mention the type in the <constructor-arg>
+Eg: <constructor-arg value="34" type="int"/>
+
+Note: We can send the value to the parameter based on our choice, this can be done by using the index attribute in the <constructor-arg>
+
+
+Eg:
+<bean
+		class=" com.technoelevate.SpringDemo.ConstructorInjection.Addition"
+		name="add">
+		<constructor-arg value="15" type="double" index="1"/>
+		<constructor-arg value="20" type="double" index="0"/>
+	</bean>
+
+
+
+
+Life Cycle Methods of Spring Bean:
+Spring provide two important methods to every bean:
+
+1. public void init()//Used to initializing the code->loading config,connecting db,webservice etc.
+
+2. public void destroy()//Used to provide CleanUp code.
+
+Life cycle step:
+
+As soon as we provide the spring bean info and the metadata(Configuration Xml file),
+1. It creates the object
+2. Sets the class properties using the setter/constructor injection.
+3. Calls the init() to initialize all the resources we might have declared inside the bean
+4. Then we read and use the bean
+5. Just before destroying the object it will call the destroy() where we have the cleanup code
+6. Destroy's the object.
+
+
+
+Configurationn Technique:
+1. Xml
+
+Eg:
+    <bean class="com.technoelevate.SpringCore.LifeCycle.Samosa" name="samosa1" 
+    				init-method="init" destroy-method="destroy">
+    	<property name="price" value="10"/>
+    </bean>
+2. Spring Interface : We implement the below two interface
+
+InitializingBean(I)-> Initializing Bean
+DisposableBean(I)-> Destroying Bean
+
+3. Annotation:
+
+1. @PostConstruct
+2. @PreDestroy
+
+We need to add the below dependency:
+
+<dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.3.2</version>
+</dependency>
+
+
+Autowiring in Spring:
+1. Feature of spring framework in which spring container inject the dependencies automatically.
+2.We cannot provide autowiring for primitive datatype and String value. It works only with reference only.
+
+Explanation:
+
+A----------------------------->B
+
+If A requires the object of B, so far we were doing it manually by writing the below:
+
+<ref bean="B"/>
+
+There is an another way of doing this where we tell the IOC container to do it by itself. This is nothing but called as autowiring.
+
+Autowiring again can be done in 2 ways:
+1. Using XML: There are few modes using which we can get this done:
+	1. No: It disables the autowiring
+	2. byName: It injects the dependencies using name
+	3. byType: It injects the dependencies using type
+	4. constructor: It injects the dependencies using constructor
+	5. autodetect: It automatically detects and injects the dependencies. However, this is depricated since Spring 3.
+
+2. Using Annotations:
+	@Autowired
+
+Advantage:
+1. Automatic
+2. Less Code
+
+Disadvantage:
+1. No control of programmer
+2. Can't be used for primitive and String values.
+
+Autowiring using the XML:
+
+byName:
+<bean class="com.technoelevate.SpringCore.Autowire.Employee" autowire="byName"/>
+
+
+1. If we are using the byName mode to do the autowiring, we need to make sure that the bean name of the bean on which the dependent class is dependent should match the variable name declared inside the dependent class.
