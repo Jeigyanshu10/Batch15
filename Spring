@@ -316,13 +316,13 @@ Explanation:
 A----------------------------->B
 
 If A requires the object of B, so far we were doing it manually by writing the below:
-
-<ref bean="B"/>
+<bean class="qualified name" name="bname">
+<ref bean="bname"/>
 
 There is an another way of doing this where we tell the IOC container to do it by itself. This is nothing but called as autowiring.
 
-Autowiring again can be done in 2 ways:
-1. Using XML: There are few modes using which we can get this done:
+Autowiring
+1. Using XML: Therng again can be done in 2 ways:e are few modes using which we can get this done:
 	1. No: It disables the autowiring
 	2. byName: It injects the dependencies using name
 	3. byType: It injects the dependencies using type
@@ -346,4 +346,188 @@ byName:
 <bean class="com.technoelevate.SpringCore.Autowire.Employee" autowire="byName"/>
 
 
-1. If we are using the byName mode to do the autowiring, we need to make sure that the bean name of the bean on which the dependent class is dependent should match the variable name declared inside the dependent class.
+1. It is worth noticing that the name of the supporter bean has to be exactly the same as of the variable name in the dependent class, only then it will lookup the variable else it will return null by default.
+
+Note: While getting the bean if we don't want to type cast it, then the getBean() is a overloaded method which accepts the object.class which is automatically type cast the bean we will fetch.
+
+byType:
+
+<bean class="com.technoelevate.SpringCore.Autowire.Employee" autowire="byType"/>
+
+1. It dosen't care about the name of the support bean and the reference variable name in the dependent object. All it tries to match is the type of the object.
+
+2. While this is a cool approach of injecting the dependency, it is worth remembering that in case the class has multiple variable of the dependent object then we can't use the "byType" to get it autowired. If we do that we will run into errors. In such cases the best approach is to use the "byName"
+
+
+Constructor:
+
+<bean class="com.technoelevate.SpringCore.Autowire.Employee" name="emp2" autowire="constructor">
+
+1. It automatically finds the bean which is eligible to be injected as a constructor and then inject it.
+2. If the dependent class has more than 1 type of the same non-primitive type of data, in such cases:
+	a. If there is a single bean, then it injects the single bean in both the parameter. The name of the bean here is not of any importance.
+	b. If there are more than 1 bean of the dependent type in that case, the name of the bean has to match the name of the variable in the dependent class.
+
+Autowiring using Annotation:
+
+We can use the @Autowire in object declaration or setter methods or Constructors.
+
+@Qualifier Annotation:
+If we want to map a particular bean to be assigned to a specific variable in the dependent class then we go for the @Qulaifier("name of the bean") annotation.
+
+Stereotype Annotaion:
+So far we were using the xml file, to declare all the classes for which we wanted a bean. However, the same job can also be done using the @Component annotation directly over the dependent class.
+
+Eg:
+
+@Component
+class Student{
+	
+} 
+
+In order for the class to be created as a bean we also need to provide the package name inside the xml file using the below format.
+
+<context:component-scan base-package="com.technoelevate.SpringCore.StereotypeAnnotation"/>
+
+While declaring the class name in the xml file we use to provide the name of the bean, since we are not decalring any sort bean here hence there is no scope to provide the name in which the object/bean can be stored.
+The IOC container by default looks up to the class name and use the camel case to store the object.
+Eg:
+
+@Component
+class StudentFamily{
+	
+} 
+
+The variable for the above scenario is student. Hence while getting the bean we would write something like below:
+
+context.getBean("studentFamily",StudentFamily.class)
+
+Having said that the situation at all demands to give a different name in such case we can do it by passing the required variable right after the component. Below is an example:
+
+@Component("std")
+class StudentFamily{
+	
+} 
+
+In the above case we can access object/bean created the below format:
+context.getBean("std",Student.class)
+
+
+
+
+Bean Scope:
+There are 5 scopes:
+1. Singleton: This is by default
+2. prototype
+3. session
+4. request
+5. Globalsession
+
+
+Creating A StandAlone Collection:
+ If we want to use a initialized collection repetedly then we can create a standalone collection and use it in our code taking help of spring expression language.
+
+Include the below schema:
+xmlns:util="http://www.springframework.org/schema/util"
+
+schemaLocation:
+http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd
+
+ Eg:
+ <context:component-scan base-package="com.technoelevate.SpringCore.StereotypeAnnotation"/>
+    <util:list list-class ="java.util.ArrayList" id="studentAddresses">
+    	<value>7019344625</value>
+    	<value>7019344626</value>
+    	<value>7019344627</value>
+    </util:list>
+
+
+Annotation Based:
+So far we have learnt how to create bean and provide the necessary injections with the help of xml. Now we will enter into completly XML less bean creation.
+
+@Configuration: IOC understands that this is the class which handles the configuration of the project.
+
+@ComponentScan(basePackages+"base package address"): This will tell the IOC container out of many pacakages and class which package are we intrested of creating the bean.
+
+@Bean: For an instance we do not want different class to have the @Component but still we need to create a bean of the class, in such sceinario we need to create a method inside the configuration class which returns an object of the respective/required class and annotate it with @Bean.
+
+So this is how it works:
+1. We create a java class which we can consider as a configuration class and has all the information of the pacakages from which we need to create the beans.
+
+2. The class of which we need a bean(doesn't matter in which pacakage) we need to annotate that class by using the @Component(as we have seen before).
+
+3. We need to create an object of ApplicationContext but instead of ClassPathXmlApplicationContext we will use AnnotationConfigApplicationContext().
+
+4. AnnotationConfigApplicationContext(), this method except an argument which is of a class type. We need to provide the class of the configuration we created in step 1.
+
+5. Now my main method knows which class is the configuration class which contains all the information about the pacakge of which we might need to create the bean of.
+
+6. Once this is done we need to get the bean:
+	1. We have annotated all the class for which we might need the bean in step 2
+	2. We already know that the IOC will use the Java standards name to hold the bean.
+	3. Now we will use the context.getBean("name deduced from step6.2",Bean'sClass.class) 
+	4. This will provide me the required bean.
+7. Now that we have the bean/object we can use it as per our requirements.
+
+Alternate way:
+
+1. We create a java class which we can consider as a configuration class and has all the information of the pacakages from which we need to create the beans.
+
+2. If we are not intrested in using the @Component (because then we can't see the all the classes which I need the beans of in one glance), in such scenario, we can create a public method inside the Configuration Class(created in Step1) which returns an object of the required class and then annotate the method with @Bean.
+
+3. We need to create an object of ApplicationContext but instead of ClassPathXmlApplicationContext we will use AnnotationConfigApplicationContext().
+
+4. AnnotationConfigApplicationContext(), this method except an argument which is of a class type. We need to provide the class of the configuration we created in step 1.
+
+5. Now my main method knows which class is the configuration class which contains all the information about the pacakge of which we might need to create the bean of.
+
+6. Once this is done we need to get the bean:
+	1. We have annotated all the class for which we might need the bean in step 2
+	2. Since we are not using the @Component in the process hence the name of method which returns me the respective object becomes the name of the bean.
+	3. Now we will use the context.getBean("name deduced from step2",Bean'sClass.class) 
+	4. This is provide me the required beans.
+7. Now that we have the bean/object we can use it as per our requirements.
+
+Note: If we are taking the alternate way we will be returning all the objects from the method inside the Configuration class. Since the class is returning all the objects, it can't be done without the class having the information about the pacakage in which the bean class is present. Hence we do not need to provide the @ComponentScan annotation in this case.
+
+Adding dependencies:
+1. Add the supporter variable inside the dependent class.
+2. Annotate the variable with @Autowired
+3. There are 4 possiblities below:
+	
+	1. If the dependent class is annotated with @Component & Supporter Class is not :
+	
+	2. If the dependent class is not annoatted but the supported class is annotated with @Component:
+
+	3. If both the classes are annotated with @Component:
+
+	4. If both the classes are not annotated with @Component:
+
+Class Assignment: Figure out possiblilities 1 & 2
+
+
+
+Solution:
+
+	1. If the dependent class is annotated with @Component & Supporter Class is not : In that case we need to provide the base pacakage(dependent class) in the Configuration file. And create the getter method of supporter class inside the Cofiguration file
+	
+	2. If the dependent class is not annoatted but the supported class is annotated with @Component: In that case we need to provide the base pacakage(supporter class) in the Configuration file. And create the getter method of dependent class inside the Cofiguration file.
+
+	3. If both the classes are annotated with @Component: We need to provide the base pacakages of both the classes.
+
+	4. If both the classes are not annotated with @Component: We need to create the respective getter methods inside the configuration file.
+
+Note: Please make sure that we are using the correct bean name in context.getBean("") as per the respective situation
+
+
+Note: While declaring the @Bean, we can also provide single/multiple names and it will save the returning bean in any & all of these names.
+
+Annotation so far:
+@Component
+@Value
+@ComponentScan
+@Configuration
+@Autowired
+@Bean
+@Qualifier
