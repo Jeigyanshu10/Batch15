@@ -1,0 +1,124 @@
+Spring MVC
+
+Configuring the project:
+1. Create a Maven project
+2. Select Archetype-webapp
+3. download servlet api dependency
+4. Delete the web.xml
+5. right click on the project>show in>system explorer> project>.settings>facet.core.xml>Change version jst.web to 3.1
+6. Update the maven project
+7. Right click on project> Java EE tool>Generate DDS
+8. Add few more dependencies:
+	1. open maven repository and search for Spring web and copy the dependency and put it in pom.xml
+	2. Do the same for Spring webMVC. Keep the symmetry
+9. Now we need to set up the dispatcher servlet to do that open web-inf and create a new xml-file and name it as "dispatcher-servlet.xml"(name should be exactly the same). This is the configuration metadata
+10. Once the dispatcher servlet is added. now paste the below links in that file:
+	
+	<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/beans
+	http://www-mapping.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+
+</beans>	
+
+
+Now just adding this xml file and content is not enough. We have to setup a url for the dispatcher servlet. Hence to configure the same
+11. Head over to web.xml and add the url pattern.
+12. To add the url pattern we need to use the <servlet></servlet> and <servlet-mapping></servlet-mapping>
+13. We can name the servlet name as dispatcher.
+14. To get the fully qualified name, in the eclipse search(ctrl+shift+t) for dispatcher servlet(org.springframework.web.servlet.DispatcherServlet). Now use it in the xml file
+15. As per the url pattern use "/"
+
+Setup the Server:
+16. Go to the server tab click on the new server.
+17. Select tomcat 9.0
+18. Apacha software foundation select tomcat folder
+19. Start the server
+20. The dispacter servlet will use the index.jsp, inside wef-inf
+21. Now if we make a request to http://localhost:8080/SpringMVC/ I will get the index.jsp
+
+Now if I make a request to http://localhost:8080/SpringMVC/Jeigyanshu, it gives 404 not found.
+Now we are going to build/ write our controller to handle a particular url pattern
+
+
+
+Controller:
+To make it recognized by the Spring that a particular class is a controller we need to annotate the class with @Controller.
+
+In servlet every class we write behaves as a controller which means for each and every request type we have to create a class however in Spring MVC when we annoated a class with @controller it becomes the controller.
+
+In spring inside the cotroller class we just need to write a method which is public and non-static and also make sure this class should be a concreate class(Because the spring should be able to create an object).
+
+The method we write inside the controller should be able to handle the request but it can only be done when we annotate the method with "@RequestMapping(path="",method=RequestMethod.Get/Post..)"
+This annotation accepts 2 attributes as mentioned 
+	1. Path
+	2. Type of the httpmethod which we want current method to handle.
+
+
+Eg:
+Lets say I have an application where when I give the url with path=/hello, I should get the home page, in that case my controller would be something like below:
+
+@Controller
+public class SpringMVCController {
+
+	@RequestMapping(path="/hello", method=RequestMethod.GET)
+	public void getHomePage() {
+		
+	}//end of getHomePage
+}	
+
+
+Note: All the classes we want needs to be created under the src/main/java and all the other resources should be placed inside WEB-INF folder.
+
+There is a class called as ModelAndView which takes the request and binds the data togeather. Hence we need to create an object of the same.
+
+Once the object is created we can call a method setViewName which takes string as a parameter and provide the path in which we have a content we are intended to return to the viewer.
+
+Now the reference of the ModelAndView(modelAndView in my case) holds the information of the view. hence we need to return this object.
+
+Since we are returning this object we need to make sure the method inside which all these operation is going on should have the return type ModelAndView.
+
+Now we can say this method is my handler which is going to handle my request.
+
+We can replace the @RequestMapping(path="/search",method=RequestMethod.GET)
+with @GetMapping("/search")
+
+Given we know how powerful Spring is we do not need to create an object provided by the Spring inside our method. All we need to do is pass these objects as parameters to the method and it will automatically handle the object. Below is an example:
+
+@GetMapping("/search")
+	public ModelAndView getSearch(ModelAndView modelAndView,HttpServletRequest request) {
+		String id = request.getParameter("id");
+		modelAndView.addObject("myId",id);
+		modelAndView.setViewName("/WEB-INF/Views/searchResult.jsp");
+		return modelAndView;
+	}
+}	
+
+
+Creating a view resolver:
+Head over to DispatchServlet:
+Create a bean with the below details.
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/Views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+Note: View resolver name in Spring: InternalResourceViewResolver.
+if we notice the signature of the view paths are similar and all my views are in jsp then we can do the below:
+
+@GetMapping("/search1")
+	public String doSearch(HttpServletRequest request, ModelMap map) {
+		String id = request.getParameter("id");
+		map.addAttribute("myId", id);
+		return "searchResult";
+	}
