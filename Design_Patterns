@@ -1,0 +1,146 @@
+What is Pattern?
+1. Right after the completion of the project or while it is being developed it is ovious we will come across a tonne of issues even though we have gain all the relavant knowledge on how a programming language work. The issue I'm mentioning here are not related to the logic rather then to the object oriented feature and its usage.
+
+2. Developers who worked on such projects use to document those issues, the solutions they used to overcome these issues and the best practices. These documents latter on emrged to become sort of a pattern.
+
+3. Hence it won't be a mistake to say patterns are nothing but some problems/issue we might face while developing an application and the logical solution that is doumented to get around these issues are called as Design Patterns.
+
+4. Upon looking broadly to these problems and solution we can catogorize the patterns into 2 catogories:
+	1. Core Java design patterns
+		a. Creation design patterns
+		b. Structural design patterns
+		c. Behavioural design patterns
+	2. Java EE design patterns
+
+Why should we learn design patterns?
+1. As a developer it is quiet evident that while developing such appications we might run into such scenarios where we need a logical solution to overcome the problem, in such cases we will need to make use of the design patterns.
+
+2. Since these design patterns serves as a standard we can also communicate the solution in a very high level instead of writing codes and explaing.
+
+From the above it is clear that almost all the application we will develop needs to follow a design pattern to avoid running into some deadlock situation, so it is also evedient that we need to forsee the issue beforehand and determine the design pattern we will need to develope our application in.
+
+In a nutshell the design patterns:
+	1. Captures the design experience(identify the problem, brainstorm multiple solution, figure out the design )
+	2. We can reuse the pattern when we might run into such issues in the future since it is documented.
+	3. It defines the system/project structure better.
+	4. Provides a common design language.
+
+How the patterns are identified:
+First we try to find the solution in the Pattern Catalog, if we find the solution we use it, but if we dont't then we create a document where we document the issue and the solution, this document is called as candidate patterns. If the issue continues to comeup in the future repetedly then we can register it to the pattern catalog.	
+
+
+
+
+Pattern Catalog:
+1.GOF patterns catalog:
+	a. Creation design patterns: Gives us guidelines to create a single objects or a group of objects.
+	b. Structural design patterns: Provide a manner to define relationships between classes. 
+	c. Behavioural design patterns: Define how the communication should takes place between classes and objects
+2. Java EE Pattern Catalog:
+Every java application is organized into multiple logical layer, starting with 
+	1. Data access layer: responsible for performing the databases operations
+	2. Service Layer: Where all of our business logic goes in.
+	3. Presentation Layer: The layer responsible to provide an intermidiate/interface to our end users
+	4. Integration Layer: Responsible for integrating with other applications.	
+
+
+Singleton:
+1. Its a object creational patterns 
+2. If at all we need to create one and only one object of a class no matter how many times that class is used inside our application, in such cases we need to make use of singleton pattern.
+	Eg: Lets say we have a properties file in our application and we have a class where we have logic to read the data from this property file, in this case it is not a good practice to create an instance of the property reader class hence we make use of the singleton pattern which allows to create the object only once which can be reused by other classes.
+
+Steps to create a singleton class:
+1. Declare the constructor of a singleton class as private so that no other class can create an instance of the class directly.
+2. Declare a static method, so that all other class can make use of it to create an object of this class
+3. Define a static member of the same class type in the class, so that we can assign the object to that member and return it back from the static method.
+
+
+DateUtil Class:
+
+public class DateUtil {
+	private static DateUtil instance;
+
+	private DateUtil() {
+
+	}
+
+	public static DateUtil getInstance() { // static being I won't be able to create an object which is the primary goal
+
+		if (instance == null) {
+			instance = new DateUtil();
+		}
+		return instance;
+	}
+
+}
+
+Main Class:
+public class Main {
+
+	public static void main(String[] args) {
+		
+		DateUtil dateutil1 = DateUtil.getInstance(); 
+		DateUtil dateutil2 = DateUtil.getInstance();
+		System.out.println(dateutil1==dateutil2); //Output: true
+	}
+
+}
+
+Eager Initialization:
+The static member is assgined with an instance of the same class, hence we need not to create it inside the getInstance(). 
+
+This is used when we are sure that the instance will be created atleast once.
+
+private static DateUtil instance= new DateUtil();//Called Eager initalization
+
+Thread Saftey:
+We can mark the static method as synchronized to make it threadsafe.
+
+public static DateUtil getInstance() { // static being I won't be able to create an object which is the primary goal
+
+		synchronized(DateUtil.class){
+
+		if (instance == null) {
+			instance = new DateUtil();
+		}
+		}
+		return instance;
+	}
+
+
+Factory Pattern:
+1. It hides the object creation process. Think of a car factory, choclate factory or toy factory. A car factory manufactures cars, a car dealear in other hand is not concerned as to how the cars are being manufactured.
+
+				
+
+											Oracle
+				Driver						MySql
+											sql server
+
+Connection con = DriverManager.getConnection(String dbUrl);
+
+In here to get the connection we make use of the class DriverManager class to get the connection, for every databases the implementation is different, we necessarily don't know whats happening behind the scene. Hence DriverManager here is a factory and it returns the appropriate driver. For orcale it will use the oracle driver for Mysql it will use the MySql driver and so on. Hence it hides the implementation as to how it finds a driver and creating a connection. 
+Here getConnection is a static connection in the Factory class.
+
+Eg:
+KFC. When you go to the KFC and place your order, the person at the counter/reception is not bothered about how the meal is prepared. It asks the KFC factory to cook the food for you so that it can deliver the food to you.
+
+																  PizzaStore
+																  	|
+																	|
+																	|												
+							(Parent Interface)Pizza		<---------Pizza Factory
+
+											Prepare
+											cook
+											serve		
+
+							VegPizza   Cheese Pizza     Non-Veg Pizza      	
+
+The key piece to implement a factory pattern is to identify what all different types of classes  a factory can manufacture. Once we have the different types of classes we will come up with a base interface that will be implemented by those classes, the factory knows how to create the different implementation of the interface.
+
+In our above example, the pizza store is the client and is not bothered as to how to create a pizza, it asks the pizza factory to bake a pizza. But the Pizza factory knows how to bake a veg-pizza, or cheese pizza etc and it bakes it based on the requirement from the pizza store.
+
+
+
+
