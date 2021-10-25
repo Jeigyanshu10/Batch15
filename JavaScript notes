@@ -326,7 +326,7 @@ Computed properties: We can use square brackets in an object literal, when creat
 let fruit = prompt("Which fruit to buy?", "apple");
 
 let bag = {
-  [fruit]: 5, // the name of the property is taken from the 						variable fruit
+  [fruit]: 5, // the name of the property is taken from the variable fruit
 };
 
 alert( bag.apple ); // 5 if fruit="apple"
@@ -360,22 +360,33 @@ String: Unlike in Java where we have character and String  in JavaScript we don'
 
 
 String are immutable in nature: Strings can’t be changed in JavaScript. It is impossible to change a character.
-let str = 'Hi';
+let myName="Jeigyanshu";
+let myNewName=myName;
 
-str[0] = 'h'; // error
-console.log( str[0] ); // doesn't work
 
-Work around:
-let str = 'Hi';
-str = 'h' + str[1]; // replace the string
-alert( str ); // hi
+myNewName="Anshu";
 
-Some improtant methods:
+console.log(myName);
+console.log(myNewName);
+
+Now lets see how it works in object:
+let firstUser ={
+  name:'Jeigyanshu',
+  age:25
+}
+
+let secondUser = firstUser;
+secondUser.name='Anshu';
+console.log(firstUser);
+console.log(secondUser);
+
+Some string improtant methods:
 
 1. String length:
 str.length
 
-eg: `m/n`.length // 3
+let name="Jeigyanshu";
+console.log(name.length); //10
 
 2. charAt: Gets the character in a certain position inside the String
 
@@ -404,7 +415,26 @@ console.log( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget
 
 6. str.includes(substr, pos): returns true/false depending on whether str contains substr within.
 console.log( "Widget with id".includes("Widget") ); // true
-console.log( "Hello".includes("Bye") ); // false
+
+//With parameter
+var str = "My name is Arya Stark";
+
+if(str.includes("Arya")){
+    console.log("word found.");
+}
+else{
+    console.log("word NOT found");
+}
+
+//Without parameter
+var myStr = "I am Lord Varys";
+
+if(myStr.includes("Lord", 5)){
+    console.log("word found.");
+}
+else{
+    console.log("word NOT found");
+}
 
 7. str.startsWith(substr):
 console.log( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
@@ -580,7 +610,7 @@ Methods:
 1. pop: Extracts the last element of the array and returns it
 Eg: fruits.pop();
 
-2. Push: Append the element to the end of the array
+2. Push: Append the element to the end of the array, if logged it gives the length of the array
 3. Shift: Extracts the first element of the array and returns it
 
 Eg:

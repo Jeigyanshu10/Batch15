@@ -575,3 +575,122 @@ add= (a) => {
   return a + 100;
 }
 console.log(add(50));
+
+
+
+
+let user = {     // an object
+  name: "Jeigyanshu",  // by key "name" store value "Jeigyanshu"
+  age: 45,        // by key "age" store value 45
+  Address : {
+	 street: "Kathirguppe",
+	 locality: "ShivajiNagar",
+	 city: "Banglore"
+ },
+ hobbies : ["fifa","Badminton"]
+};
+
+console.log(user);
+
+user.isAdmin = true;
+console.log(user);
+delete user.age;
+console.log(user);
+
+// let fruit = prompt("Which fruit to buy?", "apple");
+// let bag = {
+//   [fruit]: 5, // the name of the property is taken from the variable fruit
+// };
+
+// console.log(bag);
+
+
+
+for(let key in user){
+  
+  console.log(`${key}:${user[key]}`);
+}
+
+
+let myName="Jeigyanshu";
+let myNewName=myName;
+
+
+myNewName="Anshu";
+
+console.log(myName);
+console.log(myNewName);
+
+
+
+
+let firstUser ={
+  name:'Jeigyanshu',
+  age:25
+}
+
+let secondUser = firstUser;
+secondUser.name='Anshu';
+console.log(firstUser);
+console.log(secondUser);
+
+
+let name="Jeigyanshu";
+console.log(name.length);
+
+
+console.log('Interface'.toUpperCase());
+console.log('Interface'.toLowerCase());
+
+
+let str = 'Widget with id';
+console.log( str.indexOf("id") );
+
+console.log( "Widget with id".includes('Widget') );
+
+
+var myStr = "I am Lord Varys";
+
+if(myStr.includes("Lord", 5)){
+    console.log("word found.");
+}
+else{
+    console.log("word NOT found");
+}
+
+
+let stringValue = "stringify";
+console.log(stringValue.slice(1,5));
+console.log(stringValue.substring(1,5));
+console.log(stringValue.substr(1,5));
+
+
+console.log(Math.round(4.45)); // 4
+console.log(Math.ceil(4.45)); //5
+console.log(Math.floor(4.95)); //4
+
+
+let date = new Date("2021-10-25");
+console.log(date);
+
+
+let arr = [];
+arr=["Anshu","Jeigyanshu"];
+console.log(arr);
+
+
+let fruits = ["Apple", "Orange", "Plum",30];
+
+console.log( fruits[0] ); // Apple
+console.log( fruits[1] ); // Orange
+console.log( fruits[2] ); // Plum
+console.log( fruits[3] );
+
+console.log( fruits.shift() );
+
+
+["Apple", "orange", "grapes"].forEach(console.log);
+
+["Apple", "orange", "grapes"].forEach((test1,test2,test3) => {
+  console.log(`${test1} is at index ${test2} in ${test3}`);
+});
