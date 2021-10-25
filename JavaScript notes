@@ -1,0 +1,1304 @@
+JavaScript:
+What:
+JavaScript was initially created to "make the web pages alive".
+The program in this language are called script. It can be written in a webpage(in HTML document itself) and it runs automatically when the page loads. It doesn't need compilation unlike our fav language Java.
+
+Why is it called as JavaScript?
+When JavaScript was created it had another name "LiveScript", however Java was very popular those days so it was marketed in a fashion to encourage Java developers to use in thier web development projects, ever since then it has evolved to become JavaScript which is an independent language with its own spcification called ECMAScript and has no relation with Java whatsoever.
+
+How does it work?
+All leading browser has an embedded engine sometimes also referred as JavaScript virtual machine which has different names in different browsers. For eg:
+	- it is referred as V8 in chrome and Opera
+	- SpiderMonkey in firefox
+	- Chakra in IE
+	- SquirrelFish in Safari etc.
+Working: 
+1. The engine reads the script(Parses)
+2. Then it converts it into machine language(Compilation)
+3. Then the code runs. Very very fast.
+
+What all can I do with JavaScript:
+	1. Add new HTML contents to the page, change the existing content, modify styles.
+	2. React to user actions, run on mouse clicks, pointer movements, key presses.
+	3. Send requests over the network to remote servers, download and upload files (so-called AJAX and COMET technologies).
+	4. Get and set cookies, ask questions to the visitor, show messages.
+	5. Remember the data on the client-side (“local storage”).
+
+Inclusion(Where to write JavaScript):
+
+JavaScript can be injected to an HTML document in three ways:
+1. inline (inside the html tag, to apply on a particular element)
+2. Internal(apply JS on same page)
+	a. inside body
+	b. inside head
+3. external( script src inside head or body)--link JS file to html pages
+
+
+
+It can be placed anywhere inside the HTML document (body or head) as long as it is wrapped by the script tag
+The Script tag: <script>: In HTML document we can directly include the JavaScript inbetween script tags
+	<script>JavaScript goes here </script>
+Eg:
+<script>
+	document.getElementById("demo").innerHTML = "My First JavaScript"
+</script>	
+
+
+Now that we know we can write our JavaScript just about anywhere which is the best place to write or provide refernce to our JavaScript?
+Well to understand that lets dig a little deeper on how the execution happens. 
+During the parsing of the HTML document, if the engine comes across any sort of script tag then it halts the rest of the HTML document and downloads the script file so that it can be used in the page, this might take some time for the end user which is one thing the end user hates. Hence if we provide the script inside the body at the very end then the download will happen at the very last so that the non of the HTML portion get delayed.
+
+
+Variable:
+3 ways to declare variable:
+1. var
+2. let
+3. const
+
+Note: Unlike Java we don't actually have to provide datatype while declaring the variable and the datatypes can vary with the variable(dynamically typed). However, it is not recommended.
+
+
+DataType:
+Can be Classified into 3 categories:
+1. Primitive: number, string, boolean, BigInt( >(2^53-1) (that’s 9007199254740991), or less than -(253-1) for negatives.)
+2. Referenced: Object, Arrays, Date, Function, null
+3. Special: null, undefined 
+Note: JavaScript DataTypes are Dynamic in nature which means the variable becomes the datatype based on the value we provide to it.
+
+Lets discuss some datatypes in details:
+
+Number: Includes interger, floating datatypes, Infinity(10/0), -infinity, NaN("Anshu"/2)
+Note: BigInt is not supported in IE.
+
+String:
+Characters surrounded by quotes are called as String. 3 ways we can do it:
+1. Double quotes: "Hello"
+2. Single quotes: 'Hello'
+3. Backticks: `Hello`
+
+Double and single quotes are “simple” quotes. There’s practically no difference between them in JavaScript.
+
+Backticks are “extended functionality” quotes. They allow us to embed variables and expressions into a string by wrapping them in ${…}, 
+
+for example:
+let name = "Anshu";
+
+1. Embed a variable
+alert( `Hello, ${name}!` ); // Hello, Anshu!
+
+2. Embed an expression
+alert( `the result is ${1 + 2} ${name}` ); // the result is 3
+
+3. Combination of variable and expression
+let nickName="Anshu";
+console.log(`hello my name is ${nickName} and my fav number is ${10+20}`);
+
+null: 
+In JavaScript, null is not a “reference to a non-existing object” or a “null pointer” like in other languages.
+It’s just a special value which represents “nothing”, “empty” or “value unknown”.
+
+int age = null;
+
+undefined: 
+The special value undefined also stands apart. It makes a type of its own, just like null.
+The meaning of undefined is “value is not assigned”.
+
+Interaction: Alert, prompt,confirm
+
+Since we will be using the browser as our demo environment, let’s see a couple of functions to interact with the user: alert, prompt and confirm:
+1. alert: It shows a message and waits for the user to press “OK”
+Eg: alert("Hello");
+
+2. prompt: It accepts 2 arguments. It shows a window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+Eg:
+let age = prompt('How old are you?', 100);
+alert(`You are ${age} years old!`); // You are 100 years old!
+
+3. confirm: The function confirm shows a modal window with a question and two buttons: OK and Cancel.
+Eg:
+let isName = confirm("Are you Jeigyanshu?");
+alert( isName );
+
+Type Conversion:
+Most of the time, operators and functions automatically convert the values given to them to the right type.
+Eg: alert automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+
+String Conversion: We can call the String(value) function to convert a value to a string.
+Eg: 
+let value = true;
+alert(typeof value); // boolean
+
+value = String(value); // now value is a string "true"
+alert(typeof value); // string
+
+Numeric Conversion: Numeric conversion happens in mathematical functions and expressions automatically.
+
+
+Operators:
+Arithmetic Operators : +, -, *, /, %, ++, --
+Assignment Operators : =, +=, -=, *=, /=, %=
+Comparison Operators : ==, ===(compares value with type), !=, !==, >, <, >=,<=
+Conditional (Ternary) Operator : Syntax: variablename = (condition) ? value1:value2
+Ex : 
+var age=21;
+var ageStatus = (age >= 18) ? "Adult" : "Minor";
+console.log(ageStatus);
+
+Logical Operators : &&, ||, !
+
+Nullish coalescing operator '??'(Assignment)
+
+Control Structure: 
+
+1. While Loop:  
+
+Syntax: 
+while (condition) {
+  // code
+  // so-called "loop body"
+}
+
+Eg:
+let i = 0;
+while (i < 3) { 
+  console.log( i );
+  i++;
+}
+
+2. Do While Loop:
+Syntax:
+do {
+  // loop body
+} while (condition);
+
+Eg: 
+let i = 0;
+do {
+  console.log( i );
+  i++;
+} while (i < 3);
+
+3. 
+
+Syntax:
+for (begin; condition; step) {
+  // ... loop body ...
+}
+
+Eg:
+for (let i = 0; i < 3; i++) { 
+  console.log(i);
+}
+
+Break Loop: We can forcefully exit the loop at any given point of time by using the special "break" directive.
+Eg:
+
+
+let sum = 0;
+
+while (true) {
+
+  let value = +prompt("Enter a number", '');
+  if (!value) break;
+  sum += value;
+
+}
+console.log( 'Sum: ' + sum );
+
+
+Continue: The continue directive is a “lighter version” of break. It doesn’t stop the whole loop. Instead, it stops the current iteration and forces the loop to start a new iteration (if the condition allows).
+
+4. Switch Statement:
+A switch statement can replace multiple if checks.
+It gives a more descriptive way to compare a value with multiple variants.
+
+Syntax:
+switch(x) {
+  case 'value1':  // if (x === 'value1')
+    ...
+    [break]
+
+  case 'value2':  // if (x === 'value2')
+    ...
+    [break]
+
+  default:
+    ...
+    [break]
+}
+
+let a = 2 + 2;
+
+switch (a) {
+  case 3:
+    console.log( 'Too small' );
+    break;
+  case 4:
+    console.log( 'Exactly!' );
+    break;
+  case 5:
+    console.log( 'Too big' );
+    break;
+  default:
+    console.log( "I don't know such values" );
+}
+
+Note: If there is no break then the execution continues with the next case without any checks.
+
+Functions: These are the main “building blocks” of the program. They allow the code to be called many times without repetition.
+We can use functions in JavaScript in 4 different ways. Below are the syntax and examples:
+
+1. Named Function:
+
+Syntax:
+function funcName( args ) {
+	//statements
+}
+
+Eg:
+function showMessage() {
+  console.log( 'Hello everyone!' );
+}
+
+2. Function Expression(Anonymous Function) :
+
+Syntax:
+var getName = function( args ) {//statements}
+
+Eg:
+var getName = function (myName) {
+  return (`Hello ${myName}`);
+}
+console.log(getName('Anshu'))
+
+3. IIFE(Immediately Invoked Function Expression) :
+
+Syntax:
+(function( args ){
+	//statements
+})();
+
+Eg:
+(function( num1,num2 ){
+	console.log(num1+num2);
+})(5,6);
+
+4. ES6 Arrow Function :
+
+Syntax:
+( args ) => {
+//statements
+}
+
+Eg:
+add= (a) => {
+    return a + 100;
+  }
+  console.log(add(50));
+
+Objects:
+Objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrates almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
+
+We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It’s easy to find a file by its name or add/remove a file.
+
+An object can be created with figure brackets {…} with an optional list of properties. A property is a “key: value” pair, where key is a string (also called a “property name”), and value can be anything.
+
+Eg:
+let user = {     // an object
+  name: "Jeigyanshu",  // by key "name" store value "Jeigyanshu"
+  age: 45        // by key "age" store value 45
+  Address : {
+	 street: "Kathirguppe",
+	 locality: "ShivajiNagar",
+	 city: "Banglore"
+ }
+ hobbies : ["fifa","Badminton"]
+};
+
+We can add/remove properties into/outof the object at any time:
+Eg:
+ user.isAdmin = true;  
+ delete user.age;
+
+
+Computed properties: We can use square brackets in an object literal, when creating an object. That’s called computed properties.
+
+let fruit = prompt("Which fruit to buy?", "apple");
+
+let bag = {
+  [fruit]: 5, // the name of the property is taken from the 						variable fruit
+};
+
+alert( bag.apple ); // 5 if fruit="apple"
+
+
+The “for…in” loop: To walk over all keys of an object, there exists a special form of the loop: for..in
+
+Syntax:
+for (key in object) {
+  // executes the body for each key among object properties
+}
+
+Eg:
+let user = {
+  name: "Anshu",
+  age: 45,
+  isAdmin: true
+};
+
+for (let key in user) {
+  // keys
+  alert( key );  // name, age, isAdmin
+  // values for the keys
+  alert( user[key] ); // Anshu, 30, true
+}
+
+
+
+String Objects:
+String: Unlike in Java where we have character and String  in JavaScript we don't have two different types char and String. There is only one String type and any thing and everything which is written inside a single quote, double quotes or backtic is treated as a String.
+
+
+String are immutable in nature: Strings can’t be changed in JavaScript. It is impossible to change a character.
+let str = 'Hi';
+
+str[0] = 'h'; // error
+console.log( str[0] ); // doesn't work
+
+Work around:
+let str = 'Hi';
+str = 'h' + str[1]; // replace the string
+alert( str ); // hi
+
+Some improtant methods:
+
+1. String length:
+str.length
+
+eg: `m/n`.length // 3
+
+2. charAt: Gets the character in a certain position inside the String
+
+let str = `Hello`;
+
+// the first character
+console.log( str.charAt(0) ); // H
+
+// the last character
+alert( str[str.length - 1] ); // o
+
+Changing the case:
+3. to lowerCase
+4. to upperCase
+console.log( 'Interface'.toUpperCase() ); // INTERFACE
+console.log( 'Interface'.toLowerCase() ); // interface
+
+5. str.indexOf(substr, pos): 
+
+let str = 'Widget with id';
+
+console.log( str.indexOf('Widget') ); // 0, because 'Widget' is found at the beginning
+console.log( str.indexOf('widget') ); // -1, not found, the search is case-sensitive
+
+console.log( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
+
+6. str.includes(substr, pos): returns true/false depending on whether str contains substr within.
+console.log( "Widget with id".includes("Widget") ); // true
+console.log( "Hello".includes("Bye") ); // false
+
+7. str.startsWith(substr):
+console.log( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
+
+8. str.endsWith(substr):
+alert( "Widget".endsWith("get") ); // true, "Widget" ends with "get"
+
+Getting a substring: 3 ways to get a sub string
+9. str.slice(start [, end])
+let str = "stringify";
+console.log( str.slice(0, 5) ); // 'strin', the substring from 0 to 5 (not including 5)
+alert( str.slice(0, 1) ); // 's', from 0 to 1, but not including 1, so only character at 0
+
+10. str.substring(start [, end]): Returns the part of the string between start and end.
+
+let str = "stringify";
+
+// these are same for substring
+alert( str.substring(2, 6) ); // "ring"
+alert( str.substring(6, 2) ); // "ring"
+
+// ...but not for slice:
+alert( str.slice(2, 6) ); // "ring" (the same)
+alert( str.slice(6, 2) ); // "" (an empty string)
+
+11. str.substr(start [, length]): Returns the part of the string from start, with the given length.
+
+let str = "stringify";
+alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+
+Math Object:
+
+Math properties:
+
+Math.E        // returns Euler's number
+Math.PI       // returns PI
+Math.SQRT2    // returns the square root of 2
+Math.SQRT1_2  // returns the square root of 1/2
+Math.LN2      // returns the natural logarithm of 2
+Math.LN10     // returns the natural logarithm of 10
+Math.LOG2E    // returns base 2 logarithm of E
+Math.LOG10E   // returns base 10 logarithm of E
+
+Math Methods:
+Math.PI – returns pi value.
+console.log(Math.PI); 3.141592653589793
+
+
+Math.round(x) - returns the value of x rounded to its nearest integer.
+console.log(Math.round(4.65)); 
+console.log(Math.round(Math.PI)); 
+Math.round(4.4); 
+
+Math.pow(x , y) - returns the value of x to the power of y.:
+console.log(Math.pow(2,3));//8 
+
+Math.sqrt(x) - returns the square root of x.
+console.log(Math.sqrt(9));//3
+
+Math.abs(x) - returns the absolute (positive) value of x.
+console.log(Math.abs(-9));//9
+
+Math.ceil(x) -	returns the value of x rounded up to its nearest integer.
+Math.ceil(4.4); //5
+
+Math.floor(x) - returns the value of x rounded down to its nearest integer.
+Math.floor(4.9);
+
+Math.min() and Math.max() - can be used to find the lowest or highest value in a list of arguments.
+Math.min(0, 150, 30, 20, -8, -200);  // returns -200
+
+
+Math.random() - returns a random number between 0 (inclusive), and 1 (exclusive).
+
+
+
+
+Date Object:
+The date object stores the date, time and provides methods for date/time management.
+
+Creation:
+To create a new Date object call new Date()
+
+1. Without arguments: new Date()
+let now = new Date();
+alert( now ); // shows current date/time
+
+2. new Date(milliseconds): Create a Date object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+
+// 0 means 01.01.1970 UTC+0
+let Jan01_1970 = new Date(0);
+console.log( Jan01_1970 );
+
+// now add 24 hours, get 02.01.1970 UTC+0
+let Jan02_1970 = new Date(24 * 3600 * 1000);
+console.log( Jan02_1970 );
+
+3. new Date(datestring): 
+let date = new Date("2021-09-16");
+console.log(date);
+// The time is not set, so it's assumed to be midnight GMT and
+// is adjusted according to the timezone the code is run in
+// So the result could be
+// Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
+// or
+// Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
+
+4. new Date(year, month, date, hours, minutes, seconds, ms)
+Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+	The year must have 4 digits: 2013 is okay, 98 is not.
+	The month count starts with 0 (Jan), up to 11 (Dec).
+	The date parameter is actually the day of month, if absent then 1 is assumed.
+	If hours/minutes/seconds/ms is absent, they are assumed to be equal 0
+
+Methods: 
+getFullYear():	Get the year as a four digit number(yyyy)
+let now = new Date();
+console.log(now.getFullYear());
+
+
+getMonth():	Get the month as a number (0-11)
+let now = new Date();
+console.log(now.getMonth());
+
+getDate():	Get the day as a number (1-31)
+let now = new Date();
+console.log(now.getDate());
+
+
+getHours():	Get the hour (0-23)
+let now = new Date();
+console.log(now.getHours());
+
+getMinutes():	Get the minute (0-59)
+let now = new Date();
+console.log(now.getMinutes());
+
+getSeconds():	Get the second (0-59)
+getMilliseconds():	Get the millisecond (0-999)
+getTime():	Get the time (milliseconds since January 1, 1970)
+let now = new Date();
+console.log(now.getTime());
+
+getDay():	Get the weekday as a number (0-6)
+
+Date.now():	Get the time. ECMAScript 5.
+
+
+
+Arrays:
+Objects allow you to store keyed collections of values. That’s fine.
+But quite often we find that we need an ordered collection, where we have a 1st, a 2nd, a 3rd element and so on and it doesn't provide a lot of method that we can use. Hence to overcome this issue JavaScript has provided us with something called as Array to store ordered collection.
+
+We can declare an array is two ways:
+let arr = new Array();
+let arr = [];
+
+Initialization:
+let fruits = ["Apple", "Orange", "Plum",1];
+
+Array elements in JavaScript are numbered, starting with zero.
+
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[0] ); // Apple
+alert( fruits[1] ); // Orange
+alert( fruits[2] ); // Plum
+
+Unlike in Java, An array in JavaScript can store elements of any type.
+
+Methods:
+
+1. pop: Extracts the last element of the array and returns it
+Eg: fruits.pop();
+
+2. Push: Append the element to the end of the array
+3. Shift: Extracts the first element of the array and returns it
+
+Eg:
+let fruits = ["Apple", "Orange", "Pear"];
+console.log( fruits.shift() ); // remove Apple and alert it
+console.log( fruits ); // Orange, Pear
+
+4. unShift: Add the element to the beginning of the array:
+let fruits = ["Orange", "Pear"];
+fruits.unshift('Apple');
+console.log( fruits ); // Apple, Orange, Pear
+
+5. splice: Deletes the element from the array.
+let arr = ["I", "study", "JavaScript"];
+arr.splice(1, 1); // from index 1 remove 1 element
+console.log( arr ); // ["I", "JavaScript"]
+
+We can also use splice to replace elements:
+let arr = ["I", "study", "JavaScript", "right", "now"];
+
+// remove 3 first elements and replace them with another
+arr.splice(0, 3, "Let's", "dance");
+console.log( arr ) // now ["Let's", "dance", "right", "now"]
+
+The splice method is also capable of inserting elements into an array without having to remove anything
+
+let arr = ["I", "study", "JavaScript"];
+
+// from index 2
+// delete 0
+// then insert "complex" and "language"
+arr.splice(2, 0, "complex", "language");
+
+console.log( arr ); // "I", "study", "complex", "language", "JavaScript"
+
+6. slice: The method arr.slice is much simpler than similar-looking arr.splice. It returns a new array copying to it all items from index start to end (not including end). Both start and end can be negative, in that case position from array end is assumed.
+
+arr.slice([start], [end])
+let arr = ["t", "e", "s", "t"];
+
+alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
+
+alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
+
+7. concat: The method arr.concat creates a new array that includes values from other arrays and additional items.
+arr.concat(arg1, arg2...)
+
+let arr = [1, 2];
+
+// create an array from: arr and [3,4]
+alert( arr.concat([3, 4]) ); // 1,2,3,4
+
+// create an array from: arr and [3,4] and [5,6]
+alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
+
+// create an array from: arr and [3,4], then add values 5 and 6
+alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
+
+
+
+Iterate: forEach:
+The arr.forEach method allows to run a function for every element of the array.
+
+Syntax:
+arr.forEach(function(item, index, array) {
+  // ... do something with item
+});
+
+Eg: ["Apple", "orange", "grapes"].forEach(console.log);
+
+["Apple", "orange", "grapes"].forEach((item, index, array) => {
+  alert(`${item} is at index ${index} in ${array}`);
+});
+
+
+List of all Methods:
+
+To add/remove elements:
+
+push(...items) – adds items to the end,
+pop() – extracts an item from the end,
+shift() – extracts an item from the beginning,
+unshift(...items) – adds items to the beginning.
+splice(pos, deleteCount, ...items) – at index pos deletes deleteCount elements and inserts items.
+slice(start, end) – creates a new array, copies elements from index start till end (not inclusive) into it.
+concat(...items) – returns a new array: copies all members of the current one and adds items to it. If any of items is an array, then its elements are taken.
+To search among elements:
+
+indexOf/lastIndexOf(item, pos) – look for item starting from position pos, return the index or -1 if not found.
+includes(value) – returns true if the array has value, otherwise false.
+find/filter(func) – filter elements through the function, return first/all values that make it return true.
+findIndex is like find, but returns the index instead of a value.
+To iterate over elements:
+
+forEach(func) – calls func for every element, does not return anything.
+To transform the array:
+
+map(func) – creates a new array from results of calling func for every element.
+sort(func) – sorts the array in-place, then returns it.
+reverse() – reverses the array in-place, then returns it.
+split/join – convert a string to array and back.
+reduce/reduceRight(func, initial) – calculate a single value over the array by calling func for each element and passing an intermediate result between the calls.
+Additionally:
+
+Array.isArray(arr) checks arr for being an array.
+
+DOM (Document Object Model):
+All the page content converged/converted into an object that can be modified. Name of this object is called as "document".
+The "document" object serves as the entry point to the page and hence we have control on the page itself which further can be modified or create anything on the page using this "document" object.
+
+Eg:
+document.body.style.background="red";
+setTimeout(()=> document.body.style.background="",1000);
+
+In the above examples we have seen document.body.style, however there are much more properties and methods that we can make use of to control the behaviour of our pages.
+
+
+BOM(Browser Object Model): It provides additional objects provided by the browser for working with everything except on the document. Below is an example of the same:
+
+Eg:
+alert(location.href);
+if(confirm("Go to Google")){
+    location.href="https://www.google.com/";
+}
+
+Note: Functions such as alert/confirm/prompt are also a part of BOM: they are directly not related to the document, but represent pure browser methods of communicating with the user.
+
+
+DOM Tree:
+As we all know that the backbone of the HTML is nothing but Tags.
+According to the DOM every HTML tags is an object. The nested tags are nothing but child object.
+For eg:
+
+<div>
+	<p>This is a child object of the wrapped div object</p>
+</div>
+
+In the example above the div tag is the parent object and the paragraph tag is the child object of the parent div object.
+
+Eg 2:
+document.body is the object representing the <body></body> tag which why when we wrote: document.body.style.background the color of the entire body changed to red.
+
+Lets understand the structure in which the DOM sees an HTML document. Here is an example of how it treats a given HTML document:
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>
+      About me
+    </title>
+  </head>
+  <body>
+    I am a fan of Krishna!!
+  </body>
+</html>
+
+It converts the above HTML page into something as below:
+
+HTML
+	Head
+		#text(enter) --> This   represent a new line
+		Title
+			#text About me
+		#text(enter)
+	#text(enter)
+	Body
+	#text I am a fan of Krishna!!
+
+
+
+In the above HTML document HTML is the parent and head is the previous-sbiling and Body is the next-sibling because they are placed directly under HTML. However the title tag is a child tag of Head. We can catch hold of them for modification by using some of the DOM properties like .parentNode/.childNode etc. Having said that as we know how large an HTML page can go hence following the tree structure become a lot hetic that we want to give up. 
+
+Hence we have techniques which can target a specific element directly in the HTML document so that we can control its behaviour. Let understand how:
+Searching: getElement*,querySelector & querySelectorAll
+
+getElement*:
+
+1. getElementById: If an element has the id attribute, we can get the element using the method document.getElementById(id), no matter where it is(because id is always unique in nature)
+
+Eg: 
+let demoId = document.getElementById('demo');
+demoId.style.backgroundColor="purple";
+
+Alternate: There is something called as Global variable named by id that reference all the id's we provide inside our HTML document. Hence we can also write the above Eg as below:
+
+demo.style.background="yellow";
+
+2. getElementByTagName:
+Syntax:
+getElementByTagName(tag_name);
+
+Eg1: 
+let divs = document.getElementsByTagName('div');
+
+Eg2: 
+<table id="table">
+  <tr>
+    <td>Your age:</td>
+
+    <td>
+      <label>
+        <input type="radio" name="age" value="young" checked> less than 18
+      </label>
+      <label>
+        <input type="radio" name="age" value="mature"> from 18 to 50
+      </label>
+      <label>
+        <input type="radio" name="age" value="senior"> more than 60
+      </label>
+    </td>
+  </tr>
+</table>
+
+<script>
+  let inputs = table.getElementsByTagName('input');
+
+  for (let input of inputs) {
+    alert( input.value + ': ' + input.checked );
+  }
+</script>
+
+Eg3:
+For the same table in eg2, we can also find the nested ids elements as below:
+
+
+3. getElementByClassName:
+Syntax: getElementByClassName("classname");
+
+querySelector:
+Syntax: element = document.querySelector(selectors);
+Note: The parameter containing one or more selectors to match. This string must be a valid CSS selector string.
+
+This will return the first element in the document that matches the specified set of CSS selectors.
+
+Eg:
+function redFunction(){
+    document.querySelector('.young').style.backgroundColor = "red";
+    document.querySelector('#mature').style.backgroundColor = "orange";
+    document.querySelector('.senior').style.backgroundColor = "green";
+    document.querySelector("button").innerHTML="submit";
+    document.querySelector("div>button").style.backgroundColor = "yellow";;
+}
+
+We can link the above function to a button and when the button is clicked it will change the color of the respective classes/id/tags etc.
+
+Browser Object Model:(BOM)
+It provides additional objects provided by the browser for working with everything except on the document. Below is an example of the same:
+
+Eg:
+alert(location.href);
+if(confirm("Go to Google")){
+    location.href="https://www.google.com/";
+}
+
+Note: Functions such as alert/confirm/prompt are also a part of BOM: they are directly not related to the document, but represent pure browser methods of communicating with the user.
+
+1. Window: 
+	- Represents the browser's window. Supported by all the leading browser.
+	- "document" object is a property of the window object, hence we can also use the above DOM functions using the document.
+
+Properties: 
+	There are a lot of property that we can make use of to interact with the browser itself. Below are some of the them:
+	window.innerWidth
+	window.innerHeight
+	https://developer.mozilla.org/en-US/docs/Web/API/Window
+Methods:
+window.open() - open a new window
+window.close() - close the current window
+window.moveTo() - move the current window
+window.resizeTo() - resize the current window
+
+2. Screen: Provides information about the screen itself. It can be written with window as prefix. Below are some of the properties:
+
+properties:
+
+screen.width
+screen.height
+screen.availWidth
+screen.availHeight
+screen.colorDepth
+screen.pixelDepth
+
+
+3. Location: used to get the current page address (URL) and to redirect the browser to a new page. It also can be written without window as prefix
+
+Properties:
+location.href returns the href (URL) of the current page
+location.hostname returns the domain name of the web host
+location.pathname returns the path and filename of the current page
+location.protocol returns the web protocol used (http: or https:)
+location.assign() loads a new document(Assignment)
+
+4. History: window.history contains the history of the browser.
+
+Methods:
+history.back() - same as clicking back in the browser
+history.forward() - same as clicking forward in the browser
+history.go(distance): It loads the given page number in browser. history.go(distance) function provides a same effect as pressing the back or forward button in your browser and specifying the page exactly which you want to load.
+
+5. Navigator: Provides further information about the browser.
+appName :returns the name
+appVersion :returns the version
+appCodeName :returns the code name
+cookieEnabled : returns true if cookie is enabled otherwise false
+userAgent : returns the user agent
+language : returns the language. It is supported in Netscape and Firefox only.
+userLanguage : returns the user language. It is supported in IE only.
+plugins	returns the plugins. It is supported in Netscape and Firefox only.
+systemLanguage : returns the system language. It is supported in IE only.
+mimeTypes[] : returns the array of mime type. It is supported in Netscape and Firefox only.
+platform : returns the platform e.g. Win32.
+online 	 :	returns true if browser is online otherwise false.
+
+Methods:
+javaEnabled() :	checks if java is enabled.
+taintEnabled():	checks if taint is enabled. It is deprecated since JavaScript 1.2.
+
+6. PopUp alert: alert,prompt & confirm
+
+7. Timings: The window object also gives us control of the code in terms of when exactly to execute a piece of code.
+Methods:
+window.setTimeout(function, milliseconds): Executes a function, after waiting a specified number of milliseconds.
+setInterval(function, milliseconds): method repeats a given function at every given time-interval.
+window.clearTimeout(timeoutVariable): method stops the execution of the function specified in setTimeout().
+
+
+Working with Form Object:
+1. Forms and control elements, such as <input> have a lot of special properties and events.
+2. Document forms are members of the special collection: document.forms.
+
+document.forms.myLogin; // the form with name="myLogin"
+document.forms[0]; // the first form in the document
+
+When we have a form, then the elements of the form is made available in the named collection "form.elements".
+Eg:
+<form name="myLogin">
+  <input name="one" value="30">
+  <input name="two" value="2">
+</form>
+
+<script>
+  // get the form
+  let formVar = document.forms.myLogin; // <form name="my"> element
+
+  // get the element
+  let elem = formVar.elements.one; // <input name="one"> element
+
+console.log(elem.value); // 1
+</script>
+
+Note: 
+1. If there exists multiple occurance of one of the properties we are trying to access, then we will get the name of the collection itself
+2. The navigation properties do not depend on the tag structure. All control elements, no matter how deep they are in the form, are available in form.elements.
+
+Lets talk a little more about form control:
+1. We can access the form value as input.value (string) or input.checked (boolean) for checkboxes.
+Eg:
+let form = document.forms.myLogin; 
+let elem = form.elements.password;
+
+function redFunction(){
+    console.log(elem.value)
+}
+
+
+properties of Form Object:
+acceptCharset : To set or return the accept-charset attribute value in a form.
+let form = document.forms.myLogin; 
+function redFunction(){
+    console.log(form.acceptCharset)
+}
+
+Action : To set or return the action attribute value of the form
+Autocomplete :	To set or return the autocomplete attribute value of the form.
+Encoding : It is just an alias of enctype.
+Enctype : To set or return the enctype attribute value of the form.
+Length : To return how many elements are there in the form.
+Method : To set or return the method attribute value of the form.
+Name : To set or returns the name attribute value of the form.
+noValidate : To set or return if the form-data should be validated or not, on being submitted by user.
+Target : To set or return the target attribute value of the form.
+
+Some Methods: 
+reset()  : Resets a form
+submit() : Submits a form
+
+
+2. Select and option
+A <select> element has 3 important properties:
+
+select.options – the collection of <option> subelements,
+select.value – the value of the currently selected <option>,
+select.selectedIndex – the number of the currently selected <option>.
+
+Eg:
+<select id="select">
+  <option value="apple">Apple</option>
+  <option value="pear">Pear</option>
+  <option value="banana">Banana</option>
+</select>
+
+<script>
+  // all three lines do the same thing
+  select.options[2].selected = true;
+  select.selectedIndex = 2;
+  select.value = 'banana';
+  // please note: options start from zero, so index 2 means the 3rd option.
+</script>
+
+
+JavaScript Form Validation:
+It is important to validate the form submitted by the user because it can have inappropriate values. So, validation is must to authenticate user. Moreover we can also validate the input this early so that we don't have to send the user to our web application only to fail.
+
+let myName = document.myLogin.email.value; 
+let password = document.myLogin.password.value; 
+
+function redFunction(){
+    if(myName==null || myName==""){
+        alert("This field cannot be blank");
+        return false;
+    }
+}
+
+Assignment: Along with the above try to validate the password field as well
+Assignment2: Try to validate the retype password functionality
+
+
+Regular Expression:
+Regular Expression(regexp/reg) is used to find a particular text in a specified format in a given string.
+
+Regular Expression are patterns that provide a powerful way to search and replace in text(Strings). In JavaScript they are availble in RegExp object.
+
+1. The regular expression or simply know as regExp/reg consist of a pattern and flags.
+2. There are 2 ways of creating a regexp object:
+  1. regexp = new RegExp("pattern","flags");
+  2. regexp = /pattern/; // no flags
+     regexp = /pattern/gmi; // with flags g,m and i (to be covered soon)
+The slashes in the 2nd way informs we are creating a regexp and does the same work as of the qoutes.
+In both the above cases regexp becomes an instance of the built-in class RegExp.
+
+
+Flags:(Assignment)
+RegExp has flags that affects the search. There are 6 of them that affect the search:
+
+1. i: With this flag the search is case insensitive. no difference between A/a //"Anshu" "anshu"
+2. g: This flag search for all the matches, without it only the first match is returned. 
+3. m: multiline mode.
+4. s: Enables "dotall" mode, that allows a "." period to match newline character.
+5. u: Enables the full unicode support. The flag enables correct processing of surrogate pairs.
+6. y: Sticky mode, which searches for the exact position in the text.
+
+
+str.match: The method str.match(regexp) finds all the matches of regexp in string str
+
+Eg: 
+let str = "We will, we will rock you";
+console.log(str.match(/we/gi));
+
+In the above eg we are asking the browser to find the string "we" in the given str, on top of that we are also telling the browser please return me the information
+   1. Irrespctive of the letters in "we" are uppercase or lowercase.(because of i)
+   2. No matter how many such occurence are there, please return me all of them. (because of g)
+
+
+Note: While we provide the string to be searched we need to take special care about the space character. Because it will always look for the exact representation of what we have in the given string.   
+
+Imp Note: If the string which we are looking for is unavailable in the given String then instead of returing an empty array, it will give us null.
+
+
+Replacing: str.replace
+Not only search, we can replace a given pattern in a given string. While replacing we need to pass the replacement string after the regexp. Below is how we can do it.
+
+Eg:
+let str = "We will, we will rock you";
+
+let replacement = str.replace(/we/gi,"I");
+console.log(replacement);
+
+In the above eg, the second argument is the replacement value. 
+All the rules of searching the string is applicable here as well.
+
+Character Class:
+Let's consider a sceniaro where we are given a phone number in String like "+(91)-7019344625" and we are asked to convert it into a pure phone number i.e. 917019344625, in such scenario with the help of Character class we can we can remove anything that's not a number. 
+
+A Character class is a special notation that matches any symbol from a certain set.
+To find for a single digit out of the given string we can make use of \d. If we use this in our given mob number then it would return 9. Lets try it out:
+
+let mob = "+(91)-7019344625";
+regexp = /\d/;
+let mobNum = mob.match(regexp);
+console.log(mobNum);
+
+Having said that we have already known that if we use \g then it will return an array of all the possible character. Hence we can make use of it as below(line 1077).
+let mob = "+(91)-7019344625";
+regexp = /\d/g;
+let mobNum = mob.match(regexp);
+console.log(mobNum);
+
+Now that we have all the numbers in the array we can make use of a method called Join('') which will bind all our numbers togeather to give us a pure phone number.
+
+let mob = "+(91)-7019344625";
+regexp = /\d/g;
+let mobNum = mob.match(regexp).join('');
+console.log(mobNum);
+
+
+Character classes:
+\d – digits.
+\D – non-digits.
+\s – space symbols, tabs, newlines.
+\S – all but \s.
+\w – Latin letters, digits, underscore '_'.
+\W – all but \w.
+. – any character if with the regexp 's' flag, otherwise any except a newline \n.
+
+Clousers:
+Functions which can access values outside of their own curly braces. Unlike pure function it depends on the argument and own data. When this is called it gets passed to the call stack and where it is executed and the variables are stored inside stack memory until it is called and once called it is removed off of the stack memory.
+
+function pureFun(a,b){
+  return a+b;
+}
+//This is not a clouser. 
+
+
+  let b = 3;
+  function impureFun(a){
+    return a+b;
+  }
+
+//This is clouser
+
+Unlike the non clouser varible, it stores the data inside the heap memory which can be access latter and unlike the call stack which is short lived, the heap memory can store the data for a long time
+
+Hence to conclude a closure is a function which is combined with its outter state. 
+
+
+Callbacks:
+
+Callbacks is a technique where we pass function as an argument to a given function. Below is an example of the same:
+
+Lets say we have 2 jobs: 
+1. Calculate the sum of 3 numbers
+2. To display the result in a p tag whose id is result
+
+Solution:
+1. Inside the HTML page we will need to have an p tag:
+  <p id ="result"></p>
+2. Inside js file we would have to code the below:
+
+Function to display:
+
+function myDisplayer(output){
+  document.getElementById("result").innerHTML = output;
+}
+
+Function to calculate the sum:
+
+function myCalculator(num1,num2,num3){
+  return num1+num2+num3;
+}
+
+Now we need to store the result in a variable and call the myDisplayer function and pass this stored variable.
+let sumResult = myCalculator(1,2,3);
+myDisplayer(sumResult);
+
+Note: This will give me the desired output without any trouble.
+
+However, the problem with this code is I need to call two function to get the desired output. To avoid this we can call the myDisplayer function inside the myCalculator function and it will give me the same desired output. Like below:
+
+Function to display the output:
+
+function myDisplayer(output){
+  document.getElementById("result").innerHTML = output;
+}
+
+Function to calculate the sum:
+
+function myCalculator(num1,num2,num3){
+  let myOutput num1+num2+num3;
+  myDisplayer(myOutput);
+}
+
+myCalculator(2,6,5);
+
+In this case I just need to call the myCalculator with the parameters and it will give me the output. However, the problem with this is "control". Now I don't have any control on the display function whatsoever. To Overcome this we can make use of callback. And below is the way to do it:
+
+Function to display the output:
+
+function myDisplayer(output){
+  document.getElementById("result").innerHTML = output;
+}
+
+Function to calculate the sum:
+
+function myCalculator(num1,num2,num3,mydisplay){
+  let myOutput = num1+num2+num3;
+  myDisplay(myOutput);
+}
+
+In the above case we are passing myDisplay as a function to another function myCalculator. So far myDisplay is not defined anywhere but we will do connect the dots while calling the myCalculator function below:
+
+myCalculator(23,34,54,myDisplay);
+
+ImpNote: We need to make sure that while passing a particular function as a parameter we should not give pranthesis like we do while calling a function. If the passed function requires a parameter then it is the responsibility of the developer to make sure that the respective function is given the parameter inside the function where it is called.
+
+This is not a very suitable place/scenario to use callbacks. Normally we use callbacks in Asynchronous function.
+
+Asynchronous function: The kind of functions which runs parallel to other function is called an Asynchronous functions. 
+The best kinda example IS setTimeout function. We have used it in the past and method accepts a function as an argument. 
+Syntax: setTimeout(myFunction, time_in_milliseconds);
+
+Lets try to implement callback in this case:
+
+Lets say I want to have a clock function somewhere inside a paragraph which has an id as clock.
+
+Inside my HTML Page:
+
+<p id="clock"></p>
+
+Inside my js:
+
+1. I need to have a displayer. So I will create a function by name timeDisplay:
+
+setInterval(timeDisplay,1000);
+
+function timeDisplay(){
+    let myTime = new Date();
+    document.getElementById("clock").innerHTML=`${myTime.getHours()}:${myTime.getMinutes()}:${myTime.getSeconds()}`;
+}
+
+In the above example timeDisplay() is pretty straight forward. We are simply targeting the clock id to display a date function. But if we notice the setInterval we have passed a function as a parameter to the setInterval along with the time in milliseconds. Which means that we keep executing the function every 1 sec. This is a classic example of Asynchronous function, where we are asking the engine to run the function long after it has been declared.
+
+
+
+JSON: JavaScript Object notation:
+It is a format used to store and transfer data over a network. 
+
+Syntax:
+The syntax is similar to that of the normal JavaScript object. Below are the things it needs to follow:
+
+Data should be in name/value pairs
+Data should be separated by commas
+Curly braces hold objects
+Square brackets hold arrays
+
+Note: The Key in the Json should be enclosed in double qoutes.
+
+DataTypes it can hold:
+string
+number
+object
+array
+boolean
+null
+It can also store JavaScript expression:
+function
+date
+undefined
+
+Eg:
+let jsonObj = {
+    name:"Jeigyanshu",
+    City: "banglore",
+    kids:38,
+    Job: "Java Developer"
+    
+}
+
+
+console.log(jsonObj);
+
+Json Stringify:
+We will need to change the JSON object to a string so that it can be sent to different end points over a network. To stringify a given JSON object we need to do the below:
+
+let myJsonStr = JSON.stringify(jsonObj);
+console.log(myJsonStr);
+
+This will convert the JSON object to a string. Hence all the operation that we can do in a string is applicable here.
+
+Once it is received we need to parse the same as well so that it can be used by the user:
+let newJsonObj = JSON.parse(myJsonStr);
+console.log(newJsonObj);
+
+
+Promise: 
+
+let p = new Promise((resolve,reject)=>{
+    let a = 1+2;
+    if(a==2){
+        resolve("We will have fun");
+    }else{
+        reject("I will find another one");
+    }
+})
+
+
+p.then((message)=>{
+    console.log(`This is inside then ${message}`);
+}).catch((message)=>{
+    console.log(`This is in the catch ${message}`);
+})
+
+
+Eg:2:
+
+let p = new Promise((resolve,reject)=>{
+    let question = prompt("Do you love me?","");
+    let answer=question;
+
+    if(answer == "yes"){
+        resolve("I love you to the moon and back!")
+    }else {
+        reject("I will die!")
+    }
+})
+
+p.then((message)=>{
+    console.log(message);
+}).catch((message)=>{
+console.log(message);
+})
+
