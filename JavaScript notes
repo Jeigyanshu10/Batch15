@@ -803,7 +803,7 @@ Syntax:
 getElementByTagName(tag_name);
 
 Eg1: 
-let divs = document.getElementsByTagName('div');
+let divs = document.getElementsByTagName('div')[0];
 
 Eg2: 
 <table id="table">
@@ -838,6 +838,9 @@ For the same table in eg2, we can also find the nested ids elements as below:
 
 3. getElementByClassName:
 Syntax: getElementByClassName("classname");
+
+Eg: let myClass = document.getElementsByClassName('myClass');
+myClass[0].style.backgroundColor="cyan";
 
 querySelector:
 Syntax: element = document.querySelector(selectors);
@@ -958,7 +961,7 @@ Eg:
   // get the element
   let elem = formVar.elements.one; // <input name="one"> element
 
-console.log(elem.value); // 1
+console.log(elem.value); // 30
 </script>
 
 Note: 
@@ -1024,16 +1027,16 @@ Eg:
 JavaScript Form Validation:
 It is important to validate the form submitted by the user because it can have inappropriate values. So, validation is must to authenticate user. Moreover we can also validate the input this early so that we don't have to send the user to our web application only to fail.
 
-let myName = document.myLogin.email.value; 
-let password = document.myLogin.password.value; 
+let loginForm = document.forms.login;
+let myEmail = loginForm.elements.email;
+let myPassword = loginForm.elements.password;
 
-function redFunction(){
-    if(myName==null || myName==""){
+function myFunction(){
+    if(myEmail.value==null || myEmail.value ==""){
         alert("This field cannot be blank");
-        return false;
+        
     }
 }
-
 Assignment: Along with the above try to validate the password field as well
 Assignment2: Try to validate the retype password functionality
 
